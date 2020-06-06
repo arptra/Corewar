@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-unsigned int	ft_abs(int n)
+static unsigned int	ft_abs(int n)
 {
 	unsigned int	t1;
 
@@ -37,7 +37,7 @@ static unsigned int	ft_get_depth(int n, int base)
 	else
 		i1 = 1;
 	t1 = ft_abs(n);
-	while (t1 >= base)
+	while (t1 >= (unsigned int)base)
 	{
 		t1 = t1 / base;
 		i1++;
@@ -59,7 +59,7 @@ char				*ft_itoa_base(int n, int base)
 	t1 = ft_abs(n);
 	i1 = ft_get_depth(n,base);
 	fresh[i1] = '\0';
-	while (t1 >= base)
+	while (t1 >= (unsigned int)base)
 	{
 		fresh[--i1] = t1 % base + '0';
 		t1 = t1 / base;
