@@ -6,6 +6,7 @@
 #define COREWAR_PARSE_H
 
 #include "libft/libft.h"
+#include "op.h"
 
 typedef struct	s_file_info
 {
@@ -14,8 +15,6 @@ typedef struct	s_file_info
 	unsigned int cs; /* CHAMPION CODE SIZE */
 	char 		*cc; /* CHAMPION COMMENT */
 }				t_file_info;
-
-
 
 
 #endif //COREWAR_PARSE_H

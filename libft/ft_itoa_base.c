@@ -50,7 +50,9 @@ char				*ft_itoa_base(int n, int base)
 	char			*fresh;
 	unsigned int	i1;
 	unsigned int	t1;
+	char			*chars;
 
+	chars = "0123456789abcdef";
 	if (n < 0 && base != 10)
 		return (NULL);
 	fresh = (char*)malloc(sizeof(char) * (ft_get_depth(n,base) + 1));
@@ -61,10 +63,10 @@ char				*ft_itoa_base(int n, int base)
 	fresh[i1] = '\0';
 	while (t1 >= (unsigned int)base)
 	{
-		fresh[--i1] = t1 % base + '0';
+		fresh[--i1] = chars[t1 % base];
 		t1 = t1 / base;
 	}
-	fresh[--i1] = t1 + '0';
+	fresh[--i1] = chars[t1];
 	if (n < 0)
 		fresh[--i1] = '-';
 	return (fresh);
