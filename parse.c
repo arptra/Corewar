@@ -13,7 +13,7 @@ int	print_byte(int fd)
 		free(sym);
 	}
 	else
-		return (-1);
+		exit (-1);
 	return (1);
 }
 
@@ -27,7 +27,7 @@ void	print_bytes(int fd, int n)
 		print_byte(fd);
 }
 
-int	byte(int fd)
+unsigned char	byte(int fd)
 {
 	unsigned char byte;
 
@@ -37,15 +37,39 @@ int	byte(int fd)
 		exit(-1);
 }
 
-long int	get_magic(int fd, int n)
+long int	bytes_to_int(int fd, int n, int base)
 {
 	int i;
 	long int	res;
+	int	bt;
 
 	res = 0;
 	i = -1;
 	while (++i < n)
-		res = 16 * 16 * res + (byte(fd));
+	{
+		bt = (int)(byte(fd));
+		res = base * base * res + bt / 16 * base + bt % 16;
+	}
+	return (res);
+}
+
+char	*bytes_to_string(int fd, int n_bytes)
+{
+	int i;
+	char	*res;
+	int		bt;
+	char			*chars;
+
+	chars = "0123456789abcdef";
+	if (!(res = ft_strnew(n_bytes * 2)))
+		exit(-1);
+	i = -1;
+	while (++i < n_bytes)
+	{
+		bt = (int)byte(fd);
+		res[2 * i] = chars[bt / 16];
+		res[2 * i + 1] = chars[bt % 16];
+	}
 	return (res);
 }
 
@@ -55,10 +79,21 @@ int main(int argc, char **argv)
 	t_file_info		*info;
 	long int				magic;
 
-	// print_bytes(fd, 4);
+	if (!(info = (t_file_info*)ft_memalloc(sizeof(t_file_info))))
+		exit(-1);
 	fd = open(argv[1], O_RDONLY);
-	magic = get_magic(fd, 4);
+	magic = bytes_to_int(fd, 4, 16);
 	if (magic != COREWAR_EXEC_MAGIC)
-		write(2,"Error: this is not a champion",29);
+	{
+		write(2,"Error: this is not a champion\n",30);
+		exit (-1);
+	}
+	info->cn = bytes_to_string(fd, PROG_NAME_LENGTH);
+	if ((info->cs = bytes_to_int(fd, 8, 10)) > CHAMP_MAX_SIZE)
+	{
+		write(2,"Error: this champion is too big\n",32);
+		exit (-1);
+	}
+	// print_bytes(fd, 8);
 	return (0);
 }

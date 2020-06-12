@@ -1,1 +1,6 @@
 *.out
+.vscode*
+*.out
+*.o
+*.a
+*.dSYM*

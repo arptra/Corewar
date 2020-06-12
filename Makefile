@@ -11,16 +11,17 @@ OBJECTS_VM := $(VM:.c=.o)
 
 all: $(NAME)
 $(NAME): $(OBJECTS_VM)
-	make -C $(LIBFT_DIR)
-	gcc -g -o $(NAME) $(OBJECTS_VM) -L$(LIBFT_DIR) -lft
+	@make -C $(LIBFT_DIR)
+	@gcc -g -o $(NAME) $(VM) -L$(LIBFT_DIR) -lft
+# gcc -g -o $(NAME) $(OBJECTS_VM) -L$(LIBFT_DIR) -lft
 $(OBJECTS_VM): %.o: %.c
-	gcc $(C_FLAGS) -o $@ -c $<
+	@gcc $(C_FLAGS) -o $@ -c $<
 
 clean:
-	make clean -C $(LIBFT_DIR)
-	/bin/rm -f $(OBJECTS_VM)
+	@make clean -C $(LIBFT_DIR)
+	@/bin/rm -f $(OBJECTS_VM)
 fclean: clean
-	make fclean -C $(LIBFT_DIR)
-	/bin/rm -f $(NAME)
-	/bin/rm -f libft.a
+	@make fclean -C $(LIBFT_DIR)
+	@/bin/rm -f $(NAME)
+	@/bin/rm -f libft.a
 re: fclean all
