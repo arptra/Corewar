@@ -60,15 +60,13 @@ char	*bytes_to_string(int fd, int n_bytes)
 	int		bt;
 	char			*chars;
 
-	chars = "0123456789abcdef";
+	// chars = "0123456789abcdef";
 	if (!(res = ft_strnew(n_bytes * 2)))
 		exit(-1);
 	i = -1;
 	while (++i < n_bytes)
 	{
-		bt = (int)byte(fd);
-		res[2 * i] = chars[bt / 16];
-		res[2 * i + 1] = chars[bt % 16];
+		res[i] = (char)byte(fd);
 	}
 	return (res);
 }
@@ -94,6 +92,7 @@ int main(int argc, char **argv)
 		write(2,"Error: this champion is too big\n",32);
 		exit (-1);
 	}
+	info->cc = bytes_to_string(fd, COMMENT_LENGTH);
 	// print_bytes(fd, 8);
 	return (0);
 }
