@@ -27,34 +27,38 @@ void	print_bytes(int fd, int n)
 		print_byte(fd);
 }
 
-// t_file_info			*ft_wrt_info(int fd)
-// {
-// 	t_file_info		*res;
-// 	unsigned char	*byte;
-// 	char			*sym;
-// 	int				i1;
+int	byte(int fd)
+{
+	unsigned char byte;
 
-// 	while (read(fd, &byte, 4) > 0)
-// 	{
-// 		sym = ft_itoa_base(byte, 16);
-// 		ft_putstr(sym);
-// 		free(sym);
-// 	}
-// 	else
-// 		return (NULL);
-// 	return (res);
-// }
+	if (read(fd, &byte, 1) > 0)
+		return (byte);
+	else
+		exit(-1);
+}
+
+long int	get_magic(int fd, int n)
+{
+	int i;
+	long int	res;
+
+	res = 0;
+	i = -1;
+	while (++i < n)
+		res = 16 * 16 * res + (byte(fd));
+	return (res);
+}
 
 int main(int argc, char **argv)
 {
 	int fd;
 	t_file_info		*info;
-	char			*magic;
+	long int				magic;
 
-	magic = ft_itoa_base(COREWAR_EXEC_MAGIC,16);
-	ft_putstr(magic);
-	ft_putstr("\n");
+	// print_bytes(fd, 4);
 	fd = open(argv[1], O_RDONLY);
-	info = ft_wrt_info(fd);
-	print_bytes(fd, 4);
+	magic = get_magic(fd, 4);
+	if (magic != COREWAR_EXEC_MAGIC)
+		write(2,"Error: this is not a champion",29);
+	return (0);
 }
