@@ -11,9 +11,11 @@
 typedef struct	s_file_info
 {
 	char		*mh; /* MAGIC_HEADER */
-	char 		*cn; /* CHAPION NAME */
+	char 		*cn; /* CHAMPION NAME */
 	unsigned int cs; /* CHAMPION CODE SIZE */
 	char 		*cc; /* CHAMPION COMMENT */
+	int			cnum;	/* CHAMPION NUMBER */
+	t_file_info	*next;	/* next champion */
 }				t_file_info;
 
 
