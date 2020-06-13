@@ -15,7 +15,7 @@ typedef struct	s_file_info
 	unsigned int cs; /* CHAMPION CODE SIZE */
 	char 		*cc; /* CHAMPION COMMENT */
 	int			cnum;	/* CHAMPION NUMBER */
-	t_file_info	*next;	/* next champion */
+	struct s_file_info	*next;	/* next champion */
 }				t_file_info;
 
 
