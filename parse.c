@@ -34,7 +34,10 @@ unsigned char	byte(int fd)
 	if (read(fd, &byte, 1) > 0)
 		return (byte);
 	else
+	{
+		write(2,"Error: could not read from file with champion\n",100);
 		exit(-1);
+	}
 }
 
 long int	bytes_to_int(int fd, int n, int base)
@@ -71,13 +74,22 @@ char	*bytes_to_string(int fd, int n_bytes)
 	return (res);
 }
 
-t_file_info		*parse_player(char *player_name)
+t_file_info		*parse_player(char *player_name, int player_num, int nbr_cycles)
 {
 	int fd;
 	t_file_info		*info;
 	long int				magic;
 
-	fd = open(player_name, O_RDONLY);
+	if (!(ft_strequ(ft_strrchr(player_name,(int)'.'),".cor")))
+	{
+		write(2,"Error: file with champion code not properly named\n",100);
+		exit (-1);
+	}
+	if ((fd = open(player_name, O_RDONLY)) == -1)
+	{
+		write(2,"Error: file with champion code could not be opened\n",100);
+		exit (-1);
+	}
 	if (!(info = (t_file_info*)ft_memalloc(sizeof(t_file_info))))
 		exit(-1);
 	magic = bytes_to_int(fd, 4, 16);
@@ -93,19 +105,24 @@ t_file_info		*parse_player(char *player_name)
 		exit (-1);
 	}
 	info->cc = bytes_to_string(fd, COMMENT_LENGTH);
+	info->cnum = player_num;
+	info->nbr_cycles = nbr_cycles;
 	return (info);
 }
 
-int	parse_args(int argc, char **argv)
+t_file_info		*parse_args(int argc, char **argv)
 {
 	int			num_players;
 	int			nbr_cycles;
 	int			i;
 	int			player_num;
+	t_file_info		*players;
+	t_file_info		*temp;
 
 	nbr_cycles = -1;
 	num_players = argc - 1;
 	i=0;
+	players = NULL;
 	if (ft_strequ(argv[1],"-dump"))
 	{
 		if ((nbr_cycles = ft_atoi(argv[2])) < 1)
@@ -118,15 +135,29 @@ int	parse_args(int argc, char **argv)
 	}
 	while (++i < argc)
 	{
-		if (ft_strequ(argv[i],"-n"))
+		if (ft_strequ(argv[i],"-n"))	//if the current arg = flag -n
 		{
-			if ( ++i >= argc || (player_num = ft_atoi(argv[i])) <= 0)
+			if ( ++i >= argc			// check if the next arg (player_num) absent
+				|| (player_num = ft_atoi(argv[i])) <= 0	// check if the player_num is not correct
+				|| player_num > (num_players -= 2)		// check if the player_num is not correct
+				|| ++i >= argc			// check if the next arg (player_file) - absent
+				)
 			{
 				write(2,"Error: -n flag not properly used\n",46);
 				exit (-1);
 			}
-			
-			num_players = num_players - 2;
+		}
+		else
+			player_num = 0;
+		if (players == NULL)
+		{
+			players = parse_player(argv[i], player_num, nbr_cycles);
+			temp = players;
+		}
+		else
+		{
+			temp->next = parse_player(argv[i], player_num, nbr_cycles);
+			temp=temp->next;
 		}
 	}
 	if (num_players > MAX_PLAYERS)
@@ -134,15 +165,14 @@ int	parse_args(int argc, char **argv)
 		write(2,"Error: too much players for game\n",34);
 		exit (-1);
 	}
-
+	return (players);
 }
 
 int main(int argc, char **argv)
 {
-	t_file_info		*info;
+	t_file_info		*players;
 
-	parse_args(argc, argv);
+	players = parse_args(argc, argv);
 	// print_bytes(fd, 8);
-	info = parse_player(argv[1]);
 	return (0);
 }
