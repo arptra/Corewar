@@ -10,6 +10,7 @@
 
 typedef struct	s_file_info
 {
+	int 		fd;
 	char 		*cn; /* CHAMPION NAME */
 	unsigned int cs; /* CHAMPION CODE SIZE */
 	char 		*cc; /* CHAMPION COMMENT */
@@ -20,6 +21,22 @@ typedef struct	s_file_info
 								in the hexadecimal format with 32 octets per line.  */
 	struct s_file_info	*next;	/* next champion */
 }				t_file_info;
+
+
+/* print 1 byte */
+int	print_byte(int fd);
+/* print n bytes */
+void	print_bytes(int fd, int n);
+unsigned char	byte(int fd);
+long int	bytes_to_int(int fd, int n, int base);
+char	*bytes_to_string(int fd, int n_bytes);
+t_file_info		*parse_player(char *player_name, int player_num, int nbr_cycles);
+int					ft_get_current_num(t_file_info *players, int candidate);
+void				ft_sort_players(t_file_info *players);
+t_file_info			*ft_players(t_file_info *players, int num_players);
+t_file_info		*parse_args(int argc, char **argv);
+
+int	read_op_codes(int fd, unsigned char *byte);
 
 
 #endif //COREWAR_PARSE_H

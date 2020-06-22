@@ -4,7 +4,7 @@ C_FLAGS =  -Wall -Wextra
 #Filenames
 LIBFT_DIR := libft/
 NAME:= vm
-VM:= parse.c
+VM:= parse.c op_codes.c
 
 OBJECTS_VM := $(VM:.c=.o)
 #HEADER = libft/libft.h

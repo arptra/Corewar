@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 
-add_executable(vm parse.c)
+add_executable(vm parse.c op_codes.c)
 
 add_subdirectory(libft)
 
