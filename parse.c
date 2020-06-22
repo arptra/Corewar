@@ -50,6 +50,7 @@ long int	bytes_to_int(int fd, int n, int base)
 	i = -1;
 	while (++i < n)
 	{
+		/* mistake may here */
 		bt = (int)(byte(fd));
 		res = base * base * res + bt / 16 * base + bt % 16;
 	}
