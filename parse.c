@@ -100,7 +100,7 @@ t_file_info		*parse_player(char *player_name, int player_num, int nbr_cycles)
 		exit (-1);
 	}
 	info->cn = bytes_to_string(fd, PROG_NAME_LENGTH);
-	if ((info->cs = bytes_to_int(fd, 8, 10)) > CHAMP_MAX_SIZE)
+	if ((info->cs = bytes_to_int(fd, 8, 16)) > CHAMP_MAX_SIZE)
 	{
 		write(2,"Error: this champion is too big\n",32);
 		exit (-1);
@@ -134,35 +134,63 @@ int					ft_get_current_num(t_file_info *players, int candidate)
 	}
 }
 
-void				ft_sort_players(t_file_info *players)
+void				ft_swap_players(t_file_info *temp1, t_file_info *temp2)
 {
-	t_file_info			*cnt1;
-	t_file_info			*cnt2;
+	t_file_info			*temp3;
+
+	if (!(temp3 = (t_file_info*)ft_memalloc(sizeof(t_file_info))))
+		exit(-1);
+	temp3->cn = temp1->cn;
+	temp3->cs = temp1->cs;
+	temp3->cc = temp1->cc;
+	temp3->cnum = temp1->cnum;
+
+	temp1->cn = temp2->cn;
+	temp1->cs = temp2->cs;
+	temp1->cc = temp2->cc;
+	temp1->cnum = temp2->cnum;
+
+	temp2->cn = temp3->cn;
+	temp2->cs = temp3->cs;
+	temp2->cc = temp3->cc;
+	temp2->cnum = temp3->cnum;
+
+	free(temp3);
+}
+
+void				ft_sort_players(t_file_info *players, int num_players)
+{
 	t_file_info			*temp1;
 	t_file_info			*temp2;
+	int					flag;
 
-	cnt1 = players;
-	temp1 = players;
-	while (cnt1)
+	while (1)
 	{
-		cnt2 = cnt1;
-		while (cnt2->next)
+		temp1 = players;
+		flag = 1;
+		while (temp1->next)
 		{
-			if (cnt2->cnum > cnt2->next->cnum)
+			temp2 = temp1->next;
+			if (temp1->cnum > temp2->cnum)
 			{
-				
+				ft_swap_players(temp1,temp2);
+				flag = 0;
 			}
-			temp1 = cnt2;
-			cnt2 = cnt2->next;
+			else if (temp1->cnum == temp2->cnum)
+			{
+				write(2,"Error: 2 players with same numbers\n",100);
+				exit (-1);
+			}
+			temp1=temp1->next;
 		}
-		cnt1 = cnt1->next;
+		if (flag)
+			return ;
 	}
 }
 
 t_file_info			*ft_players(t_file_info *players, int num_players)
 {
 	t_file_info		*temp1;
-	t_file_info		*first;
 	int				cnt;
 
 	temp1 = players;
@@ -179,12 +207,10 @@ t_file_info			*ft_players(t_file_info *players, int num_players)
 			write(2,"Error: player_num greater than overall number of players\n",100);
 			exit (-1);
 		}
-		if (temp1->cnum == 1)
-			first = temp1;
 		temp1 = temp1->next;
 	}
-	ft_sort_players(players);
-	return (first);
+	ft_sort_players(players, num_players);
+	return (players);
 }
 
 t_file_info		*parse_args(int argc, char **argv)
@@ -242,14 +268,12 @@ t_file_info		*parse_args(int argc, char **argv)
 		write(2,"Error: too much players for game\n",34);
 		exit (-1);
 	}
-	ft_players(players, num_players);
-	return (players);
+	return (ft_players(players, num_players));
 }
 
 int main(int argc, char **argv)
 {
 	t_file_info		*players;
-
 	players = parse_args(argc, argv);
 	// print_bytes(fd, 8);
 	return (0);
