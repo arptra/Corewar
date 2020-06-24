@@ -17,6 +17,17 @@ int	print_byte(int fd)
 	return (1);
 }
 
+int	print_byte_by_ptr(void *memory)
+{
+	unsigned char byte;
+	char *sym;
+
+	sym = ft_itoa_base(*(int*)memory, 16);
+	ft_putstr(sym);
+	free(sym);
+	return (1);
+}
+
 /* print n bytes */
 void	print_bytes(int fd, int n)
 {
@@ -277,6 +288,18 @@ t_file_info		*parse_args(int argc, char **argv)
 	return (ft_players(players, num_players));
 }
 
+void	print_arena(void *arena, size_t size)
+{
+	size_t		i1;
+
+	i1 = 0;
+	while (i1 < size)
+	{
+		print_byte_by_ptr(arena + i1);
+		i1++;
+	}
+}
+
 int main(int argc, char **argv)
 {
 	t_file_info		*players;
@@ -285,7 +308,7 @@ int main(int argc, char **argv)
 	players = parse_args(argc, argv);
 	if (!(arena = ft_memalloc(MEM_SIZE)))
 		exit(-1);
-	
+	print_arena(arena, MEM_SIZE);
 	// print_bytes(fd, 8);
 	return (0);
 }
