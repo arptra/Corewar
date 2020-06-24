@@ -61,10 +61,7 @@ char	*bytes_to_string(int fd, int n_bytes)
 {
 	int i;
 	char	*res;
-	int		bt;
-	char			*chars;
 
-	// chars = "0123456789abcdef";
 	if (!(res = ft_strnew(n_bytes * 2)))
 		exit(-1);
 	i = -1;
@@ -167,7 +164,7 @@ void				ft_swap_players(t_file_info *temp1, t_file_info *temp2)
 	free(temp3);
 }
 
-void				ft_sort_players(t_file_info *players, int num_players)
+void				ft_sort_players(t_file_info *players)
 {
 	t_file_info			*temp1;
 	t_file_info			*temp2;
@@ -218,7 +215,7 @@ t_file_info			*ft_players(t_file_info *players, int num_players)
 		}
 		temp1 = temp1->next;
 	}
-	ft_sort_players(players, num_players);
+	ft_sort_players(players);
 	return (players);
 }
 
@@ -283,7 +280,12 @@ t_file_info		*parse_args(int argc, char **argv)
 int main(int argc, char **argv)
 {
 	t_file_info		*players;
+	void			*arena;
+
 	players = parse_args(argc, argv);
+	if (!(arena = ft_memalloc(MEM_SIZE)))
+		exit(-1);
+	
 	// print_bytes(fd, 8);
 	return (0);
 }
