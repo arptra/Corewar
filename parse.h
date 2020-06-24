@@ -7,6 +7,7 @@
 
 #include "libft/libft.h"
 #include "op.h"
+#include "stdio.h"
 
 typedef struct	s_file_info
 {
@@ -22,6 +23,12 @@ typedef struct	s_file_info
 	struct s_file_info	*next;	/* next champion */
 }				t_file_info;
 
+typedef struct s_arena
+{
+	void *data;
+	struct s_arena *start;
+}			t_arena;
+
 
 /* print 1 byte */
 int	print_byte(int fd);
@@ -36,7 +43,11 @@ void				ft_sort_players(t_file_info *players);
 t_file_info			*ft_players(t_file_info *players, int num_players);
 t_file_info		*parse_args(int argc, char **argv);
 
-int	read_op_codes(int fd, unsigned char *byte);
+int		read_op_codes(int fd, unsigned char *byte);
+void	show_byte(unsigned char byte);
+int 	read_nbytes(int fd, int nbytes, void (*f)(unsigned char));
+void	slct_instr(unsigned char byte);
+void	nthng(unsigned char byte);
 
 
 #endif //COREWAR_PARSE_H
