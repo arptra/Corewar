@@ -23,7 +23,7 @@ void	print_byte_by_ptr(void *memory)
 	int		int1;
 
 	chars = "0123456789abcdef";
-	int1 = *(int*)memory;
+	int1 = *(uint8_t *)memory;
 	write(1, &chars[int1 / 16], 1);
 	write(1, &chars[int1 % 16], 1);
 }
