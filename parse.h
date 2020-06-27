@@ -5,7 +5,9 @@
 #ifndef COREWAR_PARSE_H
 #define COREWAR_PARSE_H
 
+#include <wayland-server-protocol.h>
 #include "libft/libft.h"
+#include "stdint.h"
 #include "op.h"
 #include "stdio.h"
 
@@ -23,11 +25,19 @@ typedef struct	s_file_info
 	struct s_file_info	*next;	/* next champion */
 }				t_file_info;
 
-typedef struct s_arena
+typedef struct	s_arena
 {
-	void *data;
-	struct s_arena *start;
-}			t_arena;
+	uint8_t		byte;
+	struct		s_arena *start;
+}				t_arena;
+
+typedef struct	s_vm
+{
+	t_file_info	*players;
+	uint8_t		*arena;
+	t_file_info	*cursor; /* placed current player */
+	int 		cursor_addr; /* current address of where placed cursor, that point pointer cursor */
+}				t_vm;
 
 
 /* print 1 byte */
@@ -43,11 +53,18 @@ void				ft_sort_players(t_file_info *players);
 t_file_info			*ft_players(t_file_info *players, int num_players);
 t_file_info		*parse_args(int argc, char **argv);
 
-int		read_op_codes(int fd, unsigned char *byte);
-void	show_byte(unsigned char byte);
-int 	read_nbytes(int fd, int nbytes, void (*f)(unsigned char));
-void	slct_instr(unsigned char byte);
-void	nthng(unsigned char byte);
+int		read_byte(int fd, unsigned char *byte);
+
+void	show_byte(unsigned char byte, t_vm *vm);
+int 	read_nbytes(t_vm *vm, int nbytes, void (f)(unsigned char, t_vm *vm));
+void	slct_instr(unsigned char byte, t_vm *vm);
+void	nthng(unsigned char byte, t_vm *vm);
+
+void	print_byte_by_ptr(void *memory);
+void	print_arena(void *arena, size_t size);
+t_vm	*init_vm(int argc, char **argv);
+void	write_byte(unsigned char byte, t_vm *vm);
+void	placed_player(int addr, int num_player, t_vm *vm);
 
 
 #endif //COREWAR_PARSE_H
