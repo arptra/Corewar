@@ -45,19 +45,80 @@ unsigned char	args_type(unsigned char byte, int num_of_arg)
 	return (0xFF);
 }
 
-void	slct_instr(unsigned char byte, t_vm *vm)
+int	slct_instr(unsigned char byte)
 {
 	unsigned char	code_type_args;
 	uint8_t			arg_1;
 	uint16_t		arg_2;
 	uint16_t		arg_3;
-	t_file_info		*player;
+	int 			flag;
 
-	player = vm->current;
-	if (byte == 0x0b)
+	flag = 0;
+	if (byte == 0x01)
 	{
-		read_byte(player->fd, &code_type_args);
-		read_byte(player->fd, &arg_1);
-		printf("intsr: sti\ncode_types_args: %x\n\t arg_1: %x -> type: %x",code_type_args, arg_1, args_type(code_type_args, 1));
+		printf("hello from live\n");
 	}
+	else if (byte == 0x02)
+	{
+		printf("hello from ld\n");
+	}
+	else if (byte == 0x03)
+	{
+		printf("hello from st\n");
+	}
+	else if (byte == 0x04)
+	{
+		printf("hello from add\n");
+	}
+	else if (byte == 0x05)
+	{
+		printf("hello from sub\n");
+	}
+	else if (byte == 0x06)
+	{
+		printf("hello from and");
+	}
+	else if (byte == 0x07)
+	{
+		printf("hello from or");
+	}
+	else if (byte == 0x08)
+	{
+		printf("hello from xor");
+	}
+	else if (byte == 0x09)
+	{
+		printf("hello from zjmp");
+	}
+	else if (byte == 0x0a)
+	{
+		printf("hello from ldi");
+	}
+	else if (byte == 0x0b)
+	{
+		printf("hello from sti");
+	}
+	else if (byte == 0x0c)
+	{
+		printf("hello from fork");
+	}
+	else if (byte == 0x0d)
+	{
+		printf("hello from lld");
+	}
+	else if (byte == 0x0e)
+	{
+		printf("hello from lldi");
+	}
+	else if (byte == 0x0f)
+	{
+		printf("hello from lfork");
+	}
+	else if (byte == 0x10)
+	{
+		printf("hello from aff");
+	}
+	else
+		flag = -1;
+	return (flag);
 }

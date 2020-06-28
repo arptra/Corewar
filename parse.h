@@ -31,11 +31,21 @@ typedef struct	s_arena
 	struct		s_arena *start;
 }				t_arena;
 
+typedef struct	s_cursor
+{
+	int 		start_addr;
+	int 		cur_addr;
+	int 		player_num;
+	t_file_info	*player;
+}				t_cursor;
+
 typedef struct	s_vm
 {
 	t_file_info	*players;
 	uint8_t		*arena;
 	t_file_info	*current; /* placed current player */
+	int 		cur_num_player; /* for debug */
+	t_cursor	*cursor;
 }				t_vm;
 
 
@@ -56,13 +66,17 @@ int		read_byte(int fd, unsigned char *byte);
 
 void	show_byte(unsigned char byte, t_vm *vm);
 int 	read_nbytes(t_vm *vm, int nbytes, void (f)(unsigned char, t_vm *vm));
-void	slct_instr(unsigned char byte, t_vm *vm);
+int		slct_instr(unsigned char byte);
 void	nthng(unsigned char byte, t_vm *vm);
 
 void	print_byte_by_ptr(void *memory);
 void	print_arena(void *arena, size_t size);
 t_vm	*init_vm(int argc, char **argv);
 void	placed_player(int addr, int num_player, t_vm *vm);
+t_file_info	*get_player(t_vm *vm, int num_player);
+
+int 	set_cursor(t_vm *vm, int num_player);
+void	exec(t_vm *vm);
 
 
 #endif //COREWAR_PARSE_H

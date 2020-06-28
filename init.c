@@ -29,7 +29,22 @@ void		placed_player(int addr, int num_player, t_vm *vm)
 
 void	placed_players(t_vm *vm)
 {
-	/* code here -> placed all players in memory */
+	/* code here -> placed all players in memory
+	 * use func get_start_addr() in file exec.c
+	 */
+
+}
+
+t_cursor *init_cursor()
+{
+	t_cursor	*cursor;
+
+	cursor = (t_cursor*)malloc(sizeof(t_cursor));
+	cursor->player = NULL;
+	cursor->player_num = 0;
+	cursor->start_addr = 0;
+	cursor->cur_addr = 0;
+	return (cursor);
 }
 
 t_vm	*init_vm(int argc, char **argv)
@@ -38,9 +53,11 @@ t_vm	*init_vm(int argc, char **argv)
 	uint8_t	*arena;
 
 	vm = (t_vm*)malloc((sizeof(t_vm)));
+	vm->cursor = init_cursor();
 	if (!(arena = ft_memalloc(MEM_SIZE)))
 		exit(-1);
 	vm->arena = arena;
+	vm->cur_num_player = 0;
 	vm->players = parse_args(argc, argv);
 	placed_players(vm); //need to realize
 }
