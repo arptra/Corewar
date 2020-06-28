@@ -35,7 +35,7 @@ typedef struct	s_vm
 {
 	t_file_info	*players;
 	uint8_t		*arena;
-	t_file_info	*cursor; /* placed current player */
+	t_file_info	*current; /* placed current player */
 }				t_vm;
 
 

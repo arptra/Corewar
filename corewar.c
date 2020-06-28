@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 		exit(-1);
 	}
 	vm = init_vm(argc, argv);
-	vm->cursor = vm->players;
+	vm->current = vm->players;
 	placed_player(0, 1, vm);
 	print_arena(vm->arena, MEM_SIZE);
 	printf("\n");

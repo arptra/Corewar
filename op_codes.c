@@ -28,7 +28,7 @@ int 	read_nbytes(t_vm *vm, int nbytes, void (*f)(unsigned char, t_vm *vm))
 	t_file_info		*player;
 
 	i = -1;
-	player = vm->cursor;
+	player = vm->current;
 	while (++i < nbytes && read_byte(player->fd, &byte) == 0)
 		f(byte, vm);
 	return (i);
@@ -53,7 +53,7 @@ void	slct_instr(unsigned char byte, t_vm *vm)
 	uint16_t		arg_3;
 	t_file_info		*player;
 
-	player = vm->cursor;
+	player = vm->current;
 	if (byte == 0x0b)
 	{
 		read_byte(player->fd, &code_type_args);

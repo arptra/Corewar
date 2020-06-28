@@ -21,10 +21,15 @@ void		placed_player(int addr, int num_player, t_vm *vm)
 	int		i;
 
 	i = 0;
-	vm->cursor = get_player(vm, num_player);
+	vm->current = get_player(vm, num_player);
 	read_nbytes(vm,4, nthng);
-	while (read_byte(vm->cursor->fd, &byte) == 0)
+	while (read_byte(vm->current->fd, &byte) == 0)
 		vm->arena[addr + i++] = byte;
+}
+
+void	placed_players(t_vm *vm)
+{
+	/* code here -> placed all players in memory */
 }
 
 t_vm	*init_vm(int argc, char **argv)
@@ -35,6 +40,7 @@ t_vm	*init_vm(int argc, char **argv)
 	vm = (t_vm*)malloc((sizeof(t_vm)));
 	if (!(arena = ft_memalloc(MEM_SIZE)))
 		exit(-1);
-	vm->arena = (uint8_t*)malloc(sizeof(uint8_t)*MEM_SIZE);
+	vm->arena = arena;
 	vm->players = parse_args(argc, argv);
+	placed_players(vm); //need to realize
 }
