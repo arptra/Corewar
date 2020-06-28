@@ -45,7 +45,7 @@ unsigned char	args_type(unsigned char byte, int num_of_arg)
 	return (0xFF);
 }
 
-int	slct_instr(unsigned char byte)
+int	slct_instr(unsigned char byte, t_vm *vm)
 {
 	unsigned char	code_type_args;
 	uint8_t			arg_1;

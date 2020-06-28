@@ -23,20 +23,20 @@ int 	set_cursor(t_vm *vm, int num_player)
 	return (0);
 }
 
-int 	exec_op(t_vm * vm)
+int 	exec_op(t_vm *vm)
 {
-	int 	addr;
+	int			addr;
 	t_cursor	*cursor;
 	uint8_t 	*arena;
-	int 		check;
-
+	int 		error;
 
 	cursor = vm->cursor;
 	arena = vm->arena;
 	addr = cursor->cur_addr;
-	check = slct_instr(arena[addr]);
-	if (check == -1)
-		return (-1);
+	error = slct_instr(arena[addr], vm);
+	/* here error handler */
+	error_handler(error, vm);
+	/*if ok next op */
 	return (0);
 }
 

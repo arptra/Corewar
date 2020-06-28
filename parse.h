@@ -66,7 +66,7 @@ int		read_byte(int fd, unsigned char *byte);
 
 void	show_byte(unsigned char byte, t_vm *vm);
 int 	read_nbytes(t_vm *vm, int nbytes, void (f)(unsigned char, t_vm *vm));
-int		slct_instr(unsigned char byte);
+int		slct_instr(unsigned char byte, t_vm *vm);
 void	nthng(unsigned char byte, t_vm *vm);
 
 void	print_byte_by_ptr(void *memory);
@@ -77,6 +77,8 @@ t_file_info	*get_player(t_vm *vm, int num_player);
 
 int 	set_cursor(t_vm *vm, int num_player);
 void	exec(t_vm *vm);
+
+int 	error_handler(int erro, t_vm *vm);
 
 
 #endif //COREWAR_PARSE_H
