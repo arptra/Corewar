@@ -1,13 +1,5 @@
 #include "parse.h"
 
-void		write_byte(unsigned char byte, t_vm *vm)
-{
-	int 	i;
-
-	i = vm->cursor_addr;
-	vm->arena[i] = byte;
-}
-
 t_file_info	*get_player(t_vm *vm, int num_player)
 {
 	t_file_info *player;
@@ -26,16 +18,13 @@ t_file_info	*get_player(t_vm *vm, int num_player)
 void		placed_player(int addr, int num_player, t_vm *vm)
 {
 	uint8_t byte;
+	int		i;
 
+	i = 0;
 	vm->cursor = get_player(vm, num_player);
-	vm->cursor_addr = addr;
 	read_nbytes(vm,4, nthng);
 	while (read_byte(vm->cursor->fd, &byte) == 0)
-	{
-		write_byte(byte, vm);
-		vm->cursor_addr++;
-	}
-
+		vm->arena[addr + i++] = byte;
 }
 
 t_vm	*init_vm(int argc, char **argv)

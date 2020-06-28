@@ -36,7 +36,6 @@ typedef struct	s_vm
 	t_file_info	*players;
 	uint8_t		*arena;
 	t_file_info	*cursor; /* placed current player */
-	int 		cursor_addr; /* current address of where placed cursor, that point pointer cursor */
 }				t_vm;
 
 
@@ -63,7 +62,6 @@ void	nthng(unsigned char byte, t_vm *vm);
 void	print_byte_by_ptr(void *memory);
 void	print_arena(void *arena, size_t size);
 t_vm	*init_vm(int argc, char **argv);
-void	write_byte(unsigned char byte, t_vm *vm);
 void	placed_player(int addr, int num_player, t_vm *vm);
 
 
