@@ -35,7 +35,17 @@ void	placed_players(t_vm *vm)
 
 }
 
-t_cursor *init_cursor()
+t_args		*init_args()
+{
+	t_args *args;
+
+	args = (t_args*)malloc(sizeof(t_args));
+	args->arg_1 = 0;
+	args->arg_2 = 0;
+	args->arg_3 = 0;
+}
+
+t_cursor	*init_cursor()
 {
 	t_cursor	*cursor;
 
@@ -54,6 +64,7 @@ t_vm	*init_vm(int argc, char **argv)
 
 	vm = (t_vm*)malloc((sizeof(t_vm)));
 	vm->cursor = init_cursor();
+	vm->cursor->args = init_args();
 	if (!(arena = ft_memalloc(MEM_SIZE)))
 		exit(-1);
 	vm->arena = arena;

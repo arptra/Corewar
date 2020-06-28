@@ -1,6 +1,6 @@
 #include "parse.h"
 
-unsigned char	args_type(unsigned char byte, int num_of_arg)
+unsigned char	select_args(unsigned char byte, int num_of_arg)
 {
 	if (num_of_arg == 1)
 		return (byte & 0xC0);
@@ -9,6 +9,41 @@ unsigned char	args_type(unsigned char byte, int num_of_arg)
 	else if (num_of_arg == 3)
 		return (byte & 0xC);
 	return (0xFF);
+}
+
+int select_type(uint8_t type)
+{
+	if (type == REG_CODE)
+		return (T_REG);
+	else if (type == DIR_CODE)
+		return (T_DIR);
+	else if (type == IND_CODE)
+		return (T_IND);
+}
+
+int type_args(t_vm *vm, int num_of_arg)
+{
+	uint8_t	type;
+	int 	addr;
+
+	addr = vm->cursor->cur_addr;
+	type = vm->arena[addr + 1];
+	if (num_of_arg == 1)
+	{
+		type = select_args(type, 1);
+		type = select_type(type >> 6);
+	}
+	else if (num_of_arg == 2)
+	{
+		type = select_args(type, 2);
+		type = select_type(type >> 4);
+	}
+	else if (num_of_arg == 3)
+	{
+		type = select_args(type, 3);
+		type = select_type(type >> 2);
+	}
+	return (type);
 }
 
 int	slct_instr(unsigned char byte, t_vm *vm)
@@ -42,47 +77,50 @@ int	slct_instr(unsigned char byte, t_vm *vm)
 	}
 	else if (byte == 0x06)
 	{
-		printf("hello from and");
+		printf("hello from and\n");
 	}
 	else if (byte == 0x07)
 	{
-		printf("hello from or");
+		printf("hello from or\n");
 	}
 	else if (byte == 0x08)
 	{
-		printf("hello from xor");
+		printf("hello from xor\n");
 	}
 	else if (byte == 0x09)
 	{
-		printf("hello from zjmp");
+		printf("hello from zjmp\n");
 	}
 	else if (byte == 0x0a)
 	{
-		printf("hello from ldi");
+		printf("hello from ldi\n");
 	}
 	else if (byte == 0x0b)
 	{
-		printf("hello from sti");
+		arg_1 = type_args(vm, 1);
+		if (arg_1 == T_REG)
+			vm->cursor->args->arg_1 = vm->arena[vm->cursor->cur_addr + 2];
+		printf("hello from sti\n");
 	}
 	else if (byte == 0x0c)
 	{
-		printf("hello from fork");
+		printf("hello from fork\n");
 	}
 	else if (byte == 0x0d)
 	{
-		printf("hello from lld");
+		printf("hello from lld\n");
 	}
 	else if (byte == 0x0e)
 	{
-		printf("hello from lldi");
+		printf("hello from lldi\n");
 	}
 	else if (byte == 0x0f)
 	{
-		printf("hello from lfork");
+		printf("hello from lfork\n");
 	}
 	else if (byte == 0x10)
 	{
-		printf("hello from aff");
+		printf("hello from aff\n");
 	}
 	else
 		flag = -1;

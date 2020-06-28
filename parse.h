@@ -31,11 +31,19 @@ typedef struct	s_arena
 	struct		s_arena *start;
 }				t_arena;
 
+typedef struct	s_args
+{
+	int 		arg_1;
+	int 		arg_2;
+	int 		arg_3;
+}				t_args;
+
 typedef struct	s_cursor
 {
 	int 		start_addr;
 	int 		cur_addr;
 	int 		player_num;
+	t_args		*args;
 	t_file_info	*player;
 }				t_cursor;
 
