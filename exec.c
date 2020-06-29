@@ -11,7 +11,7 @@ int 	get_start_addr(int num_player)
 	return (-1);
 }
 
-int 	set_cursor(t_vm *vm, int num_player)
+int 	set_carriage(t_vm *vm, int num_player)
 {
 	t_carriage	*cursor;
 
@@ -44,7 +44,7 @@ int 	exec_op(t_vm *vm)
 void	exec(t_vm *vm)
 {
 	vm->current = get_player(vm, vm->cur_num_player);
-	set_cursor(vm, vm->cur_num_player);
+	set_carriage(vm, vm->cur_num_player);
 	/* here will cycle that exec op_codes */
 	exec_op(vm);
 
