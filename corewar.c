@@ -6,15 +6,15 @@ int main(int argc, char **argv)
 
 	if (argc == 1)
 	{
-		write(1,"usage:",6);
+		write(1,"usage:\n",7);
 		exit(-1);
 	}
 	vm = init_vm(argc, argv);
-	vm->current = vm->players;
+	// vm->current = vm->players;
 	vm->cur_num_player = 1; /* select player */
-	placed_player(0, vm->cur_num_player, vm);
+	// placed_player(0, vm->cur_num_player, vm);
 	print_arena(vm->arena, MEM_SIZE);
-	printf("\n");
+	// printf("\n");
 
 	//exec(vm);
 	return (0);

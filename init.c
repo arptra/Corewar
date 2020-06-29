@@ -22,20 +22,34 @@ void		placed_player(int addr, int num_player, t_vm *vm)
 
 	i = 0;
 	vm->current = get_player(vm, num_player);
-	read_nbytes(vm,4, nthng);
-	// проверка на нулевые байты
+	if (bytes_to_int(vm->current->fd, 4, 16) != 0)
+	{
+		write(2,"Here should be zero bytes\n",30);
+		exit (-1);
+	}
 	while (read_byte_fd(vm->current->fd, &byte) == 0)
-		//проверка на количество прочитанных байт
+	{
 		vm->arena[addr + i++] = byte;
+	}
+	if (i != vm->current->cs)
+	{
+		write(2,"Champion's actual code size does not match declared code size\n",62);
+		exit(-1);
+	}
 }
 
 void	placed_players(t_vm *vm)
 {
-	/*
-	 ** code here -> placed all players in memory
-	 ** use func get_start_addr() in file exec.c
-	 */
+	int				cnt;
+	int				addr;
 
+	addr = 0;
+	cnt = 0;
+	while (++cnt <= vm->players->num_players)
+	{
+		placed_player(addr,cnt,vm);
+		addr += MEM_SIZE / vm->players->num_players;
+	}
 }
 
 t_args		*init_args()
@@ -73,5 +87,6 @@ t_vm	*init_vm(int argc, char **argv)
 	vm->arena = arena;
 	vm->cur_num_player = 0;
 	vm->players = parse_args(argc, argv);
-	placed_players(vm); //need to realize
+	placed_players(vm);
+	return (vm);
 }

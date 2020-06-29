@@ -224,6 +224,7 @@ t_file_info			*ft_players(t_file_info *players, int num_players)
 			write(2,"Error: player_num greater than overall number of players\n",100);
 			exit (-1);
 		}
+		temp1->num_players = num_players;
 		temp1 = temp1->next;
 	}
 	ft_sort_players(players);

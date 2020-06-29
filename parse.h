@@ -5,7 +5,6 @@
 #ifndef COREWAR_PARSE_H
 #define COREWAR_PARSE_H
 
-#include <wayland-server-protocol.h>
 #include "libft/libft.h"
 #include "stdint.h"
 #include "op.h"
@@ -18,6 +17,7 @@ typedef struct	s_file_info
 	unsigned int cs; /* CHAMPION CODE SIZE */
 	char 		*cc; /* CHAMPION COMMENT */
 	int			cnum;	/* CHAMPION NUMBER */
+	int			num_players;	/* NUMBER OF CHAMPIONS */
 	int			nbr_cycles;		/* at the end of nbr_cycles of executions, 
 								dump the memory on the standard output and
 								quit the game. The memory must be dumped 
