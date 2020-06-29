@@ -23,7 +23,7 @@ void	print_byte_by_ptr(void *memory)
 	int		int1;
 
 	chars = "0123456789abcdef";
-	int1 = *(int*)memory;
+	int1 = *(uint8_t *)memory;
 	write(1, &chars[int1 / 16], 1);
 	write(1, &chars[int1 % 16], 1);
 }
@@ -121,7 +121,7 @@ t_file_info		*parse_player(char *player_name, int player_num, int nbr_cycles)
 	info->cc = bytes_to_string(fd, COMMENT_LENGTH);
 	info->cnum = player_num;
 	info->nbr_cycles = nbr_cycles;
-	info->fd=fd;
+	info->fd = fd;
 	return (info);
 }
 
@@ -300,21 +300,4 @@ void	print_arena(void *arena, size_t size)
 		if (i1%32 == 0)
 			write(1,"\n",1);
 	}
-}
-
-int main(int argc, char **argv)
-{
-	t_file_info		*players;
-	void			*arena;
-
-	if (argc == 1)
-	{
-		write(1,"usage:",6);
-		exit(-1);
-	}
-	players = parse_args(argc, argv);
-	if (!(arena = ft_memalloc(MEM_SIZE)))
-		exit(-1);
-	print_arena(arena, MEM_SIZE);
-	return (0);
 }
