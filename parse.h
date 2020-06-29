@@ -38,14 +38,15 @@ typedef struct	s_args
 	int 		arg_3;
 }				t_args;
 
-typedef struct	s_cursor
+typedef struct	s_carriage
 {
 	int 		start_addr;
 	int 		cur_addr;
 	int 		player_num;
+	int 		registers[REG_NUMBER];
 	t_args		*args;
 	t_file_info	*player;
-}				t_cursor;
+}				t_carriage;
 
 typedef struct	s_vm
 {
@@ -53,7 +54,7 @@ typedef struct	s_vm
 	uint8_t		*arena;
 	t_file_info	*current; /* placed current player */
 	int 		cur_num_player; /* for debug */
-	t_cursor	*cursor;
+	t_carriage	*carriage;
 }				t_vm;
 
 
@@ -70,7 +71,7 @@ void				ft_sort_players(t_file_info *players);
 t_file_info			*ft_players(t_file_info *players, int num_players);
 t_file_info		*parse_args(int argc, char **argv);
 
-int		read_byte(int fd, unsigned char *byte);
+int		read_byte_fd(int fd, unsigned char *byte);
 
 void	show_byte(unsigned char byte, t_vm *vm);
 int 	read_nbytes(t_vm *vm, int nbytes, void (f)(unsigned char, t_vm *vm));
@@ -84,9 +85,15 @@ void	placed_player(int addr, int num_player, t_vm *vm);
 t_file_info	*get_player(t_vm *vm, int num_player);
 
 int 	set_cursor(t_vm *vm, int num_player);
+uint8_t read_byte(t_vm *vm, int addr); //read byte from arena
 void	exec(t_vm *vm);
 
-int 	error_handler(int erro, t_vm *vm);
+/* op codes */
+
+void	sti(t_vm *vm);
+
+
+int 	error_handler(int error, t_vm *vm);
 
 
 #endif //COREWAR_PARSE_H

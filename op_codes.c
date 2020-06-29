@@ -26,7 +26,7 @@ int type_args(t_vm *vm, int num_of_arg)
 	uint8_t	type;
 	int 	addr;
 
-	addr = vm->cursor->cur_addr;
+	addr = vm->carriage->cur_addr;
 	type = vm->arena[addr + 1];
 	if (num_of_arg == 1)
 	{
@@ -97,9 +97,7 @@ int	slct_instr(unsigned char byte, t_vm *vm)
 	}
 	else if (byte == 0x0b)
 	{
-		arg_1 = type_args(vm, 1);
-		if (arg_1 == T_REG)
-			vm->cursor->args->arg_1 = vm->arena[vm->cursor->cur_addr + 2];
+		sti(vm);
 		printf("hello from sti\n");
 	}
 	else if (byte == 0x0c)

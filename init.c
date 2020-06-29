@@ -23,14 +23,17 @@ void		placed_player(int addr, int num_player, t_vm *vm)
 	i = 0;
 	vm->current = get_player(vm, num_player);
 	read_nbytes(vm,4, nthng);
-	while (read_byte(vm->current->fd, &byte) == 0)
+	// проверка на нулевые байты
+	while (read_byte_fd(vm->current->fd, &byte) == 0)
+		//проверка на количество прочитанных байт
 		vm->arena[addr + i++] = byte;
 }
 
 void	placed_players(t_vm *vm)
 {
-	/* code here -> placed all players in memory
-	 * use func get_start_addr() in file exec.c
+	/*
+	 ** code here -> placed all players in memory
+	 ** use func get_start_addr() in file exec.c
 	 */
 
 }
@@ -45,11 +48,11 @@ t_args		*init_args()
 	args->arg_3 = 0;
 }
 
-t_cursor	*init_cursor()
+t_carriage	*init_cursor()
 {
-	t_cursor	*cursor;
+	t_carriage	*cursor;
 
-	cursor = (t_cursor*)malloc(sizeof(t_cursor));
+	cursor = (t_carriage*)malloc(sizeof(t_carriage));
 	cursor->player = NULL;
 	cursor->player_num = 0;
 	cursor->start_addr = 0;
@@ -63,8 +66,8 @@ t_vm	*init_vm(int argc, char **argv)
 	uint8_t	*arena;
 
 	vm = (t_vm*)malloc((sizeof(t_vm)));
-	vm->cursor = init_cursor();
-	vm->cursor->args = init_args();
+	vm->carriage = init_cursor();
+	vm->carriage->args = init_args();
 	if (!(arena = ft_memalloc(MEM_SIZE)))
 		exit(-1);
 	vm->arena = arena;

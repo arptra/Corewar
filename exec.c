@@ -13,24 +13,25 @@ int 	get_start_addr(int num_player)
 
 int 	set_cursor(t_vm *vm, int num_player)
 {
-	t_cursor	*cursor;
+	t_carriage	*cursor;
 
-	cursor = vm->cursor;
+	cursor = vm->carriage;
 	cursor->start_addr = get_start_addr(num_player);
 	cursor->player_num = num_player;
 	cursor->player = vm->current;
 	cursor->cur_addr = cursor->start_addr;
+	cursor->registers[0] = -num_player;
 	return (0);
 }
 
 int 	exec_op(t_vm *vm)
 {
 	int			addr;
-	t_cursor	*cursor;
+	t_carriage	*cursor;
 	uint8_t 	*arena;
 	int 		error;
 
-	cursor = vm->cursor;
+	cursor = vm->carriage;
 	arena = vm->arena;
 	addr = cursor->cur_addr;
 	error = slct_instr(arena[addr], vm);
