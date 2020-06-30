@@ -60,6 +60,7 @@ t_args		*init_args()
 	args->arg_1 = 0;
 	args->arg_2 = 0;
 	args->arg_3 = 0;
+	return (args);
 }
 
 t_carriage	*init_cursor()

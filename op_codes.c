@@ -19,6 +19,7 @@ int select_type(uint8_t type)
 		return (T_DIR);
 	else if (type == IND_CODE)
 		return (T_IND);
+	return (0xFF);
 }
 
 int type_args(t_vm *vm, int num_of_arg)
@@ -44,6 +45,46 @@ int type_args(t_vm *vm, int num_of_arg)
 		type = select_type(type >> 2);
 	}
 	return (type);
+}
+
+int 	arg_value(t_vm *vm, int	size)
+{
+	if (size == T_REG)
+	{
+
+	}
+	else if (size == T_DIR)
+	{
+
+	}
+	else if (size == T_IND)
+	{
+
+	}
+}
+
+int 	get_arg(t_vm *vm, int num_of_arg)
+{
+	int arg;
+	int size;
+
+	arg = 0;
+	if (num_of_arg == 1)
+	{
+		size = vm->carriage->args->arg_1;
+		arg = arg_value(vm, size);
+	}
+	else if (num_of_arg == 2)
+	{
+		size = vm->carriage->args->arg_2;
+		arg = arg_value(vm, size);
+	}
+	else if (num_of_arg == 3)
+	{
+		size = vm->carriage->args->arg_3;
+		arg = arg_value(vm, size);
+	}
+	return (arg);
 }
 
 int	slct_instr(unsigned char byte, t_vm *vm)
@@ -97,6 +138,9 @@ int	slct_instr(unsigned char byte, t_vm *vm)
 	}
 	else if (byte == 0x0b)
 	{
+		vm->carriage->args->arg_1 = type_args(vm, 1);
+		vm->carriage->args->arg_2 = type_args(vm, 2);
+		vm->carriage->args->arg_3 = type_args(vm, 3);
 		sti(vm);
 		printf("hello from sti\n");
 	}

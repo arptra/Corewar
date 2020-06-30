@@ -85,7 +85,7 @@ t_vm	*init_vm(int argc, char **argv);
 void	placed_player(int addr, int num_player, t_vm *vm);
 t_file_info	*get_player(t_vm *vm, int num_player);
 
-int 	set_carriage(t_vm *vm, int num_player);
+int 	set_cursor(t_vm *vm, int num_player);
 uint8_t read_byte(t_vm *vm, int addr); //read byte from arena
 void	exec(t_vm *vm);
 
