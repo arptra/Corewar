@@ -40,6 +40,6 @@ uint8_t read_byte(t_vm *vm, int addr) // addr - step that need to jump, for read
 	int 	cur_addr;
 
 	arena = vm->arena;
-	cur_addr = vm->carriage->cur_addr;
+	cur_addr = vm->carriage->pc;
 	return (arena[cur_addr + addr]);
 }

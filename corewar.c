@@ -17,5 +17,7 @@ int main(int argc, char **argv)
 	// printf("\n");
 
 	exec(vm);
+	print_arena(vm->arena, MEM_SIZE);
+
 	return (0);
 }

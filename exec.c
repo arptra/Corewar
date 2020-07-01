@@ -11,16 +11,16 @@ int 	get_start_addr(int num_player)
 	return (-1);
 }
 
-int 	set_cursor(t_vm *vm, int num_player)
+int 	set_carriage(t_vm *vm, int num_player)
 {
-	t_carriage	*cursor;
+	t_carriage	*car;
 
-	cursor = vm->carriage;
-	cursor->start_addr = get_start_addr(num_player);
-	cursor->player_num = num_player;
-	cursor->player = vm->current;
-	cursor->cur_addr = cursor->start_addr;
-	cursor->registers[0] = -num_player;
+	car = vm->carriage;
+	car->start_addr = get_start_addr(num_player);
+	car->player_num = num_player;
+	car->player = vm->current;
+	car->pc = car->start_addr;
+	car->registers[0] = -num_player;
 	return (0);
 }
 
@@ -33,7 +33,7 @@ int 	exec_op(t_vm *vm)
 
 	cursor = vm->carriage;
 	arena = vm->arena;
-	addr = cursor->cur_addr;
+	addr = cursor->pc;
 	error = slct_instr(arena[addr], vm);
 	/* here error handler */
 	error_handler(error, vm);
@@ -44,7 +44,7 @@ int 	exec_op(t_vm *vm)
 void	exec(t_vm *vm)
 {
 	vm->current = get_player(vm, vm->cur_num_player);
-	set_cursor(vm, vm->cur_num_player);
+	set_carriage(vm, vm->cur_num_player);
 	/* here will cycle that exec op_codes */
 	exec_op(vm);
 

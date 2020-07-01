@@ -65,14 +65,15 @@ t_args		*init_args()
 
 t_carriage	*init_cursor()
 {
-	t_carriage	*cursor;
+	t_carriage	*car;
 
-	cursor = (t_carriage*)malloc(sizeof(t_carriage));
-	cursor->player = NULL;
-	cursor->player_num = 0;
-	cursor->start_addr = 0;
-	cursor->cur_addr = 0;
-	return (cursor);
+	car = (t_carriage*)malloc(sizeof(t_carriage));
+	car->player = NULL;
+	car->player_num = 0;
+	car->start_addr = 0;
+	car->pc = 0;
+	car->move = 0;
+	return (car);
 }
 
 t_vm	*init_vm(int argc, char **argv)

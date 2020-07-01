@@ -27,7 +27,7 @@ int type_args(t_vm *vm, int num_of_arg)
 	uint8_t	type;
 	int 	addr;
 
-	addr = vm->carriage->cur_addr;
+	addr = vm->carriage->pc;
 	type = vm->arena[addr + 1];
 	if (num_of_arg == 1)
 	{
@@ -47,20 +47,69 @@ int type_args(t_vm *vm, int num_of_arg)
 	return (type);
 }
 
+int 	get_value(t_vm *vm, int size)// read from memory and translate to int
+{
+	int	sign;
+	int value;
+	int addr;
+	int shift;
+	uint8_t *arena;
+
+	arena = vm->arena;
+	value = 0;
+	addr = vm->carriage->move % MEM_SIZE; // start address of argument (or current potion car.)
+	sign = (arena[addr] >> 7) ? 1 : 0;
+	shift = 0;
+	while (size)
+	{
+		if (sign)
+		{
+
+		}
+		else
+		{
+			addr = (vm->carriage->move % MEM_SIZE) + size - 1;
+			value = value + (arena[addr] << shift);
+			shift = shift + 8;
+		}
+		size--;
+	}
+	return (value);
+}
+
+void	put_value(t_vm *vm, int addr, int size, int value)
+{
+	int shift;
+	uint8_t byte;
+	int 	cur_addr;
+	uint8_t *arena;
+
+	shift = 0;
+	arena = vm->arena;
+	while (size)
+	{
+		cur_addr = (addr % MEM_SIZE) + size - 1;
+		byte = value >> shift;
+		arena[cur_addr] = byte;
+		shift = shift + 8;
+		size--;
+	}
+}
+
 int 	arg_value(t_vm *vm, int	size)
 {
+	int 	value;
+
+	value = 0;
 	if (size == T_REG)
-	{
-
-	}
+		value = read_byte(vm, vm->carriage->move);
 	else if (size == T_DIR)
-	{
-
-	}
+		value = get_value(vm, size);
 	else if (size == T_IND)
 	{
 
 	}
+	return (value);
 }
 
 int 	get_arg(t_vm *vm, int num_of_arg)
@@ -89,10 +138,6 @@ int 	get_arg(t_vm *vm, int num_of_arg)
 
 int	slct_instr(unsigned char byte, t_vm *vm)
 {
-	unsigned char	code_type_args;
-	uint8_t			arg_1;
-	uint16_t		arg_2;
-	uint16_t		arg_3;
 	int 			flag;
 
 	flag = 0;
