@@ -5,3 +5,4 @@
 *.a
 *.dSYM*
 vm
+__pycache__*
