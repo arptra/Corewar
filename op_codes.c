@@ -64,7 +64,9 @@ int 	get_value(t_vm *vm, int size)// read from memory and translate to int
 	{
 		if (sign)
 		{
-
+			addr = (vm->carriage->move % MEM_SIZE) + size - 1;
+			value = value + ((arena[addr] ^ 0xFF) << shift);
+			shift = shift + 8;
 		}
 		else
 		{
@@ -74,6 +76,8 @@ int 	get_value(t_vm *vm, int size)// read from memory and translate to int
 		}
 		size--;
 	}
+	if (sign)
+		value = ~(value);
 	return (value);
 }
 
