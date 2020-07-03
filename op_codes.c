@@ -150,7 +150,7 @@ int 	get_arg(t_vm *vm, int num_of_arg)
 	return (arg);
 }
 
-int	slct_instr(unsigned char byte, t_vm *vm)
+int		slct_instr(unsigned char byte, t_vm *vm)
 {
 	int 			flag;
 
