@@ -46,6 +46,7 @@ typedef struct	s_carriage
 	int 		player_num;
 	int 		registers[REG_NUMBER];
 	int 		move;
+	int 		tmp_addr;
 	t_args		*args;
 	t_file_info	*player;
 	struct s_carriage *next;

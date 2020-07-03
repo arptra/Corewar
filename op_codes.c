@@ -110,11 +110,18 @@ int 	arg_value(t_vm *vm, int	size)
 	else if (size == T_DIR)
 	{
 		size = get_dir_size(vm->carriage->op_code);
+		vm->carriage->args->arg_2 = size; //if size T_DIR change's, it should to save
 		value = get_value(vm, size);
 	}
 	else if (size == T_IND)
 	{
-
+		value = get_value(vm, size); // get address from to read
+		if (vm->carriage->op_code != 0x0e) //lldi
+			value = value % IDX_MOD;
+		vm->carriage->tmp_addr = vm->carriage->move; //save address to tmp var
+		vm->carriage->move = value;
+		value = get_value(vm, size);
+		vm->carriage->move = vm->carriage->tmp_addr;
 	}
 	return (value);
 }
