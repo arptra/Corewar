@@ -108,7 +108,10 @@ int 	arg_value(t_vm *vm, int	size)
 	if (size == T_REG)
 		value = read_byte(vm, vm->carriage->move);
 	else if (size == T_DIR)
+	{
+		size = get_dir_size(vm->carriage->op_code);
 		value = get_value(vm, size);
+	}
 	else if (size == T_IND)
 	{
 
@@ -129,7 +132,7 @@ int 	get_arg(t_vm *vm, int num_of_arg)
 	}
 	else if (num_of_arg == 2)
 	{
-		size = get_dir_size(vm->carriage->op_code);
+		size = vm->carriage->args->arg_2;
 		arg = arg_value(vm, size);
 	}
 	else if (num_of_arg == 3)
