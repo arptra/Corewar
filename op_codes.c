@@ -129,7 +129,7 @@ int 	get_arg(t_vm *vm, int num_of_arg)
 	}
 	else if (num_of_arg == 2)
 	{
-		size = vm->carriage->args->arg_2;
+		size = get_dir_size(vm->carriage->op_code);
 		arg = arg_value(vm, size);
 	}
 	else if (num_of_arg == 3)
@@ -187,6 +187,7 @@ int	slct_instr(unsigned char byte, t_vm *vm)
 	}
 	else if (byte == 0x0b)
 	{
+		vm->carriage->op_code = byte;
 		vm->carriage->args->arg_1 = type_args(vm, 1);
 		vm->carriage->args->arg_2 = type_args(vm, 2);
 		vm->carriage->args->arg_3 = type_args(vm, 3);
