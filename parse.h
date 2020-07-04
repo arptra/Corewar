@@ -40,11 +40,14 @@ typedef struct	s_args
 
 typedef struct	s_carriage
 {
+	uint8_t 	op_code;
 	int 		start_addr;
 	int 		pc;// use for move on instruction
 	int 		player_num;
 	int 		registers[REG_NUMBER];
 	int 		move;
+	int 		tmp_addr;
+	int 		cycle_to_exec;
 	t_args		*args;
 	t_file_info	*player;
 	struct s_carriage *next;
@@ -92,6 +95,10 @@ void	exec(t_vm *vm);
 int 	get_arg(t_vm *vm, int num_of_arg);
 int 	get_value(t_vm *vm, int size);
 void	put_value(t_vm *vm, int addr, int size, int value);
+int		get_dir_size(uint8_t byte);
+int		get_cycle_to_exec(uint8_t byte);
+
+
 
 
 /* op codes */

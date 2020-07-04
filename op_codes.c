@@ -64,7 +64,9 @@ int 	get_value(t_vm *vm, int size)// read from memory and translate to int
 	{
 		if (sign)
 		{
-
+			addr = (vm->carriage->move % MEM_SIZE) + size - 1;
+			value = value + ((arena[addr] ^ 0xFF) << shift);
+			shift = shift + 8;
 		}
 		else
 		{
@@ -74,6 +76,8 @@ int 	get_value(t_vm *vm, int size)// read from memory and translate to int
 		}
 		size--;
 	}
+	if (sign)
+		value = ~(value);
 	return (value);
 }
 
@@ -104,10 +108,20 @@ int 	arg_value(t_vm *vm, int	size)
 	if (size == T_REG)
 		value = read_byte(vm, vm->carriage->move);
 	else if (size == T_DIR)
+	{
+		size = get_dir_size(vm->carriage->op_code);
+		vm->carriage->args->arg_2 = size; //if size T_DIR change's, it should to save
 		value = get_value(vm, size);
+	}
 	else if (size == T_IND)
 	{
-
+		value = get_value(vm, size); // get address from to read
+		if (vm->carriage->op_code != 0x0e) //lldi
+			value = value % IDX_MOD;
+		vm->carriage->tmp_addr = vm->carriage->move; //save address to tmp var
+		vm->carriage->move = value;
+		value = get_value(vm, size);
+		vm->carriage->move = vm->carriage->tmp_addr;
 	}
 	return (value);
 }
@@ -136,7 +150,7 @@ int 	get_arg(t_vm *vm, int num_of_arg)
 	return (arg);
 }
 
-int	slct_instr(unsigned char byte, t_vm *vm)
+int		slct_instr(unsigned char byte, t_vm *vm)
 {
 	int 			flag;
 
@@ -183,6 +197,7 @@ int	slct_instr(unsigned char byte, t_vm *vm)
 	}
 	else if (byte == 0x0b)
 	{
+		vm->carriage->op_code = byte;
 		vm->carriage->args->arg_1 = type_args(vm, 1);
 		vm->carriage->args->arg_2 = type_args(vm, 2);
 		vm->carriage->args->arg_3 = type_args(vm, 3);
