@@ -1,7 +1,3 @@
-//
-// Created by ai on 06.06.2020.
-//
-
 #ifndef COREWAR_PARSE_H
 #define COREWAR_PARSE_H
 
@@ -24,12 +20,6 @@ typedef struct	s_file_info
 								in the hexadecimal format with 32 octets per line.  */
 	struct s_file_info	*next;	/* next champion */
 }				t_file_info;
-
-typedef struct	s_arena
-{
-	uint8_t		byte;
-	struct		s_arena *start;
-}				t_arena;
 
 typedef struct	s_args_size
 {
@@ -83,7 +73,7 @@ t_file_info		*parse_player(char *player_name, int player_num, int nbr_cycles);
 int					ft_get_current_num(t_file_info *players, int candidate);
 void				ft_sort_players(t_file_info *players);
 t_file_info			*ft_players(t_file_info *players, int num_players);
-t_file_info		*parse_args(int argc, char **argv);
+t_file_info			*parse_args(int argc, char **argv);
 
 int		read_byte_fd(int fd, unsigned char *byte);
 
@@ -108,8 +98,6 @@ int		get_dir_size(uint8_t byte);
 int		get_cycle_to_exec(uint8_t byte);
 void	check_cycle_exec(t_vm *vm,uint8_t byte, void (*f)(t_vm *));
 int		type_exception(uint8_t byte);
-
-
 
 
 
