@@ -52,11 +52,22 @@ void	placed_players(t_vm *vm)
 	}
 }
 
-t_args		*init_args()
+t_args_size		*init_args_size()
 {
-	t_args *args;
+	t_args_size *args;
 
-	args = (t_args*)malloc(sizeof(t_args));
+	args = (t_args_size*)malloc(sizeof(t_args_size));
+	args->arg_1 = 0;
+	args->arg_2 = 0;
+	args->arg_3 = 0;
+	return (args);
+}
+
+t_args_type		*init_args_type()
+{
+	t_args_type *args;
+
+	args = (t_args_type*)malloc(sizeof(t_args_type));
 	args->arg_1 = 0;
 	args->arg_2 = 0;
 	args->arg_3 = 0;
@@ -73,6 +84,7 @@ t_carriage	*init_cursor()
 	car->start_addr = 0;
 	car->pc = 0;
 	car->move = 0;
+	car->cycle_to_exec = -1;
 	return (car);
 }
 
@@ -83,12 +95,14 @@ t_vm	*init_vm(int argc, char **argv)
 
 	vm = (t_vm*)malloc((sizeof(t_vm)));
 	vm->carriage = init_cursor();
-	vm->carriage->args = init_args();
+	vm->carriage->args_size = init_args_size();
+	vm->carriage->args_type = init_args_type();
 	if (!(arena = ft_memalloc(MEM_SIZE)))
 		exit(-1);
 	vm->arena = arena;
 	vm->cur_num_player = 0;
 	vm->players = parse_args(argc, argv);
+	vm->cycle = 0;
 	placed_players(vm);
 	return (vm);
 }

@@ -73,3 +73,11 @@ int	get_cycle_to_exec(uint8_t byte)
 		return (2);
 	return (0);
 }
+
+int type_exception(uint8_t byte)
+{
+	if (byte == 0x01 || byte == 0x09
+		|| byte == 0x0c || byte == 0x0f)
+		return (get_dir_size(byte));
+	return (0);
+}

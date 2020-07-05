@@ -11,40 +11,54 @@ unsigned char	select_args(unsigned char byte, int num_of_arg)
 	return (0xFF);
 }
 
-int select_type(uint8_t type)
+int select_size(uint8_t type, uint8_t byte)
 {
 	if (type == REG_CODE)
 		return (T_REG);
 	else if (type == DIR_CODE)
-		return (T_DIR);
+		return (get_dir_size(byte));
 	else if (type == IND_CODE)
-		return (T_IND);
+		return (IND_CODE);
 	return (0xFF);
 }
 
-int type_args(t_vm *vm, int num_of_arg)
+uint8_t select_type(uint8_t type)
 {
-	uint8_t	type;
+	if (type == REG_CODE)
+		return (REG_CODE);
+	else if (type == DIR_CODE)
+		return (DIR_CODE);
+	else if (type == IND_CODE)
+		return (IND_CODE);
+	return (0xFF);
+}
+
+int type_args(t_vm *vm, int num_of_arg, uint8_t *type)
+{
+	uint8_t	size_type;
 	int 	addr;
 
 	addr = vm->carriage->pc;
-	type = vm->arena[addr + 1];
+	size_type = vm->arena[addr + 1];
 	if (num_of_arg == 1)
 	{
-		type = select_args(type, 1);
-		type = select_type(type >> 6);
+		size_type = select_args(size_type, 1);
+		*type = select_type(size_type >> 6);
+		size_type = select_size(size_type >> 6, vm->carriage->op_code);
 	}
 	else if (num_of_arg == 2)
 	{
-		type = select_args(type, 2);
-		type = select_type(type >> 4);
+		size_type = select_args(size_type, 2);
+		*type = select_type(size_type >> 4);
+		size_type = select_size(size_type >> 4, vm->carriage->op_code);
 	}
 	else if (num_of_arg == 3)
 	{
-		type = select_args(type, 3);
-		type = select_type(type >> 2);
+		size_type = select_args(size_type, 3);
+		*type = select_type(size_type >> 2);
+		size_type = select_size(size_type >> 2, vm->carriage->op_code);
 	}
-	return (type);
+	return (size_type);
 }
 
 int 	get_value(t_vm *vm, int size)// read from memory and translate to int
@@ -100,22 +114,18 @@ void	put_value(t_vm *vm, int addr, int size, int value)
 	}
 }
 
-int 	arg_value(t_vm *vm, int	size)
+int 	arg_value(t_vm *vm, int type, int size)
 {
 	int 	value;
 
 	value = 0;
-	if (size == T_REG)
+	if (type == REG_CODE)
 		value = read_byte(vm, vm->carriage->move);
-	else if (size == T_DIR)
-	{
-		size = get_dir_size(vm->carriage->op_code);
-		vm->carriage->args->arg_2 = size; //if size T_DIR change's, it should to save
+	else if (type == DIR_CODE)
 		value = get_value(vm, size);
-	}
-	else if (size == T_IND)
+	else if (type == IND_CODE)
 	{
-		value = get_value(vm, size); // get address from to read
+		value = get_value(vm, T_IND); // get address from to read
 		if (vm->carriage->op_code != 0x0e) //lldi
 			value = value % IDX_MOD;
 		vm->carriage->tmp_addr = vm->carriage->move; //save address to tmp var
@@ -130,24 +140,50 @@ int 	get_arg(t_vm *vm, int num_of_arg)
 {
 	int arg;
 	int size;
+	uint8_t type;
 
 	arg = 0;
 	if (num_of_arg == 1)
 	{
-		size = vm->carriage->args->arg_1;
-		arg = arg_value(vm, size);
+		type = vm->carriage->args_type->arg_1;
+		size = vm->carriage->args_size->arg_1;
+		arg = arg_value(vm, type, size);
 	}
 	else if (num_of_arg == 2)
 	{
-		size = vm->carriage->args->arg_2;
-		arg = arg_value(vm, size);
+		type = vm->carriage->args_type->arg_2;
+		size = vm->carriage->args_size->arg_2;
+		arg = arg_value(vm, type, size);
 	}
 	else if (num_of_arg == 3)
 	{
-		size = vm->carriage->args->arg_3;
-		arg = arg_value(vm, size);
+		type = vm->carriage->args_type->arg_3;
+		size = vm->carriage->args_size->arg_3;
+		arg = arg_value(vm, type, size);
 	}
 	return (arg);
+}
+
+void	check_cycle_exec(t_vm *vm,uint8_t byte, void (*f)(t_vm *))
+{
+	if (vm->carriage->cycle_to_exec == -1)
+		vm->carriage->cycle_to_exec = get_cycle_to_exec(byte);
+	if (vm->carriage->cycle_to_exec > 0 )
+		vm->carriage->cycle_to_exec--;
+	else if (vm->carriage->cycle_to_exec == 0)
+	{
+		vm->carriage->op_code = byte;
+		if ((vm->carriage->args_size->arg_1 = type_exception(byte)))
+			vm->carriage->args_type->arg_1 = DIR_CODE;
+		else
+		{
+			vm->carriage->args_size->arg_1 = type_args(vm, 1, &vm->carriage->args_type->arg_1);
+			vm->carriage->args_size->arg_2 = type_args(vm, 2, &vm->carriage->args_type->arg_2);
+			vm->carriage->args_size->arg_3 = type_args(vm, 3, &vm->carriage->args_type->arg_3);
+		}
+		f(vm);
+		vm->carriage->cycle_to_exec = -1;
+	}
 }
 
 int		slct_instr(unsigned char byte, t_vm *vm)
@@ -157,6 +193,7 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 	flag = 0;
 	if (byte == 0x01)
 	{
+		check_cycle_exec(vm, byte, live);
 		printf("hello from live\n");
 	}
 	else if (byte == 0x02)
@@ -197,11 +234,7 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 	}
 	else if (byte == 0x0b)
 	{
-		vm->carriage->op_code = byte;
-		vm->carriage->args->arg_1 = type_args(vm, 1);
-		vm->carriage->args->arg_2 = type_args(vm, 2);
-		vm->carriage->args->arg_3 = type_args(vm, 3);
-		sti(vm);
+		check_cycle_exec(vm, byte, sti);
 		printf("hello from sti\n");
 	}
 	else if (byte == 0x0c)

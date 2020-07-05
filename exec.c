@@ -46,6 +46,10 @@ void	exec(t_vm *vm)
 	vm->current = get_player(vm, vm->cur_num_player);
 	set_carriage(vm, vm->cur_num_player);
 	/* here will cycle that exec op_codes */
-	exec_op(vm);
-
+	while (vm->cycle != CYCLE_TO_DIE)
+	{
+		exec_op(vm);
+		vm->cycle++;
+		vm->carriage->pc = vm->carriage->move;// jump to next instruction
+	}
 }

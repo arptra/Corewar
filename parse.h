@@ -31,12 +31,19 @@ typedef struct	s_arena
 	struct		s_arena *start;
 }				t_arena;
 
-typedef struct	s_args
+typedef struct	s_args_size
 {
 	int 		arg_1;
 	int 		arg_2;
 	int 		arg_3;
-}				t_args;
+}				t_args_size;
+
+typedef struct	s_args_type
+{
+	uint8_t 		arg_1;
+	uint8_t 		arg_2;
+	uint8_t 		arg_3;
+}				t_args_type;
 
 typedef struct	s_carriage
 {
@@ -48,7 +55,8 @@ typedef struct	s_carriage
 	int 		move;
 	int 		tmp_addr;
 	int 		cycle_to_exec;
-	t_args		*args;
+	t_args_size		*args_size;
+	t_args_type		*args_type;
 	t_file_info	*player;
 	struct s_carriage *next;
 }				t_carriage;
@@ -59,6 +67,7 @@ typedef struct	s_vm
 	uint8_t		*arena;
 	t_file_info	*current; /* placed current player */
 	int 		cur_num_player; /* for debug */
+	int 		cycle;
 	t_carriage	*carriage;
 }				t_vm;
 
@@ -97,6 +106,9 @@ int 	get_value(t_vm *vm, int size);
 void	put_value(t_vm *vm, int addr, int size, int value);
 int		get_dir_size(uint8_t byte);
 int		get_cycle_to_exec(uint8_t byte);
+void	check_cycle_exec(t_vm *vm,uint8_t byte, void (*f)(t_vm *));
+int		type_exception(uint8_t byte);
+
 
 
 
@@ -104,6 +116,7 @@ int		get_cycle_to_exec(uint8_t byte);
 /* op codes */
 
 void	sti(t_vm *vm);
+void	live(t_vm *vm);
 
 
 int 	error_handler(int error, t_vm *vm);
