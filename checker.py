@@ -99,6 +99,7 @@ logging.info("players: %s"%(" ".join(args['players'])))
 i = args['start']
 players = " ".join(args['players'])
 while i <= args['end']:
+	logging.info('--------Cicle #%i--------'%(i))
 	cmd1 = " ".join([
 				exe_corewar_our,
 				'-dump',
