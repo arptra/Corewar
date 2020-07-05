@@ -201,7 +201,7 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 		printf("hello from st\n");
 	}
 	else if (byte == 0x04)
-		add(t_vm *vm);
+		add(vm);
 	else if (byte == 0x05)
 	{
 		printf("hello from sub\n");
