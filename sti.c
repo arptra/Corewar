@@ -18,4 +18,5 @@ void	sti(t_vm *vm)
 	vm->carriage->move += vm->carriage->args_size->arg_3;
 	addr = vm->carriage->pc + (arg_2 + arg_3) % IDX_MOD;
 	put_value(vm, addr, REG_SIZE, value);
+	print_arena(vm->arena, 32);
 }

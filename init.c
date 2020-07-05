@@ -74,7 +74,7 @@ t_args_type		*init_args_type()
 	return (args);
 }
 
-t_carriage	*init_cursor()
+t_carriage	*init_carriage()
 {
 	t_carriage	*car;
 
@@ -85,6 +85,7 @@ t_carriage	*init_cursor()
 	car->pc = 0;
 	car->move = 0;
 	car->cycle_to_exec = -1;
+	car->carry = 0;
 	return (car);
 }
 
@@ -94,7 +95,7 @@ t_vm	*init_vm(int argc, char **argv)
 	uint8_t	*arena;
 
 	vm = (t_vm*)malloc((sizeof(t_vm)));
-	vm->carriage = init_cursor();
+	vm->carriage = init_carriage();
 	vm->carriage->args_size = init_args_size();
 	vm->carriage->args_type = init_args_type();
 	if (!(arena = ft_memalloc(MEM_SIZE)))

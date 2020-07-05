@@ -183,6 +183,7 @@ void	check_cycle_exec(t_vm *vm,uint8_t byte, void (*f)(t_vm *))
 		}
 		f(vm);
 		vm->carriage->cycle_to_exec = -1;
+		vm->cycle--;
 	}
 }
 
@@ -192,22 +193,15 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 
 	flag = 0;
 	if (byte == 0x01)
-	{
 		check_cycle_exec(vm, byte, live);
-		printf("hello from live\n");
-	}
 	else if (byte == 0x02)
-	{
-		printf("hello from ld\n");
-	}
+		check_cycle_exec(vm, byte, ld);
 	else if (byte == 0x03)
 	{
 		printf("hello from st\n");
 	}
 	else if (byte == 0x04)
-	{
-		printf("hello from add\n");
-	}
+		add(t_vm *vm);
 	else if (byte == 0x05)
 	{
 		printf("hello from sub\n");
@@ -226,7 +220,8 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 	}
 	else if (byte == 0x09)
 	{
-		printf("hello from zjmp\n");
+		check_cycle_exec(vm, byte, zjmp);
+		//printf("hello from zjmp\n");
 	}
 	else if (byte == 0x0a)
 	{
@@ -235,7 +230,7 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 	else if (byte == 0x0b)
 	{
 		check_cycle_exec(vm, byte, sti);
-		printf("hello from sti\n");
+		//printf("hello from sti\n");
 	}
 	else if (byte == 0x0c)
 	{

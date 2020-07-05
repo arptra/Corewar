@@ -302,4 +302,5 @@ void	print_arena(void *arena, size_t size)
 		if (i1%64 == 0)
 			write(1,"\n",1);
 	}
+	write(1,"\n",1);
 }

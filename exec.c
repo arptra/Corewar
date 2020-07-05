@@ -49,7 +49,7 @@ void	exec(t_vm *vm)
 	while (vm->cycle != CYCLE_TO_DIE)
 	{
 		exec_op(vm);
-		vm->cycle++;
 		vm->carriage->pc = vm->carriage->move;// jump to next instruction
+		vm->cycle++;
 	}
 }

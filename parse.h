@@ -45,6 +45,7 @@ typedef struct	s_carriage
 	int 		move;
 	int 		tmp_addr;
 	int 		cycle_to_exec;
+	int 		carry;
 	t_args_size		*args_size;
 	t_args_type		*args_type;
 	t_file_info	*player;
@@ -105,7 +106,9 @@ int		type_exception(uint8_t byte);
 
 void	sti(t_vm *vm);
 void	live(t_vm *vm);
-
+void	ld(t_vm *vm);
+void	zjmp(t_vm *vm);
+void	add(t_vm *vm);
 
 int 	error_handler(int error, t_vm *vm);
 

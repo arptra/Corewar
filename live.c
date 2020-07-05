@@ -8,5 +8,5 @@ void	live(t_vm *vm)
 	arg_1 = get_arg(vm, 1);
 	vm->carriage->move += vm->carriage->args_size->arg_1;
 	/* something to do with player */
-
+	print_arena(vm->arena, 32);
 }
