@@ -104,10 +104,13 @@ int		type_exception(uint8_t byte);
 
 /* op codes */
 
+//tested betmen code
 void	sti(t_vm *vm);
 void	live(t_vm *vm);
 void	ld(t_vm *vm);
 void	zjmp(t_vm *vm);
+
+//not tested
 void	add(t_vm *vm);
 void	aff(t_vm *vm);
 void	and(t_vm *vm);

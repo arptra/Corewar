@@ -1,6 +1,6 @@
 #include "parse.h"
 
-unsigned char	select_args(unsigned char byte, int num_of_arg)
+uint8_t	select_args(unsigned char byte, int num_of_arg)
 {
 	if (num_of_arg == 1)
 		return (byte & 0xC0);
@@ -11,7 +11,7 @@ unsigned char	select_args(unsigned char byte, int num_of_arg)
 	return (0xFF);
 }
 
-int select_size(uint8_t type, uint8_t byte)
+int		select_size(uint8_t type, uint8_t byte)
 {
 	if (type == REG_CODE)
 		return (T_REG);
@@ -33,7 +33,7 @@ uint8_t select_type(uint8_t type)
 	return (0xFF);
 }
 
-int type_args(t_vm *vm, int num_of_arg, uint8_t *type)
+int		type_args(t_vm *vm, int num_of_arg, uint8_t *type)
 {
 	uint8_t	size_type;
 	int 	addr;

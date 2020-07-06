@@ -4,6 +4,7 @@
  * need to realize for all players
  * calculate addr where start bytecode of player
  */
+
 int 	get_start_addr(int num_player)
 {
 	if (num_player == 1)
