@@ -71,7 +71,7 @@ int 	get_value(t_vm *vm, int size)// read from memory and translate to int
 
 	arena = vm->arena;
 	value = 0;
-	addr = vm->carriage->move % MEM_SIZE; // start address of argument (or current potion car.)
+	addr = vm->carriage->move % MEM_SIZE; // start address of argument (or current position car.)
 	sign = (arena[addr] >> 7) ? 1 : 0;
 	shift = 0;
 	while (size)
@@ -201,15 +201,13 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 		printf("hello from st\n");
 	}
 	else if (byte == 0x04)
-		add(vm);
+		check_cycle_exec(vm, byte,add);
 	else if (byte == 0x05)
 	{
 		printf("hello from sub\n");
 	}
 	else if (byte == 0x06)
-	{
-		printf("hello from and\n");
-	}
+		check_cycle_exec(vm, byte, and);
 	else if (byte == 0x07)
 	{
 		printf("hello from or\n");
@@ -219,19 +217,11 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 		printf("hello from xor\n");
 	}
 	else if (byte == 0x09)
-	{
 		check_cycle_exec(vm, byte, zjmp);
-		//printf("hello from zjmp\n");
-	}
 	else if (byte == 0x0a)
-	{
-		printf("hello from ldi\n");
-	}
+		check_cycle_exec(vm, byte, ldi);
 	else if (byte == 0x0b)
-	{
 		check_cycle_exec(vm, byte, sti);
-		//printf("hello from sti\n");
-	}
 	else if (byte == 0x0c)
 	{
 		printf("hello from fork\n");
@@ -249,9 +239,7 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 		printf("hello from lfork\n");
 	}
 	else if (byte == 0x10)
-	{
-		printf("hello from aff\n");
-	}
+		check_cycle_exec(vm, byte, aff);
 	else
 		flag = -1;
 	return (flag);

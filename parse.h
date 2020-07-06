@@ -109,6 +109,9 @@ void	live(t_vm *vm);
 void	ld(t_vm *vm);
 void	zjmp(t_vm *vm);
 void	add(t_vm *vm);
+void	aff(t_vm *vm);
+void	and(t_vm *vm);
+void	ldi(t_vm *vm);
 
 int 	error_handler(int error, t_vm *vm);
 
