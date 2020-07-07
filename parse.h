@@ -115,6 +115,11 @@ void	add(t_vm *vm);
 void	aff(t_vm *vm);
 void	and(t_vm *vm);
 void	ldi(t_vm *vm);
+void	lld(t_vm *vm);
+void	lldi(t_vm *vm);
+void	or(t_vm *vm);
+void	sub(t_vm *vm);
+
 
 int 	error_handler(int error, t_vm *vm);
 
