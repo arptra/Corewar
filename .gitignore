@@ -7,3 +7,5 @@
 vm
 __pycache__*
 *.ipynb
+*.cor
+.DS_Store
