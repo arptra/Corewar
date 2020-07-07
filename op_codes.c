@@ -201,21 +201,15 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 		printf("hello from st\n");
 	}
 	else if (byte == 0x04)
-		check_cycle_exec(vm, byte,add);
+		check_cycle_exec(vm, byte, add);
 	else if (byte == 0x05)
-	{
-		printf("hello from sub\n");
-	}
+		check_cycle_exec(vm, byte, sub);
 	else if (byte == 0x06)
 		check_cycle_exec(vm, byte, and);
 	else if (byte == 0x07)
-	{
-		printf("hello from or\n");
-	}
+		check_cycle_exec(vm, byte, or);
 	else if (byte == 0x08)
-	{
-		printf("hello from xor\n");
-	}
+		check_cycle_exec(vm, byte, xor);
 	else if (byte == 0x09)
 		check_cycle_exec(vm, byte, zjmp);
 	else if (byte == 0x0a)
@@ -227,13 +221,9 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 		printf("hello from fork\n");
 	}
 	else if (byte == 0x0d)
-	{
-		printf("hello from lld\n");
-	}
+		check_cycle_exec(vm, byte, lld);
 	else if (byte == 0x0e)
-	{
-		printf("hello from lldi\n");
-	}
+		check_cycle_exec(vm, byte, lldi);
 	else if (byte == 0x0f)
 	{
 		printf("hello from lfork\n");
