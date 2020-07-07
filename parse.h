@@ -104,7 +104,7 @@ int		type_exception(uint8_t byte);
 
 /* op codes */
 
-//tested betmen code
+//tested batman code
 void	sti(t_vm *vm);
 void	live(t_vm *vm);
 void	ld(t_vm *vm);

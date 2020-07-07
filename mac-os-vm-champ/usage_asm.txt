@@ -1,2 +1,0 @@
-Usage: ./asm [-a] <sourcefile.s>
-    -a : Instead of creating a .cor file, outputs a stripped and annotated version of the code to the standard output

@@ -6,3 +6,4 @@
 *.dSYM*
 vm
 __pycache__*
+*.ipynb
