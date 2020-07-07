@@ -119,6 +119,7 @@ void	lld(t_vm *vm);
 void	lldi(t_vm *vm);
 void	or(t_vm *vm);
 void	sub(t_vm *vm);
+void 	xor(t_vm *vm);
 
 
 int 	error_handler(int error, t_vm *vm);
