@@ -12,5 +12,5 @@ void	zjmp(t_vm *vm)
 		vm->carriage->pc += addr;
 		vm->carriage->move = vm->carriage->pc;
 	}
-	print_arena(vm->arena, 32);
+	// print_arena(vm->arena, 32);
 }

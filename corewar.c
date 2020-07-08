@@ -13,11 +13,12 @@ int main(int argc, char **argv)
 	// vm->current = vm->players;
 	vm->cur_num_player = 1; /* select player */
 	// placed_player(0, vm->cur_num_player, vm);
-	print_arena(vm->arena, MEM_SIZE);
+	// print_arena(vm->arena, MEM_SIZE);
 	// printf("\n");
 
 	exec(vm);
-	print_arena(vm->arena, 32);
+	/* do not need this stuff: */
+	// print_arena(vm->arena, 32);
 
 	return (0);
 }

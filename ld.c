@@ -13,5 +13,5 @@ void 	ld(t_vm *vm)
 	reg_num = get_arg(vm, 2);
 	vm->carriage->registers[reg_num - 1] = value;
 	vm->carriage->move += vm->carriage->args_size->arg_2;
-	print_arena(vm->arena, 32);
+	// print_arena(vm->arena, 32);
 }

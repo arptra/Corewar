@@ -47,10 +47,24 @@ void	exec(t_vm *vm)
 	vm->current = get_player(vm, vm->cur_num_player);
 	set_carriage(vm, vm->cur_num_player);
 	/* here will cycle that exec op_codes */
-	while (vm->cycle != CYCLE_TO_DIE)
+	if (vm->players->nbr_cycles)
 	{
-		exec_op(vm);
-		vm->carriage->pc = vm->carriage->move;// jump to next instruction
-		vm->cycle++;
+		while (vm->cycle <= vm->players->nbr_cycles)
+		{
+			exec_op(vm);
+			vm->carriage->pc = vm->carriage->move;// jump to next instruction
+			vm->cycle++;
+		}
+		print_arena(vm->arena, MEM_SIZE);
 	}
+	else
+	{
+		while (vm->cycle != CYCLE_TO_DIE)
+		{
+			exec_op(vm);
+			vm->carriage->pc = vm->carriage->move;// jump to next instruction
+			vm->cycle++;
+		}
+	}
+	
 }

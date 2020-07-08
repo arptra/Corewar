@@ -246,7 +246,7 @@ t_file_info		*parse_args(int argc, char **argv)
 	players = NULL;
 	if (ft_strequ(argv[1],"-dump"))
 	{
-		if ((nbr_cycles = ft_atoi(argv[2])) < 1)
+		if ((nbr_cycles = ft_atoi(argv[2])) < 0)
 		{
 			write(2,"Error: nbr_cycles should be positive integer\n",46);
 			exit (-1);

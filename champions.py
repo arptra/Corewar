@@ -1,12 +1,16 @@
 instructions_ready = set([
     'sti',
-    'live',
     'ld',
     'zjmp',
     'add',
     'aff',
     'and',
     'ldi',
+    "sub",
+    "or",
+    "xor",
+    "lld",
+    "lldi",
 ])
 
 # 0. Libraries import
@@ -64,6 +68,7 @@ def compile_if_ready(path_to_file, instructions_ready=instructions_ready):
         if instructions_not_ready & set(content.split()):
             f.close()
             return
+    logging.info(path_to_file)
     path_to_file_new = os.path.join(
         folder_for_cor_files,
         path_to_file.split('/')[-1],
@@ -81,7 +86,6 @@ def compile_if_ready(path_to_file, instructions_ready=instructions_ready):
         'rm',
         path_to_file_new,
     ]))
-
 
 [
     compile_if_ready(os.path.join(os.path.abspath('s-linux-mac'), f))

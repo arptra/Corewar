@@ -21,6 +21,11 @@ VM:= 	\
 		sti.c \
 		init.c \
 		live.c \
+		lldi.c \
+		lld.c \
+		or.c \
+		xor.c \
+		sub.c \
 		error_handler.c
 
 OBJECTS_VM := $(VM:.c=.o)

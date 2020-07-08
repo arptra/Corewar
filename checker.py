@@ -96,14 +96,15 @@ logging.info("start at: %i"%(args['start']))
 logging.info("end at: %i"%(args['end']))
 logging.info("players: %s"%(" ".join(args['players'])))
 
-i = args['start']
+i1 = args['start']
 players = " ".join(args['players'])
-while i <= args['end']:
-	logging.info('--------Cicle #%i--------'%(i))
+cnt = 0
+while i1 <= args['end']:
+	logging.info('--------Cicle #%i--------'%(i1))
 	cmd1 = " ".join([
 				exe_corewar_our,
 				'-dump',
-				str(i),
+				str(i1),
 				players,
 					])
 
@@ -112,16 +113,23 @@ while i <= args['end']:
 	cmd2 = " ".join([
 				exe_corewar_sys,
 				'-d',
-				str(i),
+				str(i1),
 				players,
 	])
-	stdout_sys = run_cmd(cmd2).replace("\n",":").replace(" ","").split(":")[4::2]
+	stdout_sys = run_cmd(cmd2).replace("\n",":").replace(" ","").split(":")
+	for i2,line in enumerate(stdout_sys):
+		if line[:6] != '0x0000':continue
+		break
+	stdout_sys = stdout_sys[i2+1::2]
 
 	# 4. Compare and print out results 
 
 	[prinf_diff(string_number,our,sys) for string_number,(our, sys) in enumerate(zip(stdout_our,stdout_sys))]
-
-	i+=1
+	i1+=1
+	cnt+=1
+	if cnt == 11:
+		logging.warn("cicle artificially breaked")
+		break
 
 # 5. Final cleanup and finish
  
