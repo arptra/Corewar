@@ -8,15 +8,15 @@ void	sti(t_vm *vm)
 	int 	arg_3;
 	int 	addr;
 
-	vm->carriage->move = 2; //next addr after read (instr code and type args it' have to jump 2 byte)
+	vm->car->move = 2; //next addr after read (instr code and type args it' have to jump 2 byte)
 	reg_num = get_arg(vm, 1); //2 is step for jump to get addr from need to read
-	value = vm->carriage->registers[reg_num - 1];
-	vm->carriage->move += vm->carriage->args_size->arg_1;
+	value = vm->car->registers[reg_num - 1];
+	vm->car->move += vm->car->args_size->arg_1;
 	arg_2 = get_arg(vm, 2);
-	vm->carriage->move += vm->carriage->args_size->arg_2;
+	vm->car->move += vm->car->args_size->arg_2;
 	arg_3 = get_arg(vm, 3);
-	vm->carriage->move += vm->carriage->args_size->arg_3;
-	addr = vm->carriage->pc + (arg_2 + arg_3) % IDX_MOD;
+	vm->car->move += vm->car->args_size->arg_3;
+	addr = vm->car->pc + (arg_2 + arg_3) % IDX_MOD;
 	put_value(vm, addr, REG_SIZE, value);
 	// print_arena(vm->arena, 32);
 }

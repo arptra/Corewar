@@ -17,6 +17,7 @@ int main(int argc, char **argv)
 	// printf("\n");
 
 	exec(vm);
+	printf("player %s won", vm->last_live->cn);
 	/* do not need this stuff: */
 	// print_arena(vm->arena, 32);
 

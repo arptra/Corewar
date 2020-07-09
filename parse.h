@@ -40,6 +40,7 @@ typedef struct	s_carriage
 	uint8_t 	op_code;
 	int 		start_addr;
 	int 		pc;// use for move on instruction
+	int 		last_live;
 	int 		player_num;
 	int 		registers[REG_NUMBER];
 	int 		move;
@@ -55,11 +56,18 @@ typedef struct	s_carriage
 typedef struct	s_vm
 {
 	t_file_info	*players;
+	int 		players_num;
 	uint8_t		*arena;
 	t_file_info	*current; /* placed current player */
+	t_file_info	*last_live;
+	int 		lives;
+	int 		checks;
+	int 		cycle_to_die;
+	int 		cycle_left; //how many cycle left after last check
 	int 		cur_num_player; /* for debug */
 	int 		cycle;
-	t_carriage	*carriage;
+	int 		cars_num;
+	t_carriage	*car;
 }				t_vm;
 
 
@@ -100,6 +108,8 @@ int		get_cycle_to_exec(uint8_t byte);
 void	check_cycle_exec(t_vm *vm,uint8_t byte, void (*f)(t_vm *));
 int		type_exception(uint8_t byte);
 
+/* checks */
+void	check(t_vm *vm);
 
 
 /* op codes */

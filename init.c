@@ -49,6 +49,7 @@ void	placed_players(t_vm *vm)
 	{
 		placed_player(addr,cnt,vm);
 		addr += MEM_SIZE / vm->players->num_players;
+		vm->players_num++;
 	}
 }
 
@@ -95,15 +96,21 @@ t_vm	*init_vm(int argc, char **argv)
 	uint8_t	*arena;
 
 	vm = (t_vm*)malloc((sizeof(t_vm)));
-	vm->carriage = init_carriage();
-	vm->carriage->args_size = init_args_size();
-	vm->carriage->args_type = init_args_type();
+	vm->car = init_carriage();
+	vm->car->args_size = init_args_size();
+	vm->car->args_type = init_args_type();
 	if (!(arena = ft_memalloc(MEM_SIZE)))
 		exit(-1);
 	vm->arena = arena;
 	vm->cur_num_player = 0;
+	vm->players_num = 0;
 	vm->players = parse_args(argc, argv);
+	vm->lives = 0;
+	vm->checks = 0;
 	vm->cycle = 0;
+	vm->cycle_left = 0;
+	vm->cycle_to_die = CYCLE_TO_DIE;
 	placed_players(vm);
+	vm->cars_num = vm->players_num;
 	return (vm);
 }

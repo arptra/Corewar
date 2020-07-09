@@ -16,7 +16,7 @@ int 	set_carriage(t_vm *vm, int num_player)
 {
 	t_carriage	*car;
 
-	car = vm->carriage;
+	car = vm->car;
 	car->start_addr = get_start_addr(num_player);
 	car->player_num = num_player;
 	car->player = vm->current;
@@ -32,7 +32,7 @@ int 	exec_op(t_vm *vm)
 	uint8_t 	*arena;
 	int 		error;
 
-	cursor = vm->carriage;
+	cursor = vm->car;
 	arena = vm->arena;
 	addr = cursor->pc;
 	error = slct_instr(arena[addr], vm);
@@ -49,22 +49,27 @@ void	exec(t_vm *vm)
 	/* here will cycle that exec op_codes */
 	if (vm->players->nbr_cycles)
 	{
-		while (vm->cycle <= vm->players->nbr_cycles)
+		while (vm->cars_num)
 		{
 			exec_op(vm);
-			vm->carriage->pc = vm->carriage->move;// jump to next instruction
+			vm->car->pc = vm->car->move;// jump to next instruction
 			vm->cycle++;
+			vm->cycle_left++;
+			if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
+				check(vm);
 		}
 		print_arena(vm->arena, MEM_SIZE);
 	}
 	else
 	{
-		while (vm->cycle != CYCLE_TO_DIE)
+		while (vm->cars_num)
 		{
 			exec_op(vm);
-			vm->carriage->pc = vm->carriage->move;// jump to next instruction
+			vm->car->pc = vm->car->move;// jump to next instruction
 			vm->cycle++;
+			vm->cycle_left++;
+			if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
+				check(vm);
 		}
 	}
-	
 }
