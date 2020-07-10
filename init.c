@@ -80,8 +80,6 @@ t_carriage	*init_carriage()
 	t_carriage	*car;
 
 	car = (t_carriage*)malloc(sizeof(t_carriage));
-	car->player = NULL;
-	car->player_num = 0;
 	car->start_addr = 0;
 	car->pc = 0;
 	car->move = 0;

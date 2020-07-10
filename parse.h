@@ -41,7 +41,6 @@ typedef struct	s_carriage
 	int 		start_addr;
 	int 		pc;// use for move on instruction
 	int 		last_live;
-	int 		player_num;
 	int 		registers[REG_NUMBER];
 	int 		move;
 	int 		tmp_addr;
@@ -49,7 +48,6 @@ typedef struct	s_carriage
 	int 		carry;
 	t_args_size		*args_size;
 	t_args_type		*args_type;
-	t_file_info	*player;
 	struct s_carriage *next;
 }				t_carriage;
 
@@ -134,6 +132,10 @@ void	st(t_vm *vm);
 
 
 int 	error_handler(int error, t_vm *vm);
+
+
+/* delete func */
+void	free_car(t_carriage **car);
 
 
 #endif //COREWAR_PARSE_H

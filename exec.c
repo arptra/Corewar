@@ -18,8 +18,6 @@ int 	set_carriage(t_vm *vm, int num_player)
 
 	car = vm->car;
 	car->start_addr = get_start_addr(num_player);
-	car->player_num = num_player;
-	car->player = vm->current;
 	car->pc = car->start_addr;
 	car->registers[0] = -num_player;
 	return (0);
