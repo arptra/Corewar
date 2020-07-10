@@ -26,7 +26,10 @@ VM:= 	\
 		or.c \
 		xor.c \
 		sub.c \
-		error_handler.c
+		error_handler.c \
+		check.c \
+		free.c \
+		st.c 
 
 OBJECTS_VM := $(VM:.c=.o)
 #HEADER = libft/libft.h

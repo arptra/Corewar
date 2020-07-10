@@ -127,7 +127,7 @@ while i1 <= args['end']:
 	[prinf_diff(string_number,our,sys) for string_number,(our, sys) in enumerate(zip(stdout_our,stdout_sys))]
 	i1+=1
 	cnt+=1
-	if cnt == 11:
+	if cnt == 101:
 		logging.warn("cicle artificially breaked")
 		break
 

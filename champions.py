@@ -11,6 +11,7 @@ instructions_ready = set([
     "xor",
     "lld",
     "lldi",
+	'live',
 ])
 
 # 0. Libraries import
