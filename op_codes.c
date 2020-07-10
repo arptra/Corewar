@@ -198,9 +198,7 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 	else if (byte == 0x02)
 		check_cycle_exec(vm, byte, ld);
 	else if (byte == 0x03)
-	{
-		printf("hello from st\n");
-	}
+		check_cycle_exec(vm, byte, st);
 	else if (byte == 0x04)
 		check_cycle_exec(vm, byte, add);
 	else if (byte == 0x05)
