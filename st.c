@@ -10,7 +10,7 @@ void	st(t_vm *vm)
 	reg_num = get_arg(vm, 1);
 	value = vm->car->registers[reg_num - 1];
 	vm->car->move += vm->car->args_size->arg_1;
-	if (vm->car->args_type->arg_1 == T_REG)
+	if (vm->car->args_type->arg_2 == T_REG)
 	{
 		addr = get_arg(vm, 2);
 		vm->car->registers[addr - 1] = value;
