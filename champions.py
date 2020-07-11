@@ -1,5 +1,6 @@
 instructions_ready = set([
     'sti',
+    'st',
     'ld',
     'zjmp',
     'add',
