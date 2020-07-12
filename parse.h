@@ -84,10 +84,7 @@ t_file_info			*parse_args(int argc, char **argv);
 
 int		read_byte_fd(int fd, unsigned char *byte);
 
-void	show_byte(unsigned char byte, t_vm *vm);
-int 	read_nbytes(t_vm *vm, int nbytes, void (f)(unsigned char, t_vm *vm));
 int		slct_instr(unsigned char byte, t_vm *vm);
-void	nthng(unsigned char byte, t_vm *vm);
 
 void	print_byte_by_ptr(void *memory);
 void	print_arena(void *arena, size_t size);
@@ -105,6 +102,11 @@ int		get_dir_size(uint8_t byte);
 int		get_cycle_to_exec(uint8_t byte);
 void	check_cycle_exec(t_vm *vm,uint8_t byte, void (*f)(t_vm *));
 int		type_exception(uint8_t byte);
+
+t_carriage	*init_carriage();
+void	add_car(t_carriage **car, t_carriage *new_car);
+t_carriage	*copy_carriage();
+
 
 /* checks */
 void	check(t_vm *vm);
@@ -129,6 +131,8 @@ void	or(t_vm *vm);
 void	sub(t_vm *vm);
 void 	xor(t_vm *vm);
 void	st(t_vm *vm);
+void	ffork(t_vm *vm);
+void	lfork(t_vm *vm);
 
 
 int 	error_handler(int error, t_vm *vm);

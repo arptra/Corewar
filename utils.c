@@ -1,14 +1,5 @@
 #include "parse.h"
 
-void	show_byte(unsigned char byte, t_vm *vm)
-{
-	char *sym;
-
-	sym = ft_itoa_base(byte, 16);
-	ft_putstr(sym);
-	free(sym);
-}
-
 int		read_byte_fd(int fd, unsigned char *byte)
 {
 	if (read(fd, &(*byte), 1) > 0)
@@ -17,27 +8,31 @@ int		read_byte_fd(int fd, unsigned char *byte)
 		return (-1);
 }
 
-void	nthng(unsigned char byte, t_vm *vm)
-{
-}
-
-int 	read_nbytes(t_vm *vm, int nbytes, void (*f)(unsigned char, t_vm *vm))
-{
-	int				i;
-	unsigned char	byte;
-	t_file_info		*player;
-
-	i = -1;
-	player = vm->current;
-	while (++i < nbytes && read_byte_fd(player->fd, &byte) == 0)
-		f(byte, vm);
-	return (i);
-}
-
 uint8_t read_byte(t_vm *vm, int addr) // addr - step that need to jump, for read byte from it addr
 {
 	uint8_t *arena;
 
 	arena = vm->arena;
 	return (arena[addr]);
+}
+t_carriage	*copy_carriage(t_carriage *car, int addr)
+{
+	t_carriage *new_car;
+	int 		i;
+
+	new_car = init_carriage();
+	new_car->pc = (addr + car->pc) % MEM_SIZE;
+	new_car->carry = car->carry;
+	new_car->last_live = car->last_live;
+	i = -1;
+	while (++i < REG_NUMBER)
+		new_car->registers[i] = car->registers[i];
+	return (new_car);
+}
+
+void	add_car(t_carriage **car, t_carriage *new_car)
+{
+	if (new_car)
+		new_car->next = *car;
+	*car = new_car;
 }

@@ -216,17 +216,13 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 	else if (byte == 0x0b)
 		check_cycle_exec(vm, byte, sti);
 	else if (byte == 0x0c)
-	{
-		printf("hello from fork\n");
-	}
+		check_cycle_exec(vm, byte, ffork);
 	else if (byte == 0x0d)
 		check_cycle_exec(vm, byte, lld);
 	else if (byte == 0x0e)
 		check_cycle_exec(vm, byte, lldi);
 	else if (byte == 0x0f)
-	{
-		printf("hello from lfork\n");
-	}
+		check_cycle_exec(vm, byte, lfork);
 	else if (byte == 0x10)
 		check_cycle_exec(vm, byte, aff);
 	else
