@@ -34,11 +34,13 @@ VM:= 	\
 OBJECTS_VM := $(VM:.c=.o)
 #HEADER = libft/libft.h
 
-all: $(NAME1)
+all: $(NAME1) $(NAME2)
 $(NAME1): $(OBJECTS_VM)
 	@make -C $(LIBFT_DIR)
 	@gcc -g -o $(NAME1) $(VM) -L$(LIBFT_DIR) -lft
 # gcc -g -o $(NAME1) $(OBJECTS_VM) -L$(LIBFT_DIR) -lft
+$(NAME2):
+	@make -C assembler/assembler
 $(OBJECTS_VM): %.o: %.c
 	@gcc $(C_FLAGS) -o $@ -c $<
 
@@ -46,6 +48,7 @@ clean:
 	@make clean -C $(LIBFT_DIR)
 	@/bin/rm -f $(OBJECTS_VM)
 fclean: clean
+	@make fclean -C assembler/assembler
 	@make fclean -C $(LIBFT_DIR)
 	@/bin/rm -f $(NAME1)
 	@/bin/rm -f libft.a
