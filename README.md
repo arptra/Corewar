@@ -6,15 +6,13 @@
 
 Example:
 
-`$ python3 checker.py --start 0 --end 10 mac-os-vm-champ/batman.cor mac-os-vm-champ/robin.cor ...`
-`$ python3 checker.py mac-os-vm-champ/batman.cor --start 95 --end 100 mac-os-vm-champ/robin.cor ...`
-`$ python3 checker.py mac-os-vm-champ/batman.cor mac-os-vm-champ/robin.cor ...`
+`$ python3 checker.py cor-mac/zork.cor cor-mac/batman.cor --start 10 --end 99`
 
 `--end` flag responsible for number of cicles. After execution this number of cicles game will be stopped and memory will be dumped into stdout.
 If `--end` not given, it will be placed to 10 cicles.
 
 `--start` flag responsible for number of cicles when checker start to compare output your's and default corewars.
-If `--start` not given, it will be placed to 10 cicles.
+If `--start` not given, it will be placed equals to end.
 
 Checker will recompile project by his own, you sholdn't do anything else.
 
