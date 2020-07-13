@@ -14,7 +14,7 @@ void	and(t_vm *vm)
 	vm->car->move += vm->car->args_size->arg_2;
 	value = value_1 & value_2;
 	vm->car->carry = !value;
-	reg_num = get_arg(vm, 3);
+	reg_num = read_byte(vm, vm->car->move ) - 1;
 	vm->car->registers[reg_num] = value;
 	vm->car->move += vm->car->args_size->arg_3;
 }

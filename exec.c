@@ -45,16 +45,22 @@ void	exec(t_vm *vm)
 	vm->current = get_player(vm, vm->cur_num_player);
 	set_carriage(vm, vm->cur_num_player);
 	/* here will cycle that exec op_codes */
+	vm->head = vm->car;
 	if (vm->players->nbr_cycles)
 	{
 		while (vm->cars_num)
 		{
-			exec_op(vm);
-			vm->car->pc = vm->car->move;// jump to next instruction
 			vm->cycle++;
 			vm->cycle_left++;
- 			if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
+			while (vm->car)
+			{
+				exec_op(vm);
+				vm->car->pc = vm->car->move;// jump to next instruction
+				vm->car = vm->car->next;
+			}
+			if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
 				check(vm);
+			vm->car = vm->head;
 		}
 		print_arena(vm->arena, MEM_SIZE);
 	}

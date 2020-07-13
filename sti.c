@@ -9,7 +9,7 @@ void	sti(t_vm *vm)
 	int 	addr;
 
 	vm->car->move += 2; //next addr after read (instr code and type args it' have to jump 2 byte)
-	reg_num = get_arg(vm, 1); //2 is step for jump to get addr from need to read
+	reg_num = read_byte(vm, vm->car->move ) - 1; //2 is step for jump to get addr from need to read
 	value = vm->car->registers[reg_num];
 	vm->car->move += vm->car->args_size->arg_1;
 	arg_2 = get_arg(vm, 2);

@@ -22,7 +22,10 @@ t_carriage	*copy_carriage(t_carriage *car, int addr)
 	int 		i;
 
 	new_car = init_carriage();
-	new_car->pc = (addr + car->pc) % MEM_SIZE;
+	new_car->args_size = init_args_size();
+	new_car->args_type = init_args_type();
+	new_car->move = (addr + car->pc) % MEM_SIZE;
+	new_car->pc = new_car->move;
 	new_car->carry = car->carry;
 	new_car->last_live = car->last_live;
 	i = -1;

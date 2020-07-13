@@ -120,7 +120,7 @@ int 	arg_value(t_vm *vm, int type, int size)
 
 	value = 0;
 	if (type == REG_CODE)
-		value = read_byte(vm, vm->car->move ) - 1; // vm->car->move - 1 is number of reg, because -1
+		value = vm->car->registers[read_byte(vm, vm->car->move ) - 1]; // vm->car->move - 1 is number of reg, because -1
 	else if (type == DIR_CODE)
 		value = get_value(vm, size);
 	else if (type == IND_CODE)
@@ -167,7 +167,7 @@ int 	get_arg(t_vm *vm, int num_of_arg)
 void	check_cycle_exec(t_vm *vm, uint8_t byte, void (*f)(t_vm *))
 {
 	if (vm->car->cycle_to_exec == -1)
-		vm->car->cycle_to_exec = get_cycle_to_exec(byte);
+		vm->car->cycle_to_exec = get_cycle_to_exec(byte) - 1;
 	if (vm->car->cycle_to_exec > 0 )
 		vm->car->cycle_to_exec--;
 	else if (vm->car->cycle_to_exec == 0)
@@ -183,8 +183,13 @@ void	check_cycle_exec(t_vm *vm, uint8_t byte, void (*f)(t_vm *))
 		}
 		f(vm);
 		vm->car->cycle_to_exec = -1;
-		vm->cycle--;
-		vm->cycle_left--;
+		/*
+		if (!vm->car->next)
+		{
+			vm->cycle--;
+			vm->cycle_left--;
+		}
+		 */
 	}
 }
 

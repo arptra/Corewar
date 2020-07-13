@@ -9,6 +9,6 @@ void	lld(t_vm *vm)
 	value = get_arg(vm, 1);
 	vm->car->move += vm->car->args_size->arg_1;
 	vm->car->carry = !value;
-	reg_num = get_arg(vm, 2);
+	reg_num = read_byte(vm, vm->car->move ) - 1;
 	vm->car->registers[reg_num] = value;
 }

@@ -15,7 +15,7 @@ void	delete_car(t_vm *vm)
 	t_carriage	*del;
 
 	prev = NULL;
-	cur = vm->car;
+	cur = vm->head;
 	while (cur)
 	{
 		del = cur;

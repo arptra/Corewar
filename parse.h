@@ -30,9 +30,9 @@ typedef struct	s_args_size
 
 typedef struct	s_args_type
 {
-	uint8_t 		arg_1;
-	uint8_t 		arg_2;
-	uint8_t 		arg_3;
+	uint8_t 	arg_1;
+	uint8_t 	arg_2;
+	uint8_t 	arg_3;
 }				t_args_type;
 
 typedef struct	s_carriage
@@ -66,6 +66,7 @@ typedef struct	s_vm
 	int 		cycle;
 	int 		cars_num;
 	t_carriage	*car;
+	t_carriage	*head;
 }				t_vm;
 
 
@@ -104,6 +105,9 @@ void	check_cycle_exec(t_vm *vm,uint8_t byte, void (*f)(t_vm *));
 int		type_exception(uint8_t byte);
 
 t_carriage	*init_carriage();
+t_args_size		*init_args_size();
+t_args_type		*init_args_type();
+
 void	add_car(t_carriage **car, t_carriage *new_car);
 t_carriage	*copy_carriage();
 
