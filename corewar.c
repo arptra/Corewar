@@ -15,7 +15,6 @@ int main(int argc, char **argv)
 	// placed_player(0, vm->cur_num_player, vm);
 	print_arena(vm->arena, MEM_SIZE);
 	// printf("\n");
-
 	exec(vm);
 	printf("player %s won", vm->last_live->cn);
 	/* do not need this stuff: */

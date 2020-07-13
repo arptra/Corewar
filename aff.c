@@ -7,7 +7,7 @@ void	aff(t_vm *vm)
 
 	vm->car->move += 2;
 	reg_num = get_arg(vm, 1);
-	value = vm->car->registers[reg_num - 1];
+	value = vm->car->registers[reg_num];
 	vm->car->move += vm->car->args_size->arg_1;
 	/* not work now */
 }

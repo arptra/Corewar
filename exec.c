@@ -53,7 +53,7 @@ void	exec(t_vm *vm)
 			vm->car->pc = vm->car->move;// jump to next instruction
 			vm->cycle++;
 			vm->cycle_left++;
-			if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
+ 			if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
 				check(vm);
 		}
 		print_arena(vm->arena, MEM_SIZE);

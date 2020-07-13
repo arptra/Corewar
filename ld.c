@@ -11,7 +11,7 @@ void 	ld(t_vm *vm)
 	vm->car->carry = !value;
 	vm->car->move += vm->car->args_size->arg_1;
 	reg_num = get_arg(vm, 2);
-	vm->car->registers[reg_num - 1] = value;
+	vm->car->registers[reg_num] = value;
 	vm->car->move += vm->car->args_size->arg_2;
 	// print_arena(vm->arena, 32);
 }

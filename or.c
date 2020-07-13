@@ -15,6 +15,6 @@ void	or(t_vm *vm)
 	value = value_1 | value_2;
 	vm->car->carry = !value;
 	reg_num = get_arg(vm, 3);
-	vm->car->registers[reg_num - 1] = value;
+	vm->car->registers[reg_num] = value;
 	vm->car->move += vm->car->args_size->arg_3;
 }

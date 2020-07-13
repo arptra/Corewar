@@ -15,6 +15,7 @@ uint8_t read_byte(t_vm *vm, int addr) // addr - step that need to jump, for read
 	arena = vm->arena;
 	return (arena[addr]);
 }
+
 t_carriage	*copy_carriage(t_carriage *car, int addr)
 {
 	t_carriage *new_car;

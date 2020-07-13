@@ -12,9 +12,9 @@ void	sub(t_vm *vm)
 	vm->car->move += vm->car->args_size->arg_1;
 	reg_2 = get_arg(vm, 2);
 	vm->car->move += vm->car->args_size->arg_2;
-	value = vm->car->registers[reg_1 - 1] - vm->car->registers[reg_2 - 1];
+	value = vm->car->registers[reg_1] - vm->car->registers[reg_2];
 	vm->car->carry = !value;
 	reg_3 = get_arg(vm, 3);
-	vm->car->registers[reg_3 - 1] = value;
+	vm->car->registers[reg_3] = value;
 	vm->car->move += vm->car->args_size->arg_3;
 }

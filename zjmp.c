@@ -6,6 +6,7 @@ void	zjmp(t_vm *vm)
 
 	vm->car->move += 1;
 	addr = get_arg(vm, 1);
+	vm->car->move += vm->car->args_size->arg_1;
 	if (vm->car->carry)
 	{
 		addr = (addr % IDX_MOD) % MEM_SIZE;
