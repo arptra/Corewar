@@ -1,19 +1,15 @@
-Usage: ./corewar [-d N -s N -v N | -b --stealth | -n --stealth] [-a] <champion1.cor> <...>
-    -a        : Prints output from "aff" (Default is to hide it)
-#### TEXT OUTPUT MODE ##########################################################
-    -d N      : Dumps memory after N cycles then exits
-    -s N      : Runs N cycles, dumps memory, pauses, then repeats
-    -v N      : Verbosity levels, can be added together to enable several
-                - 0 : Show only essentials
-                - 1 : Show lives
-                - 2 : Show cycles
-                - 4 : Show operations (Params are NOT litteral ...)
-                - 8 : Show deaths
-                - 16 : Show PC movements (Except for jumps)
-#### BINARY OUTPUT MODE ########################################################
-    -b        : Binary output mode for corewar.42.fr
-    --stealth : Hides the real contents of the memory
-#### NCURSES OUTPUT MODE #######################################################
-    -n        : Ncurses output mode
-    --stealth : Hides the real contents of the memory
-################################################################################
+Usage:
+    ./corewar [-dump nbr_cycles | -n number] <champion1.cor> <...>
+    -dump nbr_cycles:
+        At the end of nbr_cycles of executions,
+        dump the memory on the standard output 
+        and quit the game. The memory will be 
+        dumped in the hexadecimal format with 
+        32 octets per line.
+    -n number:
+        Sets the number of the next player.
+        If non-existent, the player will have
+        the next available number in the order
+        of the parameters. The last player will
+        have the first process in the order of
+        execution.
