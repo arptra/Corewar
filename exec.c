@@ -55,6 +55,7 @@ void	exec(t_vm *vm)
 			while (vm->car)
 			{
 				exec_op(vm);
+				vm->car->move = get_addr(vm->car->move);
 				vm->car->pc = vm->car->move;// jump to next instruction
 				vm->car = vm->car->next;
 			}
