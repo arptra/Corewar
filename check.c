@@ -22,8 +22,8 @@ void	delete_car(t_vm *vm)
 		if (check_for_die(vm,del) && vm->cars_num--)
 		{
 			cur = cur->next;
-			if(vm->car == del)
-				vm->car = cur;
+			if(vm->head == del)
+				vm->head = cur;
 			if(prev)
 				prev->next = cur;
 			free_car(&del);

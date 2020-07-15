@@ -109,7 +109,7 @@ t_args_size		*init_args_size();
 t_args_type		*init_args_type();
 
 void	add_car(t_carriage **car, t_carriage *new_car);
-t_carriage	*copy_carriage();
+t_carriage	*copy_carriage(t_carriage *car, int addr);
 
 
 /* checks */

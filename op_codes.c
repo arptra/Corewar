@@ -168,6 +168,7 @@ void	check_cycle_exec(t_vm *vm, uint8_t byte, void (*f)(t_vm *))
 {
 	if (vm->car->cycle_to_exec == -1)
 		vm->car->cycle_to_exec = get_cycle_to_exec(byte) - 1;
+	// may to do check errors here
 	if (vm->car->cycle_to_exec > 0 )
 		vm->car->cycle_to_exec--;
 	else if (vm->car->cycle_to_exec == 0)

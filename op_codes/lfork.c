@@ -1,4 +1,4 @@
-#include "parse.h"
+#include "../parse.h"
 
 void	lfork(t_vm *vm)
 {
