@@ -32,5 +32,4 @@ add_executable(vm parse.h
 
 add_subdirectory(libft)
 
-
 target_link_libraries(vm ft)

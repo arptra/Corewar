@@ -71,20 +71,20 @@ int 	get_value(t_vm *vm, int size)// read from memory and translate to int
 
 	arena = vm->arena;
 	value = 0;
-	addr = vm->car->move % MEM_SIZE; // start address of argument (or current position car.)
+	addr = get_addr(vm->car->move); // start address of argument (or current position car.)
 	sign = (arena[addr] >> 7) ? 1 : 0;
 	shift = 0;
 	while (size)
 	{
 		if (sign)
 		{
-			addr = (vm->car->move % MEM_SIZE) + size - 1;
+			addr = get_addr(vm->car->move + size - 1);
 			value = value + ((arena[addr] ^ 0xFF) << shift);
 			shift = shift + 8;
 		}
 		else
 		{
-			addr = (vm->car->move % MEM_SIZE) + size - 1;
+			addr = get_addr(vm->car->move + size - 1);
 			value = value + (arena[addr] << shift);
 			shift = shift + 8;
 		}
@@ -106,7 +106,7 @@ void	put_value(t_vm *vm, int addr, int size, int value)
 	arena = vm->arena;
 	while (size)
 	{
-		cur_addr = (addr % MEM_SIZE) + size - 1;
+		cur_addr = get_addr(addr + size - 1);
 		byte = value >> shift;
 		arena[cur_addr] = byte;
 		shift = shift + 8;
