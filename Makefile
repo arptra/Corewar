@@ -6,30 +6,32 @@ LIBFT_DIR := libft/
 NAME1:= corewar
 NAME2:= asm
 VM:= 	\
-		ldi.c \
-		and.c \
+		op_codes/ldi.c \
+		op_codes/and.c \
 		utils.c \
-		aff.c \
+		op_codes/aff.c \
 		corewar.c \
-		add.c \
+		op_codes/add.c \
 		parse.c \
-		ld.c \
+		op_codes/ld.c \
 		parametrs_to_op_code.c \
-		zjmp.c \
+		op_codes/zjmp.c \
 		exec.c \
 		op_codes.c \
-		sti.c \
+		op_codes/sti.c \
 		init.c \
-		live.c \
-		lldi.c \
-		lld.c \
-		or.c \
-		xor.c \
-		sub.c \
+		op_codes/live.c \
+		op_codes/lldi.c \
+		op_codes/lld.c \
+		op_codes/or.c \
+		op_codes/xor.c \
+		op_codes/sub.c \
 		error_handler.c \
 		check.c \
 		free.c \
-		st.c 
+		op_codes/st.c \
+		op_codes/fork.c \
+		op_codes/lfork.c 		
 
 OBJECTS_VM := $(VM:.c=.o)
 #HEADER = libft/libft.h
