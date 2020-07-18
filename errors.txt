@@ -1,7 +1,7 @@
 
 ERROR: could not read from file with champion, may be it is direstory
 ERROR: file with champion code not properly named, need .cor extension
-ERROR: file with champion code could not be opened, check permissions
+ERROR: file with champion code could not be opened, check if file exists or permissions of the file
 ERROR: this is not a champion, that is another file
 ERROR: here should be zero bytes
 ERROR: this champion have too big code size

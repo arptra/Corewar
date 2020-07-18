@@ -281,7 +281,7 @@ t_vm		*parse_args(int argc, char **argv,t_vm *vm)
 	}
 	if (num_players > MAX_PLAYERS)
 		ft_error(11,vm);
-	vm->players = ft_players(vm->players, num_players);
+	vm = ft_players(vm, num_players);
 	return (vm);
 }
 
