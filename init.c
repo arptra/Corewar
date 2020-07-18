@@ -22,7 +22,7 @@ void		placed_player(int addr, int num_player, t_vm *vm)
 
 	i = 0;
 	vm->current = get_player(vm, num_player);
-	if (bytes_to_int(vm->current->fd, 4, 16) != 0)
+	if (bytes_to_int(vm->current->fd, 4, 16,vm) != 0)
 	{
 		write(2,"Here should be zero bytes\n",30);
 		exit (-1);
@@ -102,7 +102,7 @@ t_vm	*init_vm(int argc, char **argv)
 	vm->arena = arena;
 	vm->cur_num_player = 0;
 	vm->players_num = 0;
-	vm->players = parse_args(argc, argv);
+	vm = parse_args(argc, argv, vm);//need check
 	vm->lives = 0;
 	vm->checks = 0;
 	vm->cycle = 0;

@@ -74,14 +74,14 @@ typedef struct	s_vm
 int	print_byte(int fd);
 /* print n bytes */
 void	print_bytes(int fd, int n);
-unsigned char	byte(int fd);
-long int	bytes_to_int(int fd, int n, int base);
-char	*bytes_to_string(int fd, int n_bytes);
-t_file_info		*parse_player(char *player_name, int player_num, int nbr_cycles);
+unsigned char	byte(int fd,t_vm	*vm);
+long int	bytes_to_int(int fd, int n, int base,t_vm	*vm);
+char	*bytes_to_string(int fd, int n_bytes,t_vm	*vm);
+t_file_info		*parse_player(char *player_name, int player_num, int nbr_cycles,t_vm	*vm);
 int					ft_get_current_num(t_file_info *players, int candidate);
-void				ft_sort_players(t_file_info *players);
-t_file_info			*ft_players(t_file_info *players, int num_players);
-t_file_info			*parse_args(int argc, char **argv);
+void				ft_sort_players(t_vm	*vm);
+t_vm *ft_players(t_vm *vm, int num_players);
+t_vm *parse_args(int argc, char **argv,t_vm *vm);
 
 int		read_byte_fd(int fd, unsigned char *byte);
 
