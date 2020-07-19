@@ -1,5 +1,7 @@
 #include "../incl/parse.h"
 
+char	*VIZ_FLAG;
+
 t_file_info	*get_player(t_vm *vm, int num_player)
 {
 	t_file_info *player;
@@ -93,7 +95,7 @@ t_vm	*init_vm(int argc, char **argv)
 	t_vm	*vm;
 	uint8_t	*arena;
 
-	vm = (t_vm*)malloc((sizeof(t_vm)));
+	vm = (t_vm*)ft_memalloc((sizeof(t_vm)));
 	vm->car = init_carriage();
 	vm->car->args_size = init_args_size();
 	vm->car->args_type = init_args_type();

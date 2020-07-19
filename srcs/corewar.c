@@ -5,7 +5,7 @@ void	ft_usage_corewar(void)
 	int		fd;
 	char	buf;
 
-	fd = open("../txt/usage_corewar.txt", O_RDONLY);
+	fd = open("txt/usage_corewar.txt", O_RDONLY);
 	if (fd == -1)
 		exit(-1);
 	while (read(fd,&buf,1))

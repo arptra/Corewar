@@ -65,6 +65,7 @@ typedef struct	s_vm
 	int 		cur_num_player; /* for debug */
 	int 		cycle;
 	int 		cars_num;
+	int			flag_vis;
 	t_carriage	*car;
 	t_carriage	*head;
 }				t_vm;

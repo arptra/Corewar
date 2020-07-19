@@ -13,7 +13,7 @@ void	ft_error(int code, t_vm *vm)
 
 	i1 = 0;
 	ft_free(vm);
-	if ((fd = open("../txt/errors.txt", O_RDONLY)) == -1)
+	if ((fd = open("txt/errors.txt", O_RDONLY)) == -1)
 		exit(-1);
 	while (read(fd,&buf,1))
 	{
@@ -129,7 +129,7 @@ t_file_info		*parse_player(char *player_name, int player_num, int nbr_cycles,t_v
 	if ((info->cs = bytes_to_int(fd, 4, 16,vm)) > CHAMP_MAX_SIZE)
 		ft_error(6,vm);
 	info->cc = bytes_to_string(fd, COMMENT_LENGTH,vm);
-	info->cnum = player_num;
+	// info->cnum = player_num;
 	info->nbr_cycles = nbr_cycles;
 	info->fd = fd;
 	return (info);
@@ -255,19 +255,18 @@ t_vm		*parse_args(int argc, char **argv,t_vm *vm)
 		num_players = num_players - 2;
 		i += 2;
 	}
+	if (ft_strequ(argv[i+1],"-i") &&
+		++i )
+		vm->flag_vis = 1;
 	while (++i < argc)
 	{
-		if (ft_strequ(argv[i],"-n"))	//if the current arg = flag -n
-		{
+		if (ft_strequ(argv[i],"-n"))
 			if ( ++i >= argc			// check if the next arg (player_num) absent
 				|| (player_num = ft_atoi(argv[i])) <= 0	// check if the player_num is not correct
 				|| player_num > (num_players -= 2)		// check if the player_num is not correct
 				|| ++i >= argc			// check if the next arg (player_file) - absent
 				)
-			ft_error(10,vm);
-		}
-		else							//not necessary - equals to zero in moment of allocation
-			player_num = 0;				//not necessary - equals to zero in moment of allocation
+				ft_error(10,vm);
 		if (vm->players == NULL)
 		{
 			vm->players = parse_player(argv[i], player_num, nbr_cycles,vm);
@@ -286,7 +285,7 @@ t_vm		*parse_args(int argc, char **argv,t_vm *vm)
 }
 
 void	print_arena(void *arena, size_t size)
-{
+{	
 	size_t		i1;
 
 	i1 = 0;
