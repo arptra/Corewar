@@ -46,7 +46,7 @@ void	exec(t_vm *vm)
 	set_carriage(vm, vm->cur_num_player);
 	/* here will cycle that exec op_codes */
 	vm->head = vm->car;
-	if (vm->players->nbr_cycles)
+	if (vm->nbr_cycles)
 	{
 		while (vm->cars_num)
 		{

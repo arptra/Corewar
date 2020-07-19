@@ -16,6 +16,8 @@ VM:= 	\
 		srcs/error_handler.c \
 		srcs/check.c \
 		srcs/free.c \
+		srcs/work-with-fd.c \
+		srcs/parse-player.c \
 		op_codes/ld.c \
 		op_codes/aff.c \
 		op_codes/add.c \
