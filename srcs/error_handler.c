@@ -1,4 +1,4 @@
-#include "parse.h"
+#include "../incl/parse.h"
 
 int error_handler(int error, t_vm *vm)
 {

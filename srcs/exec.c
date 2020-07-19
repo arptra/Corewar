@@ -1,4 +1,4 @@
-#include "parse.h"
+#include "../incl/parse.h"
 
 /*
  * need to realize for all players

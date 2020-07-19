@@ -1,4 +1,4 @@
-#include "parse.h"
+#include "../incl/parse.h"
 
 t_file_info	*get_player(t_vm *vm, int num_player)
 {

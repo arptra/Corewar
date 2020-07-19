@@ -1,7 +1,7 @@
 #ifndef COREWAR_PARSE_H
 #define COREWAR_PARSE_H
 
-#include "libft/libft.h"
+#include "../libft/libft.h"
 #include "stdint.h"
 #include "op.h"
 #include "stdio.h"

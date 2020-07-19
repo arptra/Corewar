@@ -1,4 +1,4 @@
-#include "parse.h"
+#include "../incl/parse.h"
 
 void	ft_free(t_vm *vm)
 {
@@ -13,7 +13,7 @@ void	ft_error(int code, t_vm *vm)
 
 	i1 = 0;
 	ft_free(vm);
-	if ((fd = open("errors.txt", O_RDONLY)) == -1)
+	if ((fd = open("../txt/errors.txt", O_RDONLY)) == -1)
 		exit(-1);
 	while (read(fd,&buf,1))
 	{

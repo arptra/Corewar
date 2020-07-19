@@ -1,4 +1,4 @@
-#include "parse.h"
+#include "../incl/parse.h"
 
 uint8_t	select_args(unsigned char byte, int num_of_arg)
 {
