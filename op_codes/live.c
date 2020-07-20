@@ -4,8 +4,6 @@ void	live(t_vm *vm)
 {
 	int player_num;
 
-	if (vm->cycle == 17217)
-		printf("dsfsd");
 	vm->car->move += 1; //move on 1 byte from op code to args
 	player_num = get_arg(vm, 1);
 	vm->car->move += vm->car->args_size->arg_1;

@@ -91,7 +91,7 @@ void	exec(t_vm *vm)
 				check(vm);
 			vm->car = vm->head;
 		}
-		print_arena(vm->arena, MEM_SIZE);
+		//print_arena(vm->arena, MEM_SIZE);
 	}
 	else
 	{

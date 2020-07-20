@@ -161,5 +161,6 @@ void	free_car(t_carriage **car);
 /* debug func */
 void	debug_info(t_vm *vm);
 void	print_cur(t_vm *vm, int num);
+void	print_vm(t_vm *vm);
 
 #endif //COREWAR_PARSE_H
