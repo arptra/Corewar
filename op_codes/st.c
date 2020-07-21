@@ -6,6 +6,14 @@ void	st(t_vm *vm)
 	int32_t	value;
 	int32_t	addr;
 
+/*
+	if (vm->cycle == 9720)
+	{
+		int i = 239;
+		while (i < 243)
+			printf(" %x ", vm->arena[i++]);
+	}
+*/
 	vm->car->move += 2;
 	reg_num = read_byte(vm, vm->car->move ) - 1;
 	value = vm->car->registers[reg_num];

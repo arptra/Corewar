@@ -24,11 +24,12 @@ int main(int argc, char **argv)
 	vm = init_vm(argc, argv);
 	// vm->current = vm->players;
 	vm->cur_num_player = 1; /* select player */
-	// place_player(0, vm->cur_num_player, vm);
-	print_arena(vm->arena, MEM_SIZE);
+	// placed_player(0, vm->cur_num_player, vm);
+	//print_arena(vm->arena, MEM_SIZE);
 	// printf("\n");
 	exec(vm);
-	printf("player %s won", vm->last_live->cn);
+	print_vm(vm);
+	printf("win:%s\n", vm->last_live->cn);
 	/* do not need this stuff: */
 	// print_arena(vm->arena, 32);
 
