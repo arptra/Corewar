@@ -29,7 +29,8 @@ add_executable(vm parse.h
         op_codes/xor.c
         op_codes/st.c
         op_codes/fork.c
-        op_codes/lfork.c check_args.c)
+        check_args.c
+        op_codes/lfork.c)
 
 add_subdirectory(libft)
 

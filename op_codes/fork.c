@@ -1,4 +1,4 @@
-#include "../parse.h"
+#include "../incl/parse.h"
 
 void ffork(t_vm *vm)
 {
@@ -10,6 +10,7 @@ void ffork(t_vm *vm)
 	vm->car->move += vm->car->args_size->arg_1;
 	car = copy_carriage(vm->car, addr % IDX_MOD);
 	car->num = vm->cars_num + 1;
+
 	add_car(&(vm->head), car);
 	vm->cars_num++;
 }

@@ -1,4 +1,4 @@
-#include "../parse.h"
+#include "../incl/parse.h"
 
 void	live(t_vm *vm)
 {
@@ -13,6 +13,5 @@ void	live(t_vm *vm)
 	{
 		vm->last_live = get_player(vm, -player_num);
 	}
-
 	// print_arena(vm->arena, 32);
 }
