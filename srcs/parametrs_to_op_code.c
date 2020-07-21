@@ -1,4 +1,4 @@
-#include "../incl/parse.h"
+#include "parse.h"
 
 int	get_dir_size(uint8_t byte)
 {

@@ -1,4 +1,4 @@
-#include "../incl/parse.h"
+#include "parse.h"
 
 int check_for_die(t_vm *vm, t_carriage *car)
 {

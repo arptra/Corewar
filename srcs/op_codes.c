@@ -1,4 +1,4 @@
-#include "../incl/parse.h"
+#include "parse.h"
 
 uint8_t	select_args(unsigned char byte, int num_of_arg)
 {
@@ -18,8 +18,8 @@ int		select_size(uint8_t type, uint8_t byte)
 	else if (type == DIR_CODE)
 		return (get_dir_size(byte));
 	else if (type == IND_CODE)
-		return (IND_CODE);
-	return (0xFF);
+		return (T_IND);
+	return (T_IND);
 }
 
 uint8_t select_type(uint8_t type)
@@ -30,7 +30,7 @@ uint8_t select_type(uint8_t type)
 		return (DIR_CODE);
 	else if (type == IND_CODE)
 		return (IND_CODE);
-	return (0xFF);
+	return (IND_CODE);
 }
 
 int		type_args(t_vm *vm, int num_of_arg, uint8_t *type)
@@ -164,14 +164,24 @@ int 	get_arg(t_vm *vm, int num_of_arg)
 	return (arg);
 }
 
+void	reset_arg(t_vm *vm)
+{
+	vm->car->args_size->arg_1 = 0;
+	vm->car->args_size->arg_2 = 0;
+	vm->car->args_size->arg_3 = 0;
+
+	vm->car->args_type->arg_1 = 0;
+	vm->car->args_type->arg_2 = 0;
+	vm->car->args_type->arg_3 = 0;
+}
+
 void	check_cycle_exec(t_vm *vm, uint8_t byte, void (*f)(t_vm *))
 {
 	if (vm->car->cycle_to_exec == -1)
-		vm->car->cycle_to_exec = get_cycle_to_exec(byte) - 1;
-	// may to do check errors here
+		vm->car->cycle_to_exec = get_cycle_to_exec(byte);
 	if (vm->car->cycle_to_exec > 0 )
 		vm->car->cycle_to_exec--;
-	else if (vm->car->cycle_to_exec == 0)
+	if (vm->car->cycle_to_exec == 0)
 	{
 		vm->car->op_code = byte;
 		if ((vm->car->args_size->arg_1 = type_exception(byte)))
@@ -182,15 +192,13 @@ void	check_cycle_exec(t_vm *vm, uint8_t byte, void (*f)(t_vm *))
 			vm->car->args_size->arg_2 = type_args(vm, 2, &vm->car->args_type->arg_2);
 			vm->car->args_size->arg_3 = type_args(vm, 3, &vm->car->args_type->arg_3);
 		}
-		f(vm);
+		if (check_args_type(byte, vm))
+			f(vm);
+		else
+			vm->car->move = vm->car->tmp_addr;
+		vm->car->tmp_addr = 0;
+		reset_arg(vm);
 		vm->car->cycle_to_exec = -1;
-		/*
-		if (!vm->car->next)
-		{
-			vm->cycle--;
-			vm->cycle_left--;
-		}
-		 */
 	}
 }
 
@@ -199,6 +207,7 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 	int 			flag;
 
 	flag = 0;
+
 	if (byte == 0x01)
 		check_cycle_exec(vm, byte, live);
 	else if (byte == 0x02)
@@ -232,6 +241,6 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 	else if (byte == 0x10)
 		check_cycle_exec(vm, byte, aff);
 	else
-		flag = -1;
+		vm->car->move += 1;
 	return (flag);
 }

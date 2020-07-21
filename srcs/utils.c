@@ -1,4 +1,4 @@
-#include "../incl/parse.h"
+#include "parse.h"
 
 int		read_byte_fd(int fd, unsigned char *byte)
 {

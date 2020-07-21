@@ -1,4 +1,4 @@
-#include "../incl/parse.h"
+#include "parse.h"
 
 /*
  * need to realize for all players
@@ -29,11 +29,17 @@ int 	exec_op(t_vm *vm)
 	t_carriage	*cursor;
 	uint8_t 	*arena;
 	int 		error;
+	uint8_t 	byte;
 
 	cursor = vm->car;
 	arena = vm->arena;
 	addr = cursor->pc;
-	error = slct_instr(arena[addr], vm);
+	if (cursor->cycle_to_exec == -1)
+	{
+		byte = arena[addr];
+		cursor->op_code = byte;
+	}
+	error = slct_instr(cursor->op_code, vm);
 	/* here error handler */
 	error_handler(error, vm);
 	/* if ok next op */
@@ -42,11 +48,14 @@ int 	exec_op(t_vm *vm)
 
 void	exec(t_vm *vm)
 {
+	int flag;
+
+	flag = 1;
 	vm->current = get_player(vm, vm->cur_num_player);
 	set_carriage(vm, vm->cur_num_player);
 	/* here will cycle that exec op_codes */
 	vm->head = vm->car;
-	if (vm->nbr_cycles)
+	if (vm->players->nbr_cycles)
 	{
 		while (vm->cars_num)
 		{
@@ -57,13 +66,32 @@ void	exec(t_vm *vm)
 				exec_op(vm);
 				vm->car->move = get_addr(vm->car->move);
 				vm->car->pc = vm->car->move;// jump to next instruction
+/*
+				if (vm->cycle == 11514)
+				{
+					int i = 239;
+					printf("car_num->%d op_code = %x", vm->car->num, vm->car->op_code);
+					while (i < 243)
+						printf(" %x ", vm->arena[i++]);
+
+					t_carriage *debug;
+					debug = vm->head;
+					while (debug->num != 1)
+						debug = debug->next;
+					flag = 0;
+					printf("\n");
+				}
+				*/
 				vm->car = vm->car->next;
 			}
+			//if (flag == 0)
+			//	exit(0);
+			debug_info(vm);
 			if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
 				check(vm);
 			vm->car = vm->head;
 		}
-		print_arena(vm->arena, MEM_SIZE);
+		//print_arena(vm->arena, MEM_SIZE);
 	}
 	else
 	{
