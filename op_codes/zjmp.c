@@ -1,4 +1,4 @@
-#include "../parse.h"
+#include "../incl/parse.h"
 
 void	zjmp(t_vm *vm)
 {

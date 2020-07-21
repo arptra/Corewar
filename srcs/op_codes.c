@@ -1,4 +1,4 @@
-#include "parse.h"
+#include "../incl/parse.h"
 
 uint8_t	select_args(unsigned char byte, int num_of_arg)
 {
@@ -199,6 +199,15 @@ void	check_cycle_exec(t_vm *vm, uint8_t byte, void (*f)(t_vm *))
 		vm->car->tmp_addr = 0;
 		reset_arg(vm);
 		vm->car->cycle_to_exec = -1;
+		// f(vm);
+		// vm->car->cycle_to_exec = -1;
+		// /*
+		// if (!vm->car->next)
+		// {
+		// 	vm->cycle--;
+		// 	vm->cycle_left--;
+		// }
+		//  */
 	}
 }
 
@@ -242,5 +251,6 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 		check_cycle_exec(vm, byte, aff);
 	else
 		vm->car->move += 1;
+		// flag = -1;
 	return (flag);
 }
