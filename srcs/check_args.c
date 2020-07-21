@@ -1,4 +1,4 @@
-#include "parse.h"
+#include "../incl/parse.h"
 
 t_args_type	*decode_arg(int arg)
 {

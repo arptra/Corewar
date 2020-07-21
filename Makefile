@@ -18,6 +18,8 @@ VM:= 	\
 		srcs/free.c \
 		srcs/work-with-fd.c \
 		srcs/parse-player.c \
+		srcs/check_args.c \
+		srcs/debug_tools.c \
 		op_codes/ld.c \
 		op_codes/aff.c \
 		op_codes/add.c \

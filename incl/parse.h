@@ -72,6 +72,7 @@ typedef struct	s_vm
 	int			itrtr;
 	t_carriage	*car;
 	t_carriage	*head;
+	int			iter;
 }				t_vm;
 
 

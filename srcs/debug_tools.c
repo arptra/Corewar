@@ -1,4 +1,4 @@
-#include "parse.h"
+#include "../incl/parse.h"
 #include "stdio.h"
 
 void	print_vm(t_vm *vm)
