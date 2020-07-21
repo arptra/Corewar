@@ -9,7 +9,6 @@ void	live(t_vm *vm)
 	vm->car->move += vm->car->args_size->arg_1;
 	vm->car->last_live = vm->cycle;
 	vm->lives++;
-	vm->last_live = NULL;
 	if (player_num <= -1 && player_num >= -vm->players_num)
 	{
 		vm->last_live = get_player(vm, -player_num);

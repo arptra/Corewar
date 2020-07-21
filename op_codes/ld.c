@@ -1,6 +1,5 @@
 #include "../incl/parse.h"
 
-
 void 	ld(t_vm *vm)
 {
 	int value;

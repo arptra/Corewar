@@ -13,6 +13,7 @@ add_executable(vm parse.h
         parametrs_to_op_code.c
         check.c
         free.c
+        debug_tools.c
         op_codes/sti.c
         op_codes/ld.c
         op_codes/live.c
@@ -28,6 +29,7 @@ add_executable(vm parse.h
         op_codes/xor.c
         op_codes/st.c
         op_codes/fork.c
+        check_args.c
         op_codes/lfork.c)
 
 add_subdirectory(libft)
