@@ -1,4 +1,4 @@
-#include "../parse.h"
+#include "../incl/parse.h"
 
 void	and(t_vm *vm)
 {

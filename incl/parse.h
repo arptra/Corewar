@@ -1,7 +1,7 @@
 #ifndef COREWAR_PARSE_H
 #define COREWAR_PARSE_H
 
-#include "libft/libft.h"
+#include "../libft/libft.h"
 #include "stdint.h"
 #include "op.h"
 #include "stdio.h"
@@ -14,16 +14,12 @@
 typedef struct	s_file_info
 {
 	int 		fd;
-	char 		*cn; /* CHAMPION NAME */
-	unsigned int cs; /* CHAMPION CODE SIZE */
-	char 		*cc; /* CHAMPION COMMENT */
-	int			cnum;	/* CHAMPION NUMBER */
-	int			num_players;	/* NUMBER OF CHAMPIONS */
-	int			nbr_cycles;		/* at the end of nbr_cycles of executions, 
-								dump the memory on the standard output and
-								quit the game. The memory must be dumped 
-								in the hexadecimal format with 32 octets per line.  */
-	struct s_file_info	*next;	/* next champion */
+	char 		*cn;
+	int			cs;
+	char 		*cc;
+	int			cnum;
+	int			players_num;
+	struct s_file_info	*next;
 }				t_file_info;
 
 typedef struct	s_args_size
@@ -45,7 +41,7 @@ typedef struct	s_carriage
 	int 		num;
 	uint8_t 	op_code;
 	int 		start_addr;
-	int 		pc;// use for move on instruction
+	int 		pc;
 	int 		last_live;
 	int 		registers[REG_NUMBER];
 	int 		move;
@@ -62,33 +58,34 @@ typedef struct	s_vm
 	t_file_info	*players;
 	int 		players_num;
 	uint8_t		*arena;
-	t_file_info	*current; /* placed current player */
+	t_file_info	*current;
 	t_file_info	*last_live;
 	int 		lives;
 	int 		checks;
 	int 		cycle_to_die;
-	int 		cycle_left; //how many cycle left after last check
-	int 		cur_num_player; /* for debug */
+	int 		cycle_left;
+	int 		cur_num_player;
 	int 		cycle;
 	int 		cars_num;
+	int			flag_vis;
+	int			nbr_cycles;
+	int			itrtr;
 	t_carriage	*car;
 	t_carriage	*head;
-	int 		iter;
 }				t_vm;
 
 
 /* print 1 byte */
-int	print_byte(int fd);
+// int	print_byte(int fd);
 /* print n bytes */
-void	print_bytes(int fd, int n);
-unsigned char	byte(int fd,t_vm	*vm);
-long int	bytes_to_int(int fd, int n, int base,t_vm	*vm);
-char	*bytes_to_string(int fd, int n_bytes,t_vm	*vm);
-t_file_info		*parse_player(char *player_name, int player_num, int nbr_cycles,t_vm	*vm);
+// void	print_bytes(int fd, int n);
+unsigned char	byte(int fd, t_vm	*vm);
+long int	bytes_to_int(int fd, int n, int base, t_vm	*vm);
+char	*bytes_to_string(int fd, int n_bytes, t_vm	*vm);
 int					ft_get_current_num(t_file_info *players, int candidate);
 void				ft_sort_players(t_vm	*vm);
-t_vm *ft_players(t_vm *vm, int num_players);
-t_vm *parse_args(int argc, char **argv,t_vm *vm);
+t_vm *ft_players(t_vm *vm, int players_num);
+t_vm *parse_args(int argc, char **argv, t_vm *vm);
 
 int		read_byte_fd(int fd, unsigned char *byte);
 
@@ -97,7 +94,7 @@ int		slct_instr(unsigned char byte, t_vm *vm);
 void	print_byte_by_ptr(void *memory);
 void	print_arena(void *arena, size_t size);
 t_vm	*init_vm(int argc, char **argv);
-void	placed_player(int addr, int num_player, t_vm *vm);
+void	place_player(int addr, int num_player, t_vm *vm);
 t_file_info	*get_player(t_vm *vm, int num_player);
 
 int 	set_carriage(t_vm *vm, int num_player);
@@ -163,5 +160,14 @@ void	free_car(t_carriage **car);
 void	debug_info(t_vm *vm);
 void	print_cur(t_vm *vm, int num);
 void	print_vm(t_vm *vm);
+void				ft_error(int code, t_vm *vm);
+unsigned char	byte(int fd, t_vm *vm);
+void			ft_swap_players(t_file_info *temp1,
+								t_file_info *temp2,
+								t_vm *vm);
+t_vm			*ft_parse_flags(char **argv, t_vm *vm);
+t_file_info		*parse_player(char *player_name, t_vm *vm);
+
+void	ft_free_vm(t_vm *vm);
 
 #endif //COREWAR_PARSE_H

@@ -1,0 +1,12 @@
+*.out
+.vscode*
+*.out
+*.o
+*.a
+*.dSYM*
+vm
+__pycache__*
+*.ipynb
+*.cor
+.DS_Store
+the-script.sh
