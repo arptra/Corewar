@@ -116,7 +116,8 @@ t_args_size		*init_args_size();
 t_args_type		*init_args_type();
 
 int				check_args_type(uint8_t byte, t_vm *vm);
-int check_reg(int arg, t_vm *vm, int step);
+int 			check_reg(int arg, t_vm *vm, int step);
+int ind_move(int type, int size);
 
 
 

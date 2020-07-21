@@ -67,25 +67,20 @@ void	exec(t_vm *vm)
 				vm->car->move = get_addr(vm->car->move);
 				vm->car->pc = vm->car->move;// jump to next instruction
 /*
-				if (vm->cycle == 11514)
+				if (vm->cycle == 14056)
 				{
-					int i = 239;
+					int i = 510;
 					printf("car_num->%d op_code = %x", vm->car->num, vm->car->op_code);
-					while (i < 243)
+					while (i < 514)
 						printf(" %x ", vm->arena[i++]);
-
-					t_carriage *debug;
-					debug = vm->head;
-					while (debug->num != 1)
-						debug = debug->next;
 					flag = 0;
 					printf("\n");
 				}
-				*/
+*/
 				vm->car = vm->car->next;
 			}
-			//if (flag == 0)
-			//	exit(0);
+			if (flag == 0)
+				exit(0);
 			debug_info(vm);
 			if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
 				check(vm);

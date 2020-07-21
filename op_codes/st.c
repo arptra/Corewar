@@ -20,8 +20,8 @@ void	st(t_vm *vm)
 	vm->car->move += vm->car->args_size->arg_1;
 	if (vm->car->args_type->arg_2 == T_REG)
 	{
-		addr = get_arg(vm, 2);
-		vm->car->registers[addr - 1] = value;
+		addr = read_byte(vm, vm->car->move ) - 1;
+		vm->car->registers[addr] = value;
 		vm->car->move += vm->car->args_size->arg_2;
 	}
 	else

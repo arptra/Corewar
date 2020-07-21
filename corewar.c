@@ -14,7 +14,6 @@ void	ft_usage_corewar(void)
 	exit(-1);
 }
 
-
 int main(int argc, char **argv)
 {
 	t_vm			*vm;
