@@ -58,9 +58,9 @@ t_vm	*init_vm(int argc, char **argv)
 	uint8_t	*arena;
 
 	vm = (t_vm*)ft_memalloc((sizeof(t_vm)));
-	vm->car = init_carriage();
-	vm->car->args_size = init_args_size();
-	vm->car->args_type = init_args_type();
+	vm->car = NULL;
+	//vm->car->args_size = init_args_size();
+	//vm->car->args_type = init_args_type();
 	if (!(arena = ft_memalloc(MEM_SIZE)))
 		exit(-1);
 	vm->arena = arena;

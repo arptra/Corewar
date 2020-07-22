@@ -1,25 +1,23 @@
 #include "../incl/parse.h"
 
-/*
- * need to realize for all players
- * calculate addr where start bytecode of player
- */
-
-int 	get_start_addr(int num_player)
-{
-	if (num_player == 1)
-		return (0);
-	return (-1);
-}
-
-int 	set_carriage(t_vm *vm, int num_player)
+int 	set_carriage(t_vm *vm)
 {
 	t_carriage	*car;
+	int			num_player;
 
-	car = vm->car;
-	car->start_addr = get_start_addr(num_player);
-	car->pc = car->start_addr;
-	car->registers[0] = -num_player;
+	num_player = 1;
+	while (num_player <= vm->players_num)
+	{
+		car = init_carriage();
+		car->args_size = init_args_size();
+		car->args_type = init_args_type();
+		car->num = num_player;
+		car->start_addr = get_player(vm, num_player)->start_addr;
+		car->pc = car->start_addr;
+		car->registers[0] = -num_player;
+		add_car(&(vm->car), car);
+		num_player++;
+	}
 	return (0);
 }
 
@@ -51,8 +49,7 @@ void	exec(t_vm *vm)
 	int flag;
 
 	flag = 1;
-	vm->current = get_player(vm, vm->cur_num_player);
-	set_carriage(vm, vm->cur_num_player);
+	set_carriage(vm);
 	/* here will cycle that exec op_codes */
 	vm->head = vm->car;
 	if (vm->nbr_cycles)

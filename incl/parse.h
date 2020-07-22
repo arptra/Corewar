@@ -20,6 +20,7 @@ typedef struct	s_file_info
 	char 		*cc;
 	int			cnum;
 	int			players_num;
+	int 		start_addr;
 	struct s_file_info	*next;
 }				t_file_info;
 
@@ -65,7 +66,6 @@ typedef struct	s_vm
 	int 		checks;
 	int 		cycle_to_die;
 	int 		cycle_left;
-	int 		cur_num_player;
 	int 		cycle;
 	int 		cars_num;
 	int			flag_vis;
@@ -99,7 +99,7 @@ t_vm	*init_vm(int argc, char **argv);
 void	place_player(int addr, int num_player, t_vm *vm);
 t_file_info	*get_player(t_vm *vm, int num_player);
 
-int 	set_carriage(t_vm *vm, int num_player);
+int 	set_carriage(t_vm *vm);
 uint8_t read_byte(t_vm *vm, int addr); //read byte from arena
 void	exec(t_vm *vm);
 int 	get_arg(t_vm *vm, int num_of_arg);
