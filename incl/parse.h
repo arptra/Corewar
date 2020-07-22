@@ -6,6 +6,7 @@
 #include "op.h"
 #include "stdio.h"
 
+
 #define T_RD  3
 #define T_RI  5
 #define T_DI  6
@@ -38,19 +39,19 @@ typedef struct	s_args_type
 
 typedef struct	s_carriage
 {
-	int 		num;
-	uint8_t 	op_code;
-	int 		start_addr;
-	int 		pc;
-	int 		last_live;
-	int 		registers[REG_NUMBER];
-	int 		move;
-	int 		tmp_addr;
-	int 		cycle_to_exec;
-	int 		carry;
-	t_args_size		*args_size;
-	t_args_type		*args_type;
-	struct s_carriage *next;
+    int 		num;
+    uint8_t 	op_code;
+    int 		start_addr;
+    int 		pc;
+    int 		last_live;
+    int 		registers[REG_NUMBER];
+    int 		move;
+    int 		tmp_addr;
+    int 		cycle_to_exec;
+    int 		carry;
+    t_args_size		*args_size;
+    t_args_type		*args_type;
+    struct s_carriage *next;
 }				t_carriage;
 
 typedef struct	s_vm
@@ -70,6 +71,7 @@ typedef struct	s_vm
 	int			flag_vis;
 	int			nbr_cycles;
 	int			itrtr;
+	int         debug;
 	t_carriage	*car;
 	t_carriage	*head;
 }				t_vm;
@@ -105,18 +107,12 @@ int 	get_value(t_vm *vm, int size);
 void	put_value(t_vm *vm, int addr, int size, int value);
 int		get_dir_size(uint8_t byte);
 int		get_cycle_to_exec(uint8_t byte);
-void	check_cycle_exec(t_vm *vm,uint8_t byte, void (*f)(t_vm *));
+void	check_cycle_exec(t_vm *vm, uint8_t byte, void (*f)(t_vm *));
 int		type_exception(uint8_t byte);
 
-t_carriage		*init_carriage();
+t_carriage	*init_carriage();
 t_args_size		*init_args_size();
 t_args_type		*init_args_type();
-
-int				check_args_type(uint8_t byte, t_vm *vm);
-int 			check_reg(int arg, t_vm *vm, int step);
-int ind_move(int type, int size);
-
-
 
 void	add_car(t_carriage **car, t_carriage *new_car);
 int		get_addr(int addr);
@@ -125,7 +121,16 @@ t_carriage	*copy_carriage(t_carriage *car, int addr);
 
 /* checks */
 void	check(t_vm *vm);
+int	    check_args_type(uint8_t byte, t_vm *vm);
 
+
+/* debug */
+void	print_vm(t_vm *vm);
+void	print_cursor(t_vm *vm);
+void	print_cur(t_vm *vm, int num);
+void	debug_info(t_vm *vm);
+
+int     ind_move(int type, int size);
 
 /* op codes */
 
@@ -151,15 +156,6 @@ void	lfork(t_vm *vm);
 
 
 int 	error_handler(int error, t_vm *vm);
-
-
-/* delete func */
-void	free_car(t_carriage **car);
-
-/* debug func */
-void	debug_info(t_vm *vm);
-void	print_cur(t_vm *vm, int num);
-void	print_vm(t_vm *vm);
 void				ft_error(int code, t_vm *vm);
 unsigned char	byte(int fd, t_vm *vm);
 void			ft_swap_players(t_file_info *temp1,
@@ -168,6 +164,8 @@ void			ft_swap_players(t_file_info *temp1,
 t_vm			*ft_parse_flags(char **argv, t_vm *vm);
 t_file_info		*parse_player(char *player_name, t_vm *vm);
 
+/* delete func */
+void	free_car(t_carriage **car);
 void	ft_free_vm(t_vm *vm);
 
 #endif //COREWAR_PARSE_H

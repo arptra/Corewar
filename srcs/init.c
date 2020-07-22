@@ -14,6 +14,7 @@ void	place_players(t_vm *vm)
 		place_player(addr,cnt,vm);
 		addr += MEM_SIZE / vm->players_num;
 	}
+	vm->last_live = get_player(vm, vm->players_num);
 }
 
 t_args_size		*init_args_size()
