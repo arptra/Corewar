@@ -61,6 +61,16 @@ def file_test(name1, name2, file):
         subprocess.run(["mv", file,  "file_cor/"])
     return 1
 
+def file_test(name1, name2, file):
+    print ("TEST " + file, end = ' ')
+    out1, out2 = get_data(name1, name2, file)
+    if make_diff(out1, out2) >= 0:
+        print ("NOT_PASS")
+    else:
+        print("OK")
+        subprocess.run(["mv", file,  "file_cor/"])
+    return 1
+
 if __name__ == "__main__":
     name1 = "./vm_ref"
     name2 =  "./vm_ver_1"

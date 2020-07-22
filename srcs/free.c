@@ -1,4 +1,4 @@
-#include "../incl/parse.h"
+#include "parse.h"
 
 void	free_car(t_carriage **car)
 {
