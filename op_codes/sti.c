@@ -13,7 +13,7 @@ void	sti(t_vm *vm)
 	value = vm->car->registers[reg_num];
 	vm->car->move += vm->car->args_size->arg_1;
 	arg_2 = get_arg(vm, 2);
-	vm->car->move += vm->car->args_size->arg_2;
+	vm->car->move += ind_move(vm->car->args_type->arg_2, vm->car->args_size->arg_2);
 	arg_3 = get_arg(vm, 3);
 	vm->car->move += vm->car->args_size->arg_3;
 	addr = vm->car->pc + ((arg_2 + arg_3) % IDX_MOD);

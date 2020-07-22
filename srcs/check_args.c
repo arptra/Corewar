@@ -23,8 +23,8 @@ t_args_type	*decode_arg(int arg)
 	}
 	else if (arg == (T_DIR | T_IND))
 	{
-		type->arg_2 = REG_CODE;
-		type->arg_3 = DIR_CODE;
+		type->arg_2 = DIR_CODE;
+		type->arg_3 = IND_CODE;
 	}
 	else if (arg == (T_REG | T_DIR | T_IND))
 	{
@@ -139,6 +139,6 @@ int	check_args_type(uint8_t byte, t_vm *vm)
 	else if (byte == 0x0f)
 		return (1);
 	else if (byte == 0x10)
-		return (type_check(T_RDI, 0, 0, vm));
+		return (type_check(T_REG, 0, 0, vm));
 	return (0);
 }

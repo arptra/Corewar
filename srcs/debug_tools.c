@@ -39,13 +39,14 @@ void	print_cursor(t_vm *vm)
 			i++;
 		}
 		printf("\n");
-		if (vm->iter - 1 == 0)
+		if (vm->debug - 1 == 0)
 			printf("o:%x\n",cur->op_code);
 		cur = cur->next;
 	}
 }
 
-void	print_cur(t_vm *vm, int num) {
+void	print_cur(t_vm *vm, int num)
+{
 	t_carriage *cur;
 	int i;
 
@@ -64,19 +65,19 @@ void	print_cur(t_vm *vm, int num) {
 			printf("r_%d:%d\n", i, cur->registers[i]);
 			i++;
 		}
-		if (vm->iter - 1 == 0)
+		if (vm->debug - 1 == 0)
 			printf("o:%x\n", cur->op_code);
 	}
 }
 
 void	debug_info(t_vm *vm)
 {
-	if (vm->iter - 1 == 0)
+	if (vm->debug - 1 == 0)
 	{
 		print_vm(vm);
 		print_cursor(vm);
 	}
-	vm->iter--;
-	if (vm->iter == 0)
+	vm->debug--;
+	if (vm->debug == 0)
 		exit(0);
 }

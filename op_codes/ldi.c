@@ -8,7 +8,7 @@ void ldi(t_vm *vm)
 
 	vm->car->move += 2;
 	addr_1 = get_arg(vm, 1);
-	vm->car->move += vm->car->args_size->arg_1;
+	vm->car->move += ind_move(vm->car->args_type->arg_1, vm->car->args_size->arg_1);
 	addr_2 = get_arg(vm, 2);
 	vm->car->move += vm->car->args_size->arg_2;
 	reg_num = read_byte(vm, vm->car->move ) - 1;
@@ -16,7 +16,7 @@ void ldi(t_vm *vm)
 	vm->car->move = vm->car->pc + ((addr_1 + addr_2) % IDX_MOD);
 	vm->car->registers[reg_num] = get_value(vm, DIR_SIZE);
 	vm->car->move = vm->car->pc + 2;
-	vm->car->move += vm->car->args_size->arg_1;
+	vm->car->move += ind_move(vm->car->args_type->arg_1, vm->car->args_size->arg_1);
 	vm->car->move += vm->car->args_size->arg_2;
 	vm->car->move += vm->car->args_size->arg_3;
 }

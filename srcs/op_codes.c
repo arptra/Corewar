@@ -38,8 +38,8 @@ int		type_args(t_vm *vm, int num_of_arg, uint8_t *type)
 	uint8_t	size_type;
 	int 	addr;
 
-	addr = vm->car->pc;
-	size_type = vm->arena[addr + 1];
+	addr = get_addr(vm->car->pc + 1);
+	size_type = vm->arena[addr];
 	if (num_of_arg == 1)
 	{
 		size_type = select_args(size_type, 1);
@@ -125,11 +125,11 @@ int 	arg_value(t_vm *vm, int type, int size)
 		value = get_value(vm, size);
 	else if (type == IND_CODE)
 	{
-		value = get_value(vm, T_IND); // get address from to read
-		if (vm->car->op_code != 0x0e) //lldi
+		value = get_value(vm, IND_SIZE); // get address from to read
+		if (vm->car->op_code != 0x0d) //lld
 			value = value % IDX_MOD;
 		vm->car->tmp_addr = vm->car->move; //save address to tmp var
-		vm->car->move = value;
+		vm->car->move = vm->car->pc + value;
 		value = get_value(vm, size);
 		vm->car->move = vm->car->tmp_addr;
 	}

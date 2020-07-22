@@ -1,19 +1,24 @@
 cmake_minimum_required(VERSION 3.14)
 
 
-add_executable(vm parse.h
-        corewar.h
-        init.c
-        parse.c
-        op_codes.c
-        corewar.c
-        exec.c
-        error_handler.c
-        utils.c
-        parametrs_to_op_code.c
-        check.c
-        free.c
-        debug_tools.c
+add_executable(vm
+
+
+        srcs/init.c
+        srcs/parse.c
+        srcs/op_codes.c
+        srcs/corewar.c
+        srcs/exec.c
+        srcs/error_handler.c
+        srcs/utils.c
+        srcs/parametrs_to_op_code.c
+        srcs/check.c
+        srcs/free.c
+        srcs/debug_tools.c
+        srcs/work-with-fd.c
+        srcs/parse-player.c
+        srcs/check_args.c
+
         op_codes/sti.c
         op_codes/ld.c
         op_codes/live.c
@@ -29,8 +34,10 @@ add_executable(vm parse.h
         op_codes/xor.c
         op_codes/st.c
         op_codes/fork.c
-        op_codes/lfork.c check_args.c)
+        op_codes/lfork.c)
 
 add_subdirectory(libft)
+
+include_directories(incl)
 
 target_link_libraries(vm ft)
