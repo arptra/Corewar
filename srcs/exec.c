@@ -14,6 +14,7 @@ int 	set_carriage(t_vm *vm)
 		car->num = num_player;
 		car->start_addr = get_player(vm, num_player)->start_addr;
 		car->pc = car->start_addr;
+		car->move = car->pc;
 		car->registers[0] = -num_player;
 		add_car(&(vm->car), car);
 		num_player++;

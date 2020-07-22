@@ -199,15 +199,6 @@ void	check_cycle_exec(t_vm *vm, uint8_t byte, void (*f)(t_vm *))
 		vm->car->tmp_addr = 0;
 		reset_arg(vm);
 		vm->car->cycle_to_exec = -1;
-		// f(vm);
-		// vm->car->cycle_to_exec = -1;
-		// /*
-		// if (!vm->car->next)
-		// {
-		// 	vm->cycle--;
-		// 	vm->cycle_left--;
-		// }
-		//  */
 	}
 }
 
