@@ -28,6 +28,7 @@ int main(int argc, char **argv)
 	exec(vm);
 	print_vm(vm);
 	printf("win:%s\n", vm->last_live->cn);
+	printf("Contestant %d, \"%s\", has won !\n",vm->last_live->cnum, vm->last_live->cn);
 	/* do not need this stuff: */
 	// print_arena(vm->arena, 32);
 
