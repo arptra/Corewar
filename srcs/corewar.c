@@ -26,9 +26,12 @@ int main(int argc, char **argv)
 	//print_arena(vm->arena, MEM_SIZE);
 	// printf("\n");
 	exec(vm);
-	print_vm(vm);
-	printf("win:%s\n", vm->last_live->cn);
-	printf("Contestant %d, \"%s\", has won !\n",vm->last_live->cnum, vm->last_live->cn);
+	//print_vm(vm);
+	//printf("win:%s\n", vm->last_live->cn);
+	if (vm->flag_vis == 0)
+		printf("Contestant %d, \"%s\", has won !\n",vm->last_live->cnum, vm->last_live->cn);
+	else
+		print_declare_winner(vm);
 	/* do not need this stuff: */
 	// print_arena(vm->arena, 32);
 

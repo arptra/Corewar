@@ -18,5 +18,11 @@ void	sti(t_vm *vm)
 	vm->car->move += vm->car->args_size->arg_3;
 	addr = vm->car->pc + ((arg_2 + arg_3) % IDX_MOD);
 	put_value(vm, addr, REG_SIZE, value);
-	// print_arena(vm->arena, 32);
+	if (vm->d_mod == 1)
+	{
+		printf("P\t%d | sti r%d %d %d\n", vm->car->num, reg_num + 1, arg_2, arg_3);
+		printf("\t| -> store to %d + %d = %d (with pc and mod %d)\n", arg_2, arg_3, arg_2 + arg_3, addr);
+	}
+	if (vm->flag_vis == 1)
+		print_write_memory(vm, vm->car->p->cnum, addr, value);
 }

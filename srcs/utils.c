@@ -29,6 +29,7 @@ t_carriage	*copy_carriage(t_carriage *car, int addr)
 	new_car->pc = new_car->move;
 	new_car->carry = car->carry;
 	new_car->last_live = car->last_live;
+	new_car->p = car->p;
 	i = -1;
 	while (++i < REG_NUMBER)
 		new_car->registers[i] = car->registers[i];

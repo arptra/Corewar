@@ -12,6 +12,8 @@
 #define T_DI  6
 #define T_RDI 7
 
+#define sep  '"'
+
 typedef struct	s_file_info
 {
 	int 		fd;
@@ -52,6 +54,7 @@ typedef struct	s_carriage
     int 		carry;
     t_args_size		*args_size;
     t_args_type		*args_type;
+    t_file_info		*p;// player that init carriage
     struct s_carriage *next;
 }				t_carriage;
 
@@ -72,6 +75,7 @@ typedef struct	s_vm
 	int			nbr_cycles;
 	int			itrtr;
 	int         debug;
+	int 		d_mod;
 	t_carriage	*car;
 	t_carriage	*head;
 }				t_vm;
@@ -117,6 +121,8 @@ t_args_type		*init_args_type();
 void	add_car(t_carriage **car, t_carriage *new_car);
 int		get_addr(int addr);
 t_carriage	*copy_carriage(t_carriage *car, int addr);
+void	delete_car(t_vm *vm);
+int check_for_die(t_vm *vm, t_carriage *car);
 
 
 /* checks */
@@ -163,6 +169,15 @@ void			ft_swap_players(t_file_info *temp1,
 								t_vm *vm);
 t_vm			*ft_parse_flags(char **argv, t_vm *vm);
 t_file_info		*parse_player(char *player_name, t_vm *vm);
+
+/* VIS_FUNC */
+void print_add_carriage(t_vm *vm, int player_id);
+void print_kill_carriage(t_vm *vm, t_carriage *car);
+void print_write_memory(t_vm *vm, int player_id, int address, int32_t reg_value);
+void print_move_carriage(t_vm *vm, const int player_id, int offset);
+void print_add_player(t_vm *vm, int cycle, const int player_id, const char *name, int address);
+void print_declare_winner(t_vm *vm);
+
 
 /* delete func */
 void	free_car(t_carriage **car);

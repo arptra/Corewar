@@ -16,7 +16,10 @@ int 	set_carriage(t_vm *vm)
 		car->pc = car->start_addr;
 		car->move = car->pc;
 		car->registers[0] = -num_player;
+		car->p = get_player(vm, num_player);
 		add_car(&(vm->car), car);
+		if (vm->flag_vis == 1)
+			print_add_carriage(vm, num_player);
 		num_player++;
 	}
 	return (0);
@@ -47,11 +50,9 @@ int 	exec_op(t_vm *vm)
 
 void	exec(t_vm *vm)
 {
-	int flag;
-
-	flag = 1;
 	set_carriage(vm);
 	/* here will cycle that exec op_codes */
+	vm->d_mod = 0;
 	vm->head = vm->car;
 	if (vm->nbr_cycles)
 	{
@@ -63,28 +64,16 @@ void	exec(t_vm *vm)
 			{
 				exec_op(vm);
 				vm->car->move = get_addr(vm->car->move);
+				if (vm->flag_vis == 1 && vm->car->move - vm->car->pc != 0)
+					print_move_carriage(vm, vm->car->p->cnum, vm->car->move - vm->car->pc);
 				vm->car->pc = vm->car->move;// jump to next instruction
-/*
-				if (vm->cycle == 14056)
-				{
-					int i = 510;
-					printf("car_num->%d op_code = %x", vm->car->num, vm->car->op_code);
-					while (i < 514)
-						printf(" %x ", vm->arena[i++]);
-					flag = 0;
-					printf("\n");
-				}
-*/
 				vm->car = vm->car->next;
 			}
-			if (flag == 0)
-				exit(0);
-			debug_info(vm);
+			//debug_info(vm);
 			if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
 				check(vm);
 			vm->car = vm->head;
 		}
-		//print_arena(vm->arena, MEM_SIZE);
 	}
 	else
 	{

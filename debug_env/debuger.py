@@ -3,7 +3,7 @@ import subprocess
 
 def get_data(name1, name2, iter, file):
     arg1 = name1 + " -i " + str(iter) + " " + file
-    arg2 = name2 + " -i " + str(iter) + " " + file
+    arg2 = name2 + " -d " + str(iter) + " " + file
     p1 = subprocess.Popen(arg1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     p2 = subprocess.Popen(arg2, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     param1 = []
@@ -88,7 +88,7 @@ def diff_arena(config, iter, diff_line):
 if __name__ == "__main__":
     name1 = "./vm_vb"
     name2 =  "./vm_our"
-    file = "not_pass/run_Kitty_RUN.cor"
+    file = "file_cor/helltrain.cor"
     subprocess.run(["cp", "../cmake-build-debug/vm",  "./"])
     subprocess.run(["mv", "vm",  "vm_our"])
     diff_line, iter, check_arena = full_test(name1, name2, file)

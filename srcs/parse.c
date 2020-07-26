@@ -87,6 +87,12 @@ t_vm			*ft_parse_flags(char **argv, t_vm *vm)
 	if (ft_strequ(argv[vm->itrtr+1], "-i") &&
 		++vm->itrtr)
 		vm->flag_vis = 1;
+	vm->debug = -1;
+	if (ft_strequ(argv[1], "-d"))
+	{
+		vm->debug = ft_atoi(argv[2]);
+		vm->itrtr += 2;
+	}
 	return (vm);
 }
 
@@ -113,5 +119,7 @@ t_vm			*parse_args(int argc, char **argv, t_vm *vm)
 	}
 	if (vm->players_num > MAX_PLAYERS)
 		ft_error(11, vm);
+	if (vm->debug > 0)
+		vm->players_num = 1;
 	return (ft_players(vm, vm->players_num));
 }

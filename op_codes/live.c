@@ -12,6 +12,11 @@ void	live(t_vm *vm)
 	if (player_num <= -1 && player_num >= -vm->players_num)
 	{
 		vm->last_live = get_player(vm, -player_num);
+		/* DEBUG */
+		//printf("Player %d (%s) is said to be alive\n", vm->last_live->cnum, vm->last_live->cn);
 	}
-	// print_arena(vm->arena, 32);
+	if (vm->d_mod == 1)
+	{
+		printf("P\t%d | live %d\n", vm->car->num, player_num);
+	}
 }

@@ -6,14 +6,6 @@ void	st(t_vm *vm)
 	int32_t	value;
 	int32_t	addr;
 
-/*
-	if (vm->cycle == 9720)
-	{
-		int i = 239;
-		while (i < 243)
-			printf(" %x ", vm->arena[i++]);
-	}
-*/
 	vm->car->move += 2;
 	reg_num = read_byte(vm, vm->car->move ) - 1;
 	value = vm->car->registers[reg_num];
@@ -29,5 +21,9 @@ void	st(t_vm *vm)
 		addr = get_value(vm, IND_SIZE);
 		put_value(vm,vm->car->pc + (addr % IDX_MOD), DIR_SIZE, value);
 		vm->car->move += IND_SIZE;
+		if (vm->flag_vis == 1)
+			print_write_memory(vm, vm->car->p->cnum, addr, value);
 	}
+	if (vm->d_mod == 1)
+		printf("P\t%d | st r%d %d\n",vm->car->num, reg_num + 1, addr);
 }

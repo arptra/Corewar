@@ -33,7 +33,7 @@ add_executable(vm
         op_codes/xor.c
         op_codes/st.c
         op_codes/fork.c
-        op_codes/lfork.c)
+        op_codes/lfork.c srcs/visual.c)
 
 add_subdirectory(libft)
 

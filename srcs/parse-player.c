@@ -71,6 +71,7 @@ void		place_player(int addr, int num_player, t_vm *vm)
 	i = 0;
 	vm->current = get_player(vm, num_player);
 	vm->current->start_addr = addr;
+
 	if (bytes_to_int(vm->current->fd, 4, 16,vm) != 0)
 	{
 		write(2,"Here should be zero bytes\n",30);

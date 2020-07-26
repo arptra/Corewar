@@ -1,4 +1,5 @@
 #include "../incl/parse.h"
+#include "stdio.h"
 
 int check_for_die(t_vm *vm, t_carriage *car)
 {
@@ -26,6 +27,8 @@ void	delete_car(t_vm *vm)
 				vm->head = cur;
 			if(prev)
 				prev->next = cur;
+			if (vm->flag_vis == 1)
+				print_kill_carriage(vm, del);
 			free_car(&del);
 		}
 		else
@@ -44,6 +47,7 @@ void	check(t_vm *vm)
 	{
 		vm->cycle_to_die -= CYCLE_DELTA;
 		vm->checks = 0;
+		//printf("Cycle to die is now %d\n", vm->cycle_to_die);
 	}
 	vm->cycle_left = 0;
 	vm->lives = 0;

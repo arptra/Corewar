@@ -13,6 +13,12 @@ void	place_players(t_vm *vm)
 	{
 		place_player(addr,cnt,vm);
 		addr += MEM_SIZE / vm->players_num;
+		if (vm->flag_vis == 1)
+			print_add_player(vm,
+					0,
+					vm->current->cnum,
+					vm->current->cn,
+					vm->current->start_addr);
 	}
 	vm->last_live = get_player(vm, 1);
 }
@@ -66,6 +72,7 @@ t_vm	*init_vm(int argc, char **argv)
 	vm->arena = arena;
 	vm = parse_args(argc, argv, vm);//need check
 	vm->cycle_to_die = CYCLE_TO_DIE;
+	vm->flag_vis = 1;
 	place_players(vm);
 	vm->cars_num = vm->players_num;
 	return (vm);

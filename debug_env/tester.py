@@ -114,8 +114,6 @@ if __name__ == "__main__":
     #full_test(name1, name2, list_files, not_pass_dir)
 
     #Test not passed file, one more
-    #subprocess.run(["cp", "../cmake-build-debug/vm",  "./"])
-    #subprocess.run(["mv", "vm",  "vm_ver_1"])
     #files = os.listdir("not_pass/")
     #files = ["not_pass/" + x for x in files]
     #for file in files:
