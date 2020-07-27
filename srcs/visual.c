@@ -3,13 +3,16 @@
 void print_add_player(t_vm *vm, int cycle, const int player_id, const char *name, int address)
 {
 	uint8_t *arena;
+	int 	codesize;
 
 	printf("p%c%d%c%d%c%s%c%d%c", sep, cycle, sep, player_id, sep, name, sep, address, sep);
+	codesize = get_player(vm, player_id)->cs;
 	arena = &vm->arena[address];
-	while (*arena != 0)
+	while (codesize)
 	{
 		print_byte_by_ptr(arena);
 		(*arena)++;
+		codesize--;
 	}
 	printf("\n");
 }
