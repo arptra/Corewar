@@ -85,7 +85,8 @@ t_vm			*ft_parse_flags(char **argv, t_vm *vm)
 		vm->itrtr += 2;
 	}
 	if (ft_strequ(argv[vm->itrtr+1], "-i") &&
-		++vm->itrtr)
+		++vm->itrtr && --vm->players_num)
+		// ++vm->itrtr)
 		vm->flag_vis = 1;
 	vm->debug = -1;
 	if (ft_strequ(argv[1], "-d"))

@@ -20,6 +20,7 @@ VM:= 	\
 		srcs/parse-player.c \
 		srcs/check_args.c \
 		srcs/debug_tools.c \
+		srcs/visual.c \
 		op_codes/ld.c \
 		op_codes/aff.c \
 		op_codes/add.c \
