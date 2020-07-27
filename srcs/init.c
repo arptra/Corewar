@@ -72,7 +72,7 @@ t_vm	*init_vm(int argc, char **argv)
 	vm->arena = arena;
 	vm = parse_args(argc, argv, vm);//need check
 	vm->cycle_to_die = CYCLE_TO_DIE;
-	vm->flag_vis = 1;
+	// vm->flag_vis = 1;
 	place_players(vm);
 	vm->cars_num = vm->players_num;
 	return (vm);
