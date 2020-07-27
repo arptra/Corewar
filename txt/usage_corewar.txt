@@ -1,5 +1,5 @@
 Usage:
-    ./corewar [-dump nbr_cycles | -i] [-n number] <champion1.cor> <...>
+    ./corewar [one of: -dump nbr_cycles | -i | -d] [-n number] <champion1.cor> <...>
 
     -dump nbr_cycles:
         At the end of nbr_cycles of executions,
@@ -12,6 +12,9 @@ Usage:
         The argument turn on a special visualization mode.
         At this special mode corewar print out symbols that
         will be used to visualize game.
+    -d:
+        The argument turn on a special debug mode.
+        At this special mode corewar print out debug info.
     -n number:
         Sets the number of the next player.
         If non-existent, the player will have

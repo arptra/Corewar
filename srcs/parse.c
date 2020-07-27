@@ -88,11 +88,14 @@ t_vm			*ft_parse_flags(char **argv, t_vm *vm)
 		++vm->itrtr && --vm->players_num)
 		vm->flag_vis = 1;
 	vm->debug = -1;
-	if (ft_strequ(argv[1], "-d"))
-	{
-		vm->debug = ft_atoi(argv[2]);
-		vm->itrtr += 2;
-	}
+	if (ft_strequ(argv[vm->itrtr+1], "-d") &&
+		++vm->itrtr && --vm->players_num)
+		vm->d_mod = 1;
+	// if (ft_strequ(argv[1], "-d"))
+	// {
+	// 	vm->debug = ft_atoi(argv[2]);
+	// 	vm->itrtr += 2;
+	// }
 	return (vm);
 }
 
