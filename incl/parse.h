@@ -167,7 +167,7 @@ unsigned char	byte(int fd, t_vm *vm);
 void			ft_swap_players(t_file_info *temp1,
 								t_file_info *temp2,
 								t_vm *vm);
-t_vm			*ft_parse_flags(char **argv, t_vm *vm);
+t_vm			*ft_parse_flags(int argc, char **argv, t_vm *vm);
 t_file_info		*parse_player(char *player_name, t_vm *vm);
 
 /* VIS_FUNC */
@@ -177,6 +177,9 @@ void print_write_memory(t_vm *vm, int player_id, int address, int32_t reg_value)
 void print_move_carriage(t_vm *vm, const int player_id, int offset);
 void print_add_player(t_vm *vm, int cycle, const int player_id, const char *name, int address);
 void print_declare_winner(t_vm *vm);
+
+
+void		players_intro(t_vm *vm);
 
 
 /* delete func */

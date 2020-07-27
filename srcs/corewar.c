@@ -29,7 +29,10 @@ int main(int argc, char **argv)
 	//print_vm(vm);
 	//printf("win:%s\n", vm->last_live->cn);
 	if (vm->flag_vis == 0)
+	{
+		players_intro(vm);
 		printf("Contestant %d, \"%s\", has won !\n",vm->last_live->cnum, vm->last_live->cn);
+	}
 	else
 		print_declare_winner(vm);
 	/* do not need this stuff: */

@@ -75,7 +75,7 @@ t_vm			*ft_players(t_vm *vm, int players_num)
 	return (vm);
 }
 
-t_vm			*ft_parse_flags(char **argv, t_vm *vm)
+t_vm			*ft_parse_flags(int argc, char **argv, t_vm *vm)
 {
 	if (--(vm->nbr_cycles) && ft_strequ(argv[1], "-dump"))
 	{
@@ -84,18 +84,15 @@ t_vm			*ft_parse_flags(char **argv, t_vm *vm)
 		vm->players_num = vm->players_num - 2;
 		vm->itrtr += 2;
 	}
-	if (ft_strequ(argv[vm->itrtr+1], "-i") &&
-		++vm->itrtr && --vm->players_num)
+	if (ft_strequ(argv[vm->itrtr+1], "-i") && ++vm->itrtr && --vm->players_num)
 		vm->flag_vis = 1;
 	vm->debug = -1;
-	if (ft_strequ(argv[vm->itrtr+1], "-d") &&
-		++vm->itrtr && --vm->players_num)
-		vm->d_mod = 1;
-	// if (ft_strequ(argv[1], "-d"))
-	// {
-	// 	vm->debug = ft_atoi(argv[2]);
-	// 	vm->itrtr += 2;
-	// }
+	if (ft_strequ(argv[vm->itrtr+1], "-d") && (vm->players_num -= 2))
+		if ((vm->itrtr += 2) >= argc ||
+			((vm->d_mod = ft_atoi(argv[vm->itrtr])) != 0 &&
+			vm->d_mod != 1 && vm->d_mod != 2 && vm->d_mod != 4 &&
+			vm->d_mod != 8 && vm->d_mod != 16))
+			ft_error(13, vm);
 	return (vm);
 }
 
@@ -105,7 +102,7 @@ t_vm			*parse_args(int argc, char **argv, t_vm *vm)
 	t_file_info		*temp;
 
 	vm->players_num = argc - 1;
-	vm = ft_parse_flags(argv, vm);
+	vm = ft_parse_flags(argc, argv, vm);
 	while (++vm->itrtr < argc)
 	{
 		if (ft_strequ(argv[vm->itrtr], "-n"))

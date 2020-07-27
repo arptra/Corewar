@@ -88,7 +88,7 @@ void			print_arena(void *arena, size_t size)
 		print_byte_by_ptr(arena + i1);
 		i1++;
 		// NEED TO BE CHANGED TO 32 BEFORE VALUATION!
-		if (i1%64 == 0)
+		if (i1%32 == 0)
 			write(1, "\n", 1);
 	}
 	write(1, "\n", 1);

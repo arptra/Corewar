@@ -10,3 +10,4 @@ ERROR: player_num greater than overall number of players
 ERROR: parameter nbr_cycles should be positive integer
 ERROR: -n flag not properly used
 ERROR: too much players for game
+ERROR: -d flag not properly used
