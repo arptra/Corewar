@@ -19,7 +19,7 @@ int 	set_carriage(t_vm *vm)
 		car->p = get_player(vm, num_player);
 		add_car(&(vm->car), car);
 		if (vm->flag_vis == 1)
-			print_add_carriage(vm, num_player);
+			print_add_carriage(vm, num_player, car);
 		num_player++;
 	}
 	return (0);

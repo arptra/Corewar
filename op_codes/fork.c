@@ -17,5 +17,5 @@ void ffork(t_vm *vm)
 		printf("P\t%d | fork %d (%d)\n", vm->car->num, addr, car->pc);
 	}
 	if (vm->flag_vis == 1)
-		print_add_carriage(vm, vm->car->p->cnum);
+		print_add_carriage(vm, car->p->cnum, car);
 }

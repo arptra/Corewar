@@ -19,9 +19,9 @@ void print_add_player(t_vm *vm, int cycle, const int player_id, const char *name
 // player_id игрок которому пренадлежит каретка
 // carriage_id каретки надо отличать друг от друга, в качестве id можно использовыть адрес их структур
 // address абсолютный адресс памяти где будет стартовать каретка
-void print_add_carriage(t_vm *vm, int player_id)
+void print_add_carriage(t_vm *vm, int player_id, t_carriage *car)
 {
-	printf("c%c%d%c%d%c%d%c%d\n", sep, vm->cycle, sep, player_id, sep, vm->car->num, sep, vm->car->pc);
+	printf("c%c%d%c%d%c%d%c%d\n", sep, vm->cycle, sep, player_id, sep, car->num, sep, car->pc);
 }
 
 // печать при смерти карретки

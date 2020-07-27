@@ -171,7 +171,7 @@ t_vm			*ft_parse_flags(char **argv, t_vm *vm);
 t_file_info		*parse_player(char *player_name, t_vm *vm);
 
 /* VIS_FUNC */
-void print_add_carriage(t_vm *vm, int player_id);
+void print_add_carriage(t_vm *vm, int player_id, t_carriage *car);
 void print_kill_carriage(t_vm *vm, t_carriage *car);
 void print_write_memory(t_vm *vm, int player_id, int address, int32_t reg_value);
 void print_move_carriage(t_vm *vm, const int player_id, int offset);
