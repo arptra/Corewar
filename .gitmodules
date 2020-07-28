@@ -1,3 +1,6 @@
 [submodule "assembler"]
 	path = assembler
 	url = https://github.com/orsk-moscow/Assembler.git
+[submodule "visualiser"]
+	path = visualiser
+	url = https://github.com/terenty-rezman/corewar-visual.git
