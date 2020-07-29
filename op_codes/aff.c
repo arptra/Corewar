@@ -9,5 +9,6 @@ void	aff(t_vm *vm)
 	reg_num = read_byte(vm, vm->car->move ) - 1;
 	value = vm->car->registers[reg_num];
 	vm->car->move += 1;
-	printf("Aff: %c\n", (char)value);
+	if (vm->aff == 1)
+		printf("Aff: %c\n", (char)value);
 }

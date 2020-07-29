@@ -76,6 +76,7 @@ typedef struct	s_vm
 	int			itrtr;
 	int         debug;
 	int 		d_mod;
+	int 		aff;
 	t_carriage	*car;
 	t_carriage	*head;
 }				t_vm;
