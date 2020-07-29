@@ -41,18 +41,13 @@ int 	exec_op(t_vm *vm)
 		byte = arena[addr];
 		cursor->op_code = byte;
 	}
-	error = slct_instr(cursor->op_code, vm);
-	/* here error handler */
-	error_handler(error, vm);
-	/* if ok next op */
+	slct_instr(cursor->op_code, vm);
 	return (0);
 }
 
 void	exec(t_vm *vm)
 {
 	set_carriage(vm);
-	/* here will cycle that exec op_codes */
-	vm->d_mod = 0;
 	vm->head = vm->car;
 	if (vm->nbr_cycles)
 	{
@@ -60,6 +55,8 @@ void	exec(t_vm *vm)
 		{
 			vm->cycle++;
 			vm->cycle_left++;
+			if (vm->d_mod == 2 || vm->d_mod == 1)
+				printf("It is now cycle %d\n", vm->cycle);
 			while (vm->car)
 			{
 				exec_op(vm);

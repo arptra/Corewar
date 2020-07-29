@@ -17,6 +17,7 @@ add_executable(vm
         srcs/work-with-fd.c
         srcs/parse-player.c
         srcs/check_args.c
+        srcs/print.c
 
         op_codes/sti.c
         op_codes/ld.c
@@ -33,7 +34,7 @@ add_executable(vm
         op_codes/xor.c
         op_codes/st.c
         op_codes/fork.c
-        op_codes/lfork.c srcs/visual.c)
+        op_codes/lfork.c srcs/visual.c )
 
 add_subdirectory(libft)
 

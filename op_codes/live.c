@@ -13,10 +13,9 @@ void	live(t_vm *vm)
 	{
 		vm->last_live = get_player(vm, -player_num);
 		/* DEBUG */
-		//printf("Player %d (%s) is said to be alive\n", vm->last_live->cnum, vm->last_live->cn);
+		if (vm->d_mod == 1)
+			printf("Player %d (%s) is said to be alive\n", vm->last_live->cnum, vm->last_live->cn);
 	}
-	if (vm->d_mod == 1)
-	{
+	if (vm->d_mod == 4)
 		printf("P\t%d | live %d\n", vm->car->num, player_num);
-	}
 }

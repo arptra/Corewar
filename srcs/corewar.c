@@ -35,8 +35,5 @@ int main(int argc, char **argv)
 	}
 	else
 		print_declare_winner(vm);
-	/* do not need this stuff: */
-	// print_arena(vm->arena, 32);
-
 	return (0);
 }

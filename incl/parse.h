@@ -161,7 +161,6 @@ void	ffork(t_vm *vm);
 void	lfork(t_vm *vm);
 
 
-int 	error_handler(int error, t_vm *vm);
 void				ft_error(int code, t_vm *vm);
 unsigned char	byte(int fd, t_vm *vm);
 void			ft_swap_players(t_file_info *temp1,

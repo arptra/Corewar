@@ -29,6 +29,8 @@ void	delete_car(t_vm *vm)
 				prev->next = cur;
 			if (vm->flag_vis == 1)
 				print_kill_carriage(vm, del);
+			if (vm->d_mod == 8)
+				printf("Process %d hasn't lived for %d cycles (CTD %d)\n", del->num, vm->cycle, vm->cycle_to_die);
 			free_car(&del);
 		}
 		else
@@ -47,7 +49,8 @@ void	check(t_vm *vm)
 	{
 		vm->cycle_to_die -= CYCLE_DELTA;
 		vm->checks = 0;
-		//printf("Cycle to die is now %d\n", vm->cycle_to_die);
+		if (vm->d_mod == 2)
+			printf("Cycle to die is now %d\n", vm->cycle_to_die);
 	}
 	vm->cycle_left = 0;
 	vm->lives = 0;

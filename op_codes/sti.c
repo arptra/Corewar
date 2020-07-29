@@ -18,7 +18,7 @@ void	sti(t_vm *vm)
 	vm->car->move += vm->car->args_size->arg_3;
 	addr = vm->car->pc + ((arg_2 + arg_3) % IDX_MOD);
 	put_value(vm, addr, REG_SIZE, value);
-	if (vm->d_mod == 1)
+	if (vm->d_mod == 4)
 	{
 		printf("P\t%d | sti r%d %d %d\n", vm->car->num, reg_num + 1, arg_2, arg_3);
 		printf("\t| -> store to %d + %d = %d (with pc and mod %d)\n", arg_2, arg_3, arg_2 + arg_3, addr);

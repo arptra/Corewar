@@ -19,4 +19,10 @@ void ldi(t_vm *vm)
 	vm->car->move += ind_move(vm->car->args_type->arg_1, vm->car->args_size->arg_1);
 	vm->car->move += vm->car->args_size->arg_2;
 	vm->car->move += vm->car->args_size->arg_3;
+	if (vm->d_mod == 4)
+	{
+		printf("P\t%4d | ldi %d %d r%d\n", vm->car->num, addr_1, addr_2, reg_num);
+		printf("       | -> load from %d + %d = %d (with pc and mod %d)\n",
+			   addr_1, addr_2, addr_1 + addr_2, vm->car->pc + (addr_1 + addr_2) % IDX_MOD);
+	}
 }

@@ -12,4 +12,6 @@ void	lfork(t_vm *vm)
 	car->num = vm->cars_num + 1;
 	add_car(&(vm->head), car);
 	vm->cars_num++;
+	if (vm->d_mod == 4)
+		printf("P\t%4d | lfork %d (%d)\n", vm->car->num, addr, vm->car->pc);
 }

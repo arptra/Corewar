@@ -17,6 +17,6 @@ void	add(t_vm *vm)
 	reg_3 = read_byte(vm, vm->car->move ) - 1;
 	vm->car->registers[reg_3] = value;
 	vm->car->move += vm->car->args_size->arg_3;
-	if (vm->d_mod == 1)
+	if (vm->d_mod == 4)
 		printf("P\t%d | add r%d r%d r%d\n", vm->car->num, reg_1 + 1, reg_2 + 1, reg_3 + 1);
 }
