@@ -124,9 +124,7 @@ int		get_addr(int addr);
 t_carriage	*copy_carriage(t_carriage *car, int addr);
 void	delete_car(t_vm *vm);
 int check_for_die(t_vm *vm, t_carriage *car);
-
-
-/* checks */
+int     ind_move(int type, int size);
 void	check(t_vm *vm);
 int	    check_args_type(uint8_t byte, t_vm *vm);
 
@@ -137,17 +135,11 @@ void	print_cursor(t_vm *vm);
 void	print_cur(t_vm *vm, int num);
 void	debug_info(t_vm *vm);
 
-int     ind_move(int type, int size);
-
 /* op codes */
-
-//tested batman code
 void	sti(t_vm *vm);
 void	live(t_vm *vm);
 void	ld(t_vm *vm);
 void	zjmp(t_vm *vm);
-
-//not tested
 void	add(t_vm *vm);
 void	aff(t_vm *vm);
 void	and(t_vm *vm);
@@ -184,6 +176,5 @@ void		players_intro(t_vm *vm);
 
 /* delete func */
 void	free_car(t_carriage **car);
-void	ft_free_vm(t_vm *vm);
-
+void	ft_free_vm(t_vm **vm);
 #endif //COREWAR_PARSE_H

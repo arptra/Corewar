@@ -2,23 +2,25 @@
 
 void		players_intro(t_vm *vm)
 {
+	t_file_info *players;
+
+	players = vm->players;
 	ft_putstr("Introducing contestants...\n");
-	while (vm->players)
+	while (players)
 	{
 		ft_putstr("* Player ");
-		ft_putnbr(vm->players->cnum);
+		ft_putnbr(players->cnum);
 		ft_putstr(", weighing ");
-		ft_putnbr(vm->players->cs);
+		ft_putnbr(players->cs);
 		ft_putstr(" bytes, ");
 		ft_putchar('"');
-		ft_putstr(vm->players->cn);
+		ft_putstr(players->cn);
 		ft_putchar('"');
 		ft_putstr(" (");
 		ft_putchar('"');
-		ft_putstr(vm->players->cc);
+		ft_putstr(players->cc);
 		ft_putchar('"');
 		ft_putstr(") !\n");
-		vm->players = vm->players->next;
+		players = players->next;
 	}
-	return ;
 }

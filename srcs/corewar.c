@@ -21,19 +21,17 @@ int main(int argc, char **argv)
 	if (argc == 1)
 		ft_usage_corewar();
 	vm = init_vm(argc, argv);
-	// vm->current = vm->players;
-	// placed_player(0, vm->cur_num_player, vm);
-	//print_arena(vm->arena, MEM_SIZE);
-	// printf("\n");
+	if (vm->flag_vis == 0)
+		players_intro(vm);
 	exec(vm);
-	//print_vm(vm);
-	//printf("win:%s\n", vm->last_live->cn);
 	if (vm->flag_vis == 0)
 	{
-		players_intro(vm);
-		printf("Contestant %d, \"%s\", has won !\n",vm->last_live->cnum, vm->last_live->cn);
+		if (vm->d_mod != 0)
+			printf("Contestant %d, \"%s\", has won !\n",
+					vm->last_live->cnum, vm->last_live->cn);
 	}
 	else
 		print_declare_winner(vm);
+	ft_free_vm(&vm);
 	return (0);
 }

@@ -30,7 +30,6 @@ int 	exec_op(t_vm *vm)
 	int			addr;
 	t_carriage	*cursor;
 	uint8_t 	*arena;
-	int 		error;
 	uint8_t 	byte;
 
 	cursor = vm->car;
@@ -49,39 +48,28 @@ void	exec(t_vm *vm)
 {
 	set_carriage(vm);
 	vm->head = vm->car;
-	if (vm->nbr_cycles)
+	while (vm->cars_num)
 	{
-		while (vm->cars_num)
-		{
-			vm->cycle++;
-			vm->cycle_left++;
-			if (vm->d_mod == 2 || vm->d_mod == 1)
-				printf("It is now cycle %d\n", vm->cycle);
-			while (vm->car)
-			{
-				exec_op(vm);
-				vm->car->move = get_addr(vm->car->move);
-				if (vm->flag_vis == 1 && vm->car->move - vm->car->pc != 0)
-					print_move_carriage(vm, vm->car->p->cnum, vm->car->move - vm->car->pc);
-				vm->car->pc = vm->car->move;// jump to next instruction
-				vm->car = vm->car->next;
-			}
-			//debug_info(vm);
-			if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
-				check(vm);
-			vm->car = vm->head;
-		}
-	}
-	else
-	{
-		while (vm->cars_num)
+		vm->cycle++;
+		vm->cycle_left++;
+		if (vm->d_mod == 2 || vm->d_mod == 1)
+			printf("It is now cycle %d\n", vm->cycle);
+		while (vm->car)
 		{
 			exec_op(vm);
-			vm->car->pc = vm->car->move;// jump to next instruction
-			vm->cycle++;
-			vm->cycle_left++;
-			if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
-				check(vm);
+			vm->car->move = get_addr(vm->car->move);
+			if (vm->flag_vis == 1 && vm->car->move - vm->car->pc != 0)
+				print_move_carriage(vm, vm->car->p->cnum, vm->car->move - vm->car->pc);
+			vm->car->pc = vm->car->move;
+			vm->car = vm->car->next;
+		}
+		if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
+			check(vm);
+		vm->car = vm->head;
+		if (vm->nbr_cycles && vm->cycle == vm->nbr_cycles)
+		{
+			print_arena(vm->arena, MEM_SIZE);
+			exit(0);
 		}
 	}
 }

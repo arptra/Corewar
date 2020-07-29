@@ -18,8 +18,6 @@ def diff_file(file1, file2):
             fork1.append(line1)
         if "fork" in line2:
             fork2.append(line2)
-        #print (params1, params2)
-        #exit()
         count += 1
         for i in range(len(params1)):
             if params1[i] != params2[i]:
@@ -45,4 +43,4 @@ if __name__ == "__main__":
     #subprocess.run(["mv", "vm",  "vm_ver_1"])
 
 
-    diff_file("pc_our", "pc")
+    diff_file("vm_print", "cor")

@@ -102,7 +102,11 @@ int type_check(int arg_1, int arg_2, int arg_3, t_vm *vm)
 	}
 	vm->car->tmp_addr = step;
 	if (check->arg_1 < 2 && check->arg_2 < 2 && check->arg_3 < 2)
+	{
+		free(check);
 		return (1);
+	}
+	free(check);
 	return (0);
 }
 
