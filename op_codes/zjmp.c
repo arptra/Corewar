@@ -15,6 +15,8 @@ void	zjmp(t_vm *vm)
 	{
 		vm->car->pc = get_addr(vm->car->pc + (addr % IDX_MOD));
 		vm->car->move = vm->car->pc;
+		if (vm->flag_vis == 1)
+			print_move_carriage(vm, vm->car->p->cnum, (addr % IDX_MOD));
 		if (vm->d_mod == 4)
 			printf("%d OK\n", (addr % IDX_MOD));
 		flag = 1;
