@@ -17,6 +17,6 @@ void	xor(t_vm *vm)
 	reg_num = read_byte(vm, vm->car->move ) - 1;
 	vm->car->registers[reg_num] = value;
 	vm->car->move += ind_move(vm->car->args_type->arg_3, vm->car->args_size->arg_3);
-	if (vm->d_mod)
+	if (vm->d_mod == 4)
 		printf("P %4d | xor %d %d r%d\n", vm->car->num, value_1, value_2, reg_num + 1);
 }
