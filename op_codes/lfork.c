@@ -10,6 +10,7 @@ void	lfork(t_vm *vm)
 	vm->car->move += vm->car->args_size->arg_1;
 	car = copy_carriage(vm->car, addr);
 	car->num = vm->car_count + 1;
+	vm->car_count++;
 	add_car(&(vm->head), car);
 	vm->cars_num++;
 	if (vm->d_mod == 4)
