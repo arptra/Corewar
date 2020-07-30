@@ -52,8 +52,8 @@ typedef struct	s_carriage
     int 		tmp_addr;
     int 		cycle_to_exec;
     int 		carry;
-    t_args_size		*args_size;
-    t_args_type		*args_type;
+    t_args_size		*a_s;
+    t_args_type		*a_t;
     t_file_info		*p;// player that init carriage
     struct s_carriage *next;
 }				t_carriage;

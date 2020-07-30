@@ -35,8 +35,8 @@ t_carriage	*copy_carriage(t_carriage *car, int addr)
 	int 		i;
 
 	new_car = init_carriage();
-	new_car->args_size = init_args_size();
-	new_car->args_type = init_args_type();
+	new_car->a_s = init_args_size();
+	new_car->a_t = init_args_type();
 	new_car->move = get_addr(addr + car->pc);
 	new_car->pc = new_car->move;
 	new_car->carry = car->carry;

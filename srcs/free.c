@@ -14,8 +14,8 @@
 
 void	free_car(t_carriage **car)
 {
-	free((*car)->args_size);
-	free((*car)->args_type);
+	free((*car)->a_s);
+	free((*car)->a_t);
 	free(*car);
 }
 

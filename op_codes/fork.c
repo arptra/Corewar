@@ -12,14 +12,14 @@
 
 #include "../incl/parse.h"
 
-void ffork(t_vm *vm)
+void	ffork(t_vm *vm)
 {
-	int		addr;
+	int			addr;
 	t_carriage	*car;
 
 	vm->car->move += 1;
 	addr = get_arg(vm, 1);
-	vm->car->move += vm->car->args_size->arg_1;
+	vm->car->move += vm->car->a_s->arg_1;
 	car = copy_carriage(vm->car, addr % IDX_MOD);
 	car->num = vm->car_count + 1;
 	vm->car_count++;

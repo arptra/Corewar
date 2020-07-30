@@ -21,8 +21,8 @@ int 	set_carriage(t_vm *vm)
 	while (num_player <= vm->players_num)
 	{
 		car = init_carriage();
-		car->args_size = init_args_size();
-		car->args_type = init_args_type();
+		car->a_s = init_args_size();
+		car->a_t = init_args_type();
 		car->num = num_player;
 		car->start_addr = get_player(vm, num_player)->start_addr;
 		car->pc = car->start_addr;

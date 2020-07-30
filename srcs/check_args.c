@@ -101,23 +101,23 @@ int			type_check(int arg_1, int arg_2, int arg_3, t_vm *vm)
 	int 		move;
 	t_args_type *check;
 
-	type = vm->car->args_type;
+	type = vm->car->a_t;
 	move = vm->car->move + 2;
 	check = init_args_type();
 	if (arg_1)
 	{
 		check->arg_1 = conjunction(type->arg_1, arg_1, move, vm);
-		move += ind_move(type->arg_1, vm->car->args_size->arg_1);
+		move += ind_move(type->arg_1, vm->car->a_s->arg_1);
 	}
 	if (arg_2)
 	{
 		check->arg_2 = conjunction(type->arg_2, arg_2, move, vm);
-		move += ind_move(type->arg_2, vm->car->args_size->arg_2);
+		move += ind_move(type->arg_2, vm->car->a_s->arg_2);
 	}
 	if (arg_3)
 	{
 		check->arg_3 = conjunction(type->arg_3, arg_3, move, vm);
-		move += ind_move(type->arg_3, vm->car->args_size->arg_3);
+		move += ind_move(type->arg_3, vm->car->a_s->arg_3);
 	}
 	return (type_check_aux(vm, check, move));
 }

@@ -146,20 +146,20 @@ int 	get_arg(t_vm *vm, int num_of_arg)
 	arg = 0;
 	if (num_of_arg == 1)
 	{
-		type = vm->car->args_type->arg_1;
-		size = vm->car->args_size->arg_1;
+		type = vm->car->a_t->arg_1;
+		size = vm->car->a_s->arg_1;
 		arg = arg_value(vm, type, size);
 	}
 	else if (num_of_arg == 2)
 	{
-		type = vm->car->args_type->arg_2;
-		size = vm->car->args_size->arg_2;
+		type = vm->car->a_t->arg_2;
+		size = vm->car->a_s->arg_2;
 		arg = arg_value(vm, type, size);
 	}
 	else if (num_of_arg == 3)
 	{
-		type = vm->car->args_type->arg_3;
-		size = vm->car->args_size->arg_3;
+		type = vm->car->a_t->arg_3;
+		size = vm->car->a_s->arg_3;
 		arg = arg_value(vm, type, size);
 	}
 	return (arg);
@@ -167,12 +167,12 @@ int 	get_arg(t_vm *vm, int num_of_arg)
 
 void	reset_arg(t_vm *vm)
 {
-	vm->car->args_size->arg_1 = 0;
-	vm->car->args_size->arg_2 = 0;
-	vm->car->args_size->arg_3 = 0;
-	vm->car->args_type->arg_1 = 0;
-	vm->car->args_type->arg_2 = 0;
-	vm->car->args_type->arg_3 = 0;
+	vm->car->a_s->arg_1 = 0;
+	vm->car->a_s->arg_2 = 0;
+	vm->car->a_s->arg_3 = 0;
+	vm->car->a_t->arg_1 = 0;
+	vm->car->a_t->arg_2 = 0;
+	vm->car->a_t->arg_3 = 0;
 }
 
 void	check_cycle_exec(t_vm *vm, uint8_t byte, void (*f)(t_vm *))
@@ -184,13 +184,13 @@ void	check_cycle_exec(t_vm *vm, uint8_t byte, void (*f)(t_vm *))
 	if (vm->car->cycle_to_exec == 0)
 	{
 		vm->car->op_code = byte;
-		if ((vm->car->args_size->arg_1 = type_exception(byte)))
-			vm->car->args_type->arg_1 = DIR_CODE;
+		if ((vm->car->a_s->arg_1 = type_exception(byte)))
+			vm->car->a_t->arg_1 = DIR_CODE;
 		else
 		{
-			vm->car->args_size->arg_1 = type_args(vm, 1, &vm->car->args_type->arg_1);
-			vm->car->args_size->arg_2 = type_args(vm, 2, &vm->car->args_type->arg_2);
-			vm->car->args_size->arg_3 = type_args(vm, 3, &vm->car->args_type->arg_3);
+			vm->car->a_s->arg_1 = type_args(vm, 1, &vm->car->a_t->arg_1);
+			vm->car->a_s->arg_2 = type_args(vm, 2, &vm->car->a_t->arg_2);
+			vm->car->a_s->arg_3 = type_args(vm, 3, &vm->car->a_t->arg_3);
 		}
 		if (check_args_type(byte, vm))
 			f(vm);
