@@ -65,6 +65,7 @@ typedef struct	s_vm
 	uint8_t		*arena;
 	t_file_info	*current;
 	t_file_info	*last_live;
+	int 		car_count;
 	int 		lives;
 	int 		checks;
 	int 		cycle_to_die;

@@ -28,19 +28,19 @@ int 	set_carriage(t_vm *vm)
 int 	exec_op(t_vm *vm)
 {
 	int			addr;
-	t_carriage	*cursor;
+	t_carriage	*car;
 	uint8_t 	*arena;
 	uint8_t 	byte;
 
-	cursor = vm->car;
+	car = vm->car;
 	arena = vm->arena;
-	addr = cursor->pc;
-	if (cursor->cycle_to_exec == -1)
+	addr = car->pc;
+	if (car->cycle_to_exec == -1)
 	{
 		byte = arena[addr];
-		cursor->op_code = byte;
+		car->op_code = byte;
 	}
-	slct_instr(cursor->op_code, vm);
+	slct_instr(car->op_code, vm);
 	return (0);
 }
 

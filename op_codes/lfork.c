@@ -9,9 +9,11 @@ void	lfork(t_vm *vm)
 	addr = get_arg(vm, 1);
 	vm->car->move += vm->car->args_size->arg_1;
 	car = copy_carriage(vm->car, addr);
-	car->num = vm->cars_num + 1;
+	car->num = vm->car_count + 1;
 	add_car(&(vm->head), car);
 	vm->cars_num++;
 	if (vm->d_mod == 4)
 		printf("P\t%4d | lfork %d (%d)\n", vm->car->num, addr, vm->car->pc);
+	if (vm->flag_vis == 1)
+		print_add_carriage(vm, car->p->cnum, car);
 }

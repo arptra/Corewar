@@ -62,5 +62,6 @@ t_vm			*init_vm(int argc, char **argv)
 	vm->cycle_to_die = CYCLE_TO_DIE;
 	place_players(vm);
 	vm->cars_num = vm->players_num;
+	vm->car_count = vm->cars_num;
 	return (vm);
 }
