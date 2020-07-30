@@ -44,6 +44,19 @@ int 	exec_op(t_vm *vm)
 	return (0);
 }
 
+void 	exec_cycle(t_vm *vm)
+{
+	while (vm->car)
+	{
+		exec_op(vm);
+		vm->car->move = get_addr(vm->car->move);
+		if (vm->flag_vis == 1 && vm->car->move - vm->car->pc != 0)
+			print_move_carriage(vm, vm->car->p->cnum, vm->car->move - vm->car->pc);
+		vm->car->pc = vm->car->move;
+		vm->car = vm->car->next;
+	}
+}
+
 void	exec(t_vm *vm)
 {
 	set_carriage(vm);
@@ -54,15 +67,7 @@ void	exec(t_vm *vm)
 		vm->cycle_left++;
 		if (vm->d_mod == 2 || vm->d_mod == 1)
 			printf("It is now cycle %d\n", vm->cycle);
-		while (vm->car)
-		{
-			exec_op(vm);
-			vm->car->move = get_addr(vm->car->move);
-			if (vm->flag_vis == 1 && vm->car->move - vm->car->pc != 0)
-				print_move_carriage(vm, vm->car->p->cnum, vm->car->move - vm->car->pc);
-			vm->car->pc = vm->car->move;
-			vm->car = vm->car->next;
-		}
+		exec_cycle(vm);
 		if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
 			check(vm);
 		vm->car = vm->head;

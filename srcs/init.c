@@ -4,11 +4,9 @@ void			place_players(t_vm *vm)
 {
 	int				cnt;
 	int				addr;
-	int				cnt2;
 
 	addr = 0;
 	cnt = 0;
-	cnt2 = 0;
 	while (++cnt <= vm->players_num)
 	{
 		place_player(addr,cnt,vm);

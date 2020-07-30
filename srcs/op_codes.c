@@ -61,6 +61,7 @@ int		type_args(t_vm *vm, int num_of_arg, uint8_t *type)
 	return (size_type);
 }
 
+
 int 	get_value(t_vm *vm, int size)// read from memory and translate to int
 {
 	int	sign;
@@ -71,7 +72,7 @@ int 	get_value(t_vm *vm, int size)// read from memory and translate to int
 
 	arena = vm->arena;
 	value = 0;
-	addr = get_addr(vm->car->move); // start address of argument (or current position car.)
+	addr = get_addr(vm->car->move);
 	sign = (arena[addr] >> 7) ? 1 : 0;
 	shift = 0;
 	while (size)
@@ -138,8 +139,8 @@ int 	arg_value(t_vm *vm, int type, int size)
 
 int 	get_arg(t_vm *vm, int num_of_arg)
 {
-	int arg;
-	int size;
+	int		arg;
+	int		size;
 	uint8_t type;
 
 	arg = 0;
@@ -169,7 +170,6 @@ void	reset_arg(t_vm *vm)
 	vm->car->args_size->arg_1 = 0;
 	vm->car->args_size->arg_2 = 0;
 	vm->car->args_size->arg_3 = 0;
-
 	vm->car->args_type->arg_1 = 0;
 	vm->car->args_type->arg_2 = 0;
 	vm->car->args_type->arg_3 = 0;
@@ -204,10 +204,6 @@ void	check_cycle_exec(t_vm *vm, uint8_t byte, void (*f)(t_vm *))
 
 int		slct_instr(unsigned char byte, t_vm *vm)
 {
-	int 			flag;
-
-	flag = 0;
-
 	if (byte == 0x01)
 		check_cycle_exec(vm, byte, live);
 	else if (byte == 0x02)
@@ -242,6 +238,5 @@ int		slct_instr(unsigned char byte, t_vm *vm)
 		check_cycle_exec(vm, byte, aff);
 	else
 		vm->car->move += 1;
-		// flag = -1;
-	return (flag);
+	return (0);
 }

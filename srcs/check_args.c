@@ -1,22 +1,8 @@
 #include "../incl/parse.h"
 
-t_args_type	*decode_arg(int arg)
+t_args_type	*next_decode_arg(t_args_type *type, int arg)
 {
-	t_args_type *type;
-
-	type = init_args_type();
-	if (arg == T_REG)
-		type->arg_1 = REG_CODE;
-	else if (arg == T_DIR)
-		type->arg_2 = DIR_CODE;
-	else if (arg == T_IND)
-		type->arg_3 = IND_CODE;
-	else if (arg == (T_REG | T_DIR))
-	{
-		type->arg_1 = REG_CODE;
-		type->arg_2 = DIR_CODE;
-	}
-	else if (arg == (T_REG | T_IND))
+	if (arg == (T_REG | T_IND))
 	{
 		type->arg_1 = REG_CODE;
 		type->arg_3 = IND_CODE;
@@ -35,7 +21,28 @@ t_args_type	*decode_arg(int arg)
 	return (type);
 }
 
-int check_reg(int arg, t_vm *vm, int step)
+t_args_type	*decode_arg(int arg)
+{
+	t_args_type *type;
+
+	type = init_args_type();
+	if (arg == T_REG)
+		type->arg_1 = REG_CODE;
+	else if (arg == T_DIR)
+		type->arg_2 = DIR_CODE;
+	else if (arg == T_IND)
+		type->arg_3 = IND_CODE;
+	else if (arg == (T_REG | T_DIR))
+	{
+		type->arg_1 = REG_CODE;
+		type->arg_2 = DIR_CODE;
+	}
+	else
+		type = next_decode_arg(type, arg);
+	return (type);
+}
+
+int			check_reg(int arg, t_vm *vm, int step)
 {
 	int reg;
 
@@ -49,7 +56,7 @@ int check_reg(int arg, t_vm *vm, int step)
 	return (1);
 }
 
-int conjunction(int vm_arg, int ref_arg, int step, t_vm *vm)
+int			conjunction(int vm_arg, int ref_arg, int step, t_vm *vm)
 {
 	t_args_type *ref_type;
 	int 		flag;
@@ -69,38 +76,16 @@ int conjunction(int vm_arg, int ref_arg, int step, t_vm *vm)
 	return (1);
 }
 
-int ind_move(int type, int size)
+int			ind_move(int type, int size)
 {
 	if (type == IND_CODE)
 		return (IND_SIZE);
 	return (size);
 }
 
-int type_check(int arg_1, int arg_2, int arg_3, t_vm *vm)
+int			type_check_aux(t_vm *vm, t_args_type *check, int move)
 {
-	t_args_type *type;
-	int 		step;
-	t_args_type *check;
-
-	type = vm->car->args_type;
-	step = vm->car->move + 2; // op code + arg len = 2
-	check = init_args_type();
-	if (arg_1)
-	{
-		check->arg_1 = conjunction(type->arg_1, arg_1, step, vm);
-		step += ind_move(type->arg_1, vm->car->args_size->arg_1);
-	}
-	if (arg_2)
-	{
-		check->arg_2 = conjunction(type->arg_2, arg_2, step, vm);
-		step += ind_move(type->arg_2, vm->car->args_size->arg_2);
-	}
-	if (arg_3)
-	{
-		check->arg_3 = conjunction(type->arg_3, arg_3, step, vm);
-		step += ind_move(type->arg_3, vm->car->args_size->arg_3);
-	}
-	vm->car->tmp_addr = step;
+	vm->car->tmp_addr = move;
 	if (check->arg_1 < 2 && check->arg_2 < 2 && check->arg_3 < 2)
 	{
 		free(check);
@@ -110,7 +95,53 @@ int type_check(int arg_1, int arg_2, int arg_3, t_vm *vm)
 	return (0);
 }
 
-int	check_args_type(uint8_t byte, t_vm *vm)
+int			type_check(int arg_1, int arg_2, int arg_3, t_vm *vm)
+{
+	t_args_type *type;
+	int 		move;
+	t_args_type *check;
+
+	type = vm->car->args_type;
+	move = vm->car->move + 2;
+	check = init_args_type();
+	if (arg_1)
+	{
+		check->arg_1 = conjunction(type->arg_1, arg_1, move, vm);
+		move += ind_move(type->arg_1, vm->car->args_size->arg_1);
+	}
+	if (arg_2)
+	{
+		check->arg_2 = conjunction(type->arg_2, arg_2, move, vm);
+		move += ind_move(type->arg_2, vm->car->args_size->arg_2);
+	}
+	if (arg_3)
+	{
+		check->arg_3 = conjunction(type->arg_3, arg_3, move, vm);
+		move += ind_move(type->arg_3, vm->car->args_size->arg_3);
+	}
+	return (type_check_aux(vm, check, move));
+}
+
+int 		check_args_type_aux(uint8_t byte, t_vm *vm)
+{
+	if (byte == 0x0a)
+		return (type_check(T_RDI, T_RD, T_REG, vm));
+	else if (byte == 0x0b)
+		return (type_check(T_REG, T_RDI, T_RD, vm));
+	else if (byte == 0x0c)
+		return (1);
+	else if (byte == 0x0d)
+		return (type_check(T_DI, T_REG, 0, vm));
+	else if (byte == 0x0e)
+		return (type_check(T_RDI, T_RD, T_REG, vm));
+	else if (byte == 0x0f)
+		return (1);
+	else if (byte == 0x10)
+		return (type_check(T_REG, 0, 0, vm));
+	return (0);
+}
+
+int			check_args_type(uint8_t byte, t_vm *vm)
 {
 	if (byte == 0x01)
 		return (1);
@@ -130,19 +161,6 @@ int	check_args_type(uint8_t byte, t_vm *vm)
 		return (type_check(T_RDI, T_RDI, T_REG, vm));
 	else if (byte == 0x09)
 		return (1);
-	else if (byte == 0x0a)
-		return (type_check(T_RDI, T_RD, T_REG, vm));
-	else if (byte == 0x0b)
-		return (type_check(T_REG, T_RDI, T_RD, vm));
-	else if (byte == 0x0c)
-		return (1);
-	else if (byte == 0x0d)
-		return (type_check(T_DI, T_REG, 0, vm));
-	else if (byte == 0x0e)
-		return (type_check(T_RDI, T_RD, T_REG, vm));
-	else if (byte == 0x0f)
-		return (1);
-	else if (byte == 0x10)
-		return (type_check(T_REG, 0, 0, vm));
-	return (0);
+	else
+		return check_args_type_aux(byte, vm);
 }

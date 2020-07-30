@@ -1,7 +1,7 @@
 #include "../incl/parse.h"
 #include "stdio.h"
 
-int check_for_die(t_vm *vm, t_carriage *car)
+int			check_for_die(t_vm *vm, t_carriage *car)
 {
 	if (vm->cycle_to_die <= 0 || vm->cycle - car->last_live >= vm->cycle_to_die)
 		return (1);
@@ -9,7 +9,26 @@ int check_for_die(t_vm *vm, t_carriage *car)
 		return (0);
 }
 
-void	delete_car(t_vm *vm)
+void		print_vis_debug(t_vm *vm, t_carriage *del)
+{
+	if (vm->flag_vis == 1)
+		print_kill_carriage(vm, del);
+	if (vm->d_mod == 8)
+		printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+			   del->num, vm->cycle, vm->cycle_to_die);
+}
+
+t_carriage	*delete_car_aux(t_vm *vm, t_carriage *del, t_carriage *prev, t_carriage *cur)
+{
+	if(vm->head == del)
+		vm->head = cur;
+	if(prev)
+		prev->next = cur;
+	return (prev);
+}
+
+
+void		delete_car(t_vm *vm)
 {
 	t_carriage	*cur;
 	t_carriage	*prev;
@@ -23,14 +42,8 @@ void	delete_car(t_vm *vm)
 		if (check_for_die(vm,del) && vm->cars_num--)
 		{
 			cur = cur->next;
-			if(vm->head == del)
-				vm->head = cur;
-			if(prev)
-				prev->next = cur;
-			if (vm->flag_vis == 1)
-				print_kill_carriage(vm, del);
-			if (vm->d_mod == 8)
-				printf("Process %d hasn't lived for %d cycles (CTD %d)\n", del->num, vm->cycle, vm->cycle_to_die);
+			prev = delete_car_aux(vm, del, prev, cur);
+			print_vis_debug(vm, del);
 			free_car(&del);
 		}
 		else
@@ -41,7 +54,7 @@ void	delete_car(t_vm *vm)
 	}
 }
 
-void	check(t_vm *vm)
+void		check(t_vm *vm)
 {
 	vm->checks++;
 	delete_car(vm);
