@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/parse.h"
+#include "../incl/corewar.h"
 
-int 	set_carriage(t_vm *vm)
+int		set_carriage(t_vm *vm)
 {
 	t_carriage	*car;
 	int			num_player;
@@ -37,12 +37,12 @@ int 	set_carriage(t_vm *vm)
 	return (0);
 }
 
-int 	exec_op(t_vm *vm)
+int		exec_op(t_vm *vm)
 {
 	int			addr;
 	t_carriage	*car;
-	uint8_t 	*arena;
-	uint8_t 	byte;
+	uint8_t		*arena;
+	uint8_t		byte;
 
 	car = vm->car;
 	arena = vm->arena;
@@ -56,14 +56,15 @@ int 	exec_op(t_vm *vm)
 	return (0);
 }
 
-void 	exec_cycle(t_vm *vm)
+void	exec_cycle(t_vm *vm)
 {
 	while (vm->car)
 	{
 		exec_op(vm);
 		vm->car->move = get_addr(vm->car->move);
 		if (vm->flag_vis == 1 && vm->car->move - vm->car->pc != 0)
-			print_move_carriage(vm, vm->car->p->cnum, vm->car->move - vm->car->pc);
+			print_move_carriage(vm, vm->car->p->cnum,
+					vm->car->move - vm->car->pc);
 		vm->car->pc = vm->car->move;
 		vm->car = vm->car->next;
 	}

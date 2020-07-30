@@ -12,34 +12,20 @@
 
 #include "../incl/corewar.h"
 
-void	print_add_player(t_vm *vm, const int player_id,
-							const char *name, int address)
+void	print_move_carriage(t_vm *vm, const int player_id, int offset)
 {
-	uint8_t	*arena;
-	int		codesize;
-
-	setbuf(stdout, NULL);
-	printf("p%c%d%c%d%c%s%c%d%c", SEP, vm->cycle, SEP, player_id,
-		   SEP, name, SEP, address, SEP);
-	codesize = get_player(vm, player_id)->cs;
-	arena = &vm->arena[address];
-	while (codesize)
-	{
-		print_byte_by_ptr(arena);
-		arena++;
-		codesize--;
-	}
-	printf("\n");
+	printf("m%c%d%c%d%c%d%c%d\n", SEP, vm->cycle, SEP, player_id, SEP,
+		   vm->car->num, SEP, offset);
 }
 
-void	print_add_carriage(t_vm *vm, int player_id, t_carriage *car)
+void	print_write_memory(t_vm *vm, int player_id, int address,
+							int32_t reg_value)
 {
-	printf("c%c%d%c%d%c%d%c%d\n", SEP, vm->cycle, SEP,
-		   player_id, SEP, car->num, SEP, car->pc);
+	printf("w%c%d%c%d%c%d%c%08X\n", SEP, vm->cycle, SEP, player_id,
+		   SEP, address, SEP, reg_value);
 }
 
-void	print_kill_carriage(t_vm *vm, t_carriage *car)
+void	print_declare_winner(t_vm *vm)
 {
-	printf("k%c%d%c%d%c%d\n", SEP, vm->cycle, SEP,
-		   car->p->cnum, SEP, car->num);
+	printf("e%c%d%c%d\n", SEP, vm->cycle, SEP, vm->last_live->cnum);
 }

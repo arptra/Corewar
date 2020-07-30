@@ -2,22 +2,25 @@ cmake_minimum_required(VERSION 3.14)
 
 
 add_executable(vm
-
         srcs/init.c
         srcs/parse.c
         srcs/op_codes.c
-        srcs/corewar.c
+        srcs/op_codes_2.c
+        srcs/op_codes_3.c
+        srcs/parse.c
         srcs/exec.c
         srcs/error_handler.c
         srcs/utils.c
         srcs/parametrs_to_op_code.c
         srcs/check.c
         srcs/free.c
-        srcs/debug_tools.c
-        srcs/work-with-fd.c
-        srcs/parse-player.c
+        srcs/work_with_fd.c
+        srcs/parse_player.c
         srcs/check_args.c
+        srcs/check_args_2.c
         srcs/print.c
+        srcs/visual.c
+        srcs/visual_2.c
 
         op_codes/sti.c
         op_codes/ld.c
@@ -34,7 +37,7 @@ add_executable(vm
         op_codes/xor.c
         op_codes/st.c
         op_codes/fork.c
-        op_codes/lfork.c srcs/visual.c )
+        op_codes/lfork.c srcs/corewar.c)
 
 add_subdirectory(libft)
 

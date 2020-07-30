@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/parse.h"
+#include "../incl/corewar.h"
 
 void	free_car(t_carriage **car)
 {
@@ -19,7 +19,7 @@ void	free_car(t_carriage **car)
 	free(*car);
 }
 
-void 	free_player(t_file_info **player)
+void	free_player(t_file_info **player)
 {
 	t_file_info *next;
 	t_file_info *cur;
@@ -44,7 +44,8 @@ void	ft_free_vm(t_vm **vm)
 	if ((*vm)->car)
 	{
 		car = (*vm)->car;
-		while (car) {
+		while (car)
+		{
 			next = car->next;
 			free_car(&car);
 			car = next;

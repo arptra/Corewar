@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse-player.c                                     :+:      :+:    :+:   */
+/*   parse_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: student <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/parse.h"
+#include "../incl/corewar.h"
 
 t_file_info		*parse_player(char *player_name, t_vm *vm)
 {
@@ -60,14 +60,14 @@ int				ft_get_current_num(t_file_info *players, int candidate)
 	}
 }
 
-t_file_info	*get_player(t_vm *vm, int num_player)
+t_file_info		*get_player(t_vm *vm, int num_player)
 {
-	t_file_info *player;
-	int i;
+	t_file_info	*player;
+	int			i;
 
 	i = 1;
 	player = vm->players;
-	while(player && i < num_player)
+	while (player && i < num_player)
 	{
 		player = player->next;
 		i++;
@@ -75,7 +75,7 @@ t_file_info	*get_player(t_vm *vm, int num_player)
 	return (player);
 }
 
-void		place_player(int addr, int num_player, t_vm *vm)
+void			place_player(int addr, int num_player, t_vm *vm)
 {
 	uint8_t byte;
 	int		i;
@@ -83,11 +83,10 @@ void		place_player(int addr, int num_player, t_vm *vm)
 	i = 0;
 	vm->current = get_player(vm, num_player);
 	vm->current->start_addr = addr;
-
-	if (bytes_to_int(vm->current->fd, 4, 16,vm) != 0)
+	if (bytes_to_int(vm->current->fd, 4, 16, vm) != 0)
 	{
-		write(2,"Here should be zero bytes\n",30);
-		exit (-1);
+		write(2, "Here should be zero bytes\n", 30);
+		exit(-1);
 	}
 	while (read_byte_fd(vm->current->fd, &byte) == 0)
 	{
@@ -95,7 +94,7 @@ void		place_player(int addr, int num_player, t_vm *vm)
 	}
 	if (i != vm->current->cs)
 	{
-		write(2,"Champion's actual code size does not match declared code size\n",62);
+		write(2, "Code size is too big\n", 21);
 		exit(-1);
 	}
 }

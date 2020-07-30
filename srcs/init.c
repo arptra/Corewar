@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/parse.h"
+#include "../incl/corewar.h"
 
 void			place_players(t_vm *vm)
 {
@@ -21,11 +21,10 @@ void			place_players(t_vm *vm)
 	cnt = 0;
 	while (++cnt <= vm->players_num)
 	{
-		place_player(addr,cnt,vm);
+		place_player(addr, cnt, vm);
 		addr += MEM_SIZE / vm->players_num;
 		if (vm->flag_vis == 1)
 			print_add_player(vm,
-					0,
 					vm->current->cnum,
 					vm->current->cn,
 					vm->current->start_addr);
@@ -33,7 +32,7 @@ void			place_players(t_vm *vm)
 	vm->last_live = get_player(vm, 1);
 }
 
-t_args_size		*init_args_size()
+t_args_size		*init_args_size(void)
 {
 	t_args_size *args;
 
@@ -41,7 +40,7 @@ t_args_size		*init_args_size()
 	return (args);
 }
 
-t_args_type		*init_args_type()
+t_args_type		*init_args_type(void)
 {
 	t_args_type *args;
 
@@ -49,7 +48,7 @@ t_args_type		*init_args_type()
 	return (args);
 }
 
-t_carriage		*init_carriage()
+t_carriage		*init_carriage(void)
 {
 	t_carriage	*car;
 

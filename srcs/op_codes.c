@@ -1,4 +1,16 @@
-#include "../incl/parse.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_codes.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: student <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/30 21:05:17 by student           #+#    #+#             */
+/*   Updated: 2020/07/30 21:05:20 by student          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../incl/corewar.h"
 
 uint8_t	select_args(unsigned char byte, int num_of_arg)
 {
@@ -22,7 +34,7 @@ int		select_size(uint8_t type, uint8_t byte)
 	return (T_IND);
 }
 
-uint8_t select_type(uint8_t type)
+uint8_t	select_type(uint8_t type)
 {
 	if (type == REG_CODE)
 		return (REG_CODE);
@@ -36,7 +48,7 @@ uint8_t select_type(uint8_t type)
 int		type_args(t_vm *vm, int num_of_arg, uint8_t *type)
 {
 	uint8_t	size_type;
-	int 	addr;
+	int		addr;
 
 	addr = get_addr(vm->car->pc + 1);
 	size_type = vm->arena[addr];
@@ -59,184 +71,4 @@ int		type_args(t_vm *vm, int num_of_arg, uint8_t *type)
 		size_type = select_size(size_type >> 2, vm->car->op_code);
 	}
 	return (size_type);
-}
-
-
-int 	get_value(t_vm *vm, int size)// read from memory and translate to int
-{
-	int	sign;
-	int value;
-	int addr;
-	int shift;
-	uint8_t *arena;
-
-	arena = vm->arena;
-	value = 0;
-	addr = get_addr(vm->car->move);
-	sign = (arena[addr] >> 7) ? 1 : 0;
-	shift = 0;
-	while (size)
-	{
-		if (sign)
-		{
-			addr = get_addr(vm->car->move + size - 1);
-			value = value + ((arena[addr] ^ 0xFF) << shift);
-			shift = shift + 8;
-		}
-		else
-		{
-			addr = get_addr(vm->car->move + size - 1);
-			value = value + (arena[addr] << shift);
-			shift = shift + 8;
-		}
-		size--;
-	}
-	if (sign)
-		value = ~(value);
-	return (value);
-}
-
-void	put_value(t_vm *vm, int addr, int size, int value)
-{
-	int shift;
-	uint8_t byte;
-	int 	cur_addr;
-	uint8_t *arena;
-
-	shift = 0;
-	arena = vm->arena;
-	while (size)
-	{
-		cur_addr = get_addr(addr + size - 1);
-		byte = value >> shift;
-		arena[cur_addr] = byte;
-		shift = shift + 8;
-		size--;
-	}
-}
-
-int 	arg_value(t_vm *vm, int type, int size)
-{
-	int 	value;
-
-	value = 0;
-	if (type == REG_CODE)
-		value = vm->car->registers[read_byte(vm, vm->car->move ) - 1]; // vm->car->move - 1 is number of reg, because -1
-	else if (type == DIR_CODE)
-		value = get_value(vm, size);
-	else if (type == IND_CODE)
-	{
-		value = get_value(vm, IND_SIZE); // get address from to read
-		if (vm->car->op_code != 0x0d) //lld
-			value = value % IDX_MOD;
-		vm->car->tmp_addr = vm->car->move; //save address to tmp var
-		vm->car->move = vm->car->pc + value;
-		value = get_value(vm, size);
-		vm->car->move = vm->car->tmp_addr;
-	}
-	return (value);
-}
-
-int 	get_arg(t_vm *vm, int num_of_arg)
-{
-	int		arg;
-	int		size;
-	uint8_t type;
-
-	arg = 0;
-	if (num_of_arg == 1)
-	{
-		type = vm->car->a_t->arg_1;
-		size = vm->car->a_s->arg_1;
-		arg = arg_value(vm, type, size);
-	}
-	else if (num_of_arg == 2)
-	{
-		type = vm->car->a_t->arg_2;
-		size = vm->car->a_s->arg_2;
-		arg = arg_value(vm, type, size);
-	}
-	else if (num_of_arg == 3)
-	{
-		type = vm->car->a_t->arg_3;
-		size = vm->car->a_s->arg_3;
-		arg = arg_value(vm, type, size);
-	}
-	return (arg);
-}
-
-void	reset_arg(t_vm *vm)
-{
-	vm->car->a_s->arg_1 = 0;
-	vm->car->a_s->arg_2 = 0;
-	vm->car->a_s->arg_3 = 0;
-	vm->car->a_t->arg_1 = 0;
-	vm->car->a_t->arg_2 = 0;
-	vm->car->a_t->arg_3 = 0;
-}
-
-void	check_cycle_exec(t_vm *vm, uint8_t byte, void (*f)(t_vm *))
-{
-	if (vm->car->cycle_to_exec == -1)
-		vm->car->cycle_to_exec = get_cycle_to_exec(byte);
-	if (vm->car->cycle_to_exec > 0 )
-		vm->car->cycle_to_exec--;
-	if (vm->car->cycle_to_exec == 0)
-	{
-		vm->car->op_code = byte;
-		if ((vm->car->a_s->arg_1 = type_exception(byte)))
-			vm->car->a_t->arg_1 = DIR_CODE;
-		else
-		{
-			vm->car->a_s->arg_1 = type_args(vm, 1, &vm->car->a_t->arg_1);
-			vm->car->a_s->arg_2 = type_args(vm, 2, &vm->car->a_t->arg_2);
-			vm->car->a_s->arg_3 = type_args(vm, 3, &vm->car->a_t->arg_3);
-		}
-		if (check_args_type(byte, vm))
-			f(vm);
-		else
-			vm->car->move = vm->car->tmp_addr;
-		vm->car->tmp_addr = 0;
-		reset_arg(vm);
-		vm->car->cycle_to_exec = -1;
-	}
-}
-
-int		slct_instr(unsigned char byte, t_vm *vm)
-{
-	if (byte == 0x01)
-		check_cycle_exec(vm, byte, live);
-	else if (byte == 0x02)
-		check_cycle_exec(vm, byte, ld);
-	else if (byte == 0x03)
-		check_cycle_exec(vm, byte, st);
-	else if (byte == 0x04)
-		check_cycle_exec(vm, byte, add);
-	else if (byte == 0x05)
-		check_cycle_exec(vm, byte, sub);
-	else if (byte == 0x06)
-		check_cycle_exec(vm, byte, and);
-	else if (byte == 0x07)
-		check_cycle_exec(vm, byte, or);
-	else if (byte == 0x08)
-		check_cycle_exec(vm, byte, xor);
-	else if (byte == 0x09)
-		check_cycle_exec(vm, byte, zjmp);
-	else if (byte == 0x0a)
-		check_cycle_exec(vm, byte, ldi);
-	else if (byte == 0x0b)
-		check_cycle_exec(vm, byte, sti);
-	else if (byte == 0x0c)
-		check_cycle_exec(vm, byte, ffork);
-	else if (byte == 0x0d)
-		check_cycle_exec(vm, byte, lld);
-	else if (byte == 0x0e)
-		check_cycle_exec(vm, byte, lldi);
-	else if (byte == 0x0f)
-		check_cycle_exec(vm, byte, lfork);
-	else if (byte == 0x10)
-		check_cycle_exec(vm, byte, aff);
-	else
-		vm->car->move += 1;
-	return (0);
 }

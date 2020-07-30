@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   work-with-fd.c                                     :+:      :+:    :+:   */
+/*   work_with_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: student <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,32 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/parse.h"
-
-// int				print_byte(int fd)
-// {
-// 	unsigned char	byte;
-// 	char			*sym;
-
-// 	if (read(fd, &byte, 1) > 0)
-// 	{
-// 		sym = ft_itoa_base(byte, 16);
-// 		ft_putstr(sym);
-// 		free(sym);
-// 	}
-// 	else
-// 		exit (-1);
-// 	return (1);
-// }
-
-// void			print_bytes(int fd, int n)
-// {
-// 	int				i;
-
-// 	i = -1;
-// 	while (++i < n)
-// 		print_byte(fd);
-// }
+#include "../incl/corewar.h"
 
 void			print_byte_by_ptr(void *memory)
 {
@@ -91,16 +66,15 @@ char			*bytes_to_string(int fd, int n_bytes, t_vm *vm)
 }
 
 void			print_arena(void *arena, size_t size)
-{	
-	size_t			i1;
+{
+	size_t	i1;
 
 	i1 = 0;
 	while (i1 < size)
 	{
 		print_byte_by_ptr(arena + i1);
 		i1++;
-		// NEED TO BE CHANGED TO 32 BEFORE VALUATION!
-		if (i1%32 == 0)
+		if (i1 % 32 == 0)
 			write(1, "\n", 1);
 	}
 	write(1, "\n", 1);

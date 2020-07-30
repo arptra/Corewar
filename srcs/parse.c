@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/parse.h"
+#include "../incl/corewar.h"
 
 void			ft_swap_players(t_file_info *temp1,
 								t_file_info *temp2,
@@ -37,6 +37,7 @@ void			ft_swap_players(t_file_info *temp1,
 	temp2->fd = temp3->fd;
 	free(temp3);
 }
+
 void			ft_sort_players(t_vm *vm)
 {
 	t_file_info		*temp1;
@@ -96,10 +97,10 @@ t_vm			*ft_parse_flags(int argc, char **argv, t_vm *vm)
 		vm->players_num = vm->players_num - 2;
 		vm->itrtr += 2;
 	}
-	if (ft_strequ(argv[vm->itrtr+1], "-i") && ++vm->itrtr && --vm->players_num)
+	if (ft_strequ(argv[vm->itrtr + 1], "-i")
+		&& ++vm->itrtr && --vm->players_num)
 		vm->flag_vis = 1;
-	vm->debug = -1;
-	if (ft_strequ(argv[vm->itrtr+1], "-d") && (vm->players_num -= 2))
+	if (ft_strequ(argv[vm->itrtr + 1], "-d") && (vm->players_num -= 2))
 		if ((vm->itrtr += 2) >= argc ||
 			((vm->d_mod = ft_atoi(argv[vm->itrtr])) != 0 &&
 			vm->d_mod != 1 && vm->d_mod != 2 && vm->d_mod != 4 &&
@@ -118,10 +119,9 @@ t_vm			*parse_args(int argc, char **argv, t_vm *vm)
 	while (++vm->itrtr < argc)
 	{
 		if (ft_strequ(argv[vm->itrtr], "-n"))
-			if ( ++vm->itrtr >= argc
+			if (++vm->itrtr >= argc
 				|| (player_num = ft_atoi(argv[vm->itrtr])) <= 0
-				|| player_num > (vm->players_num -= 2) || ++vm->itrtr >= argc
-				)
+				|| player_num > (vm->players_num -= 2) || ++vm->itrtr >= argc)
 				ft_error(10, vm);
 		if ((vm->players == NULL) &&
 			(vm->players = parse_player(argv[vm->itrtr], vm)))
@@ -131,7 +131,5 @@ t_vm			*parse_args(int argc, char **argv, t_vm *vm)
 	}
 	if (vm->players_num > MAX_PLAYERS)
 		ft_error(11, vm);
-	if (vm->debug > 0)
-		vm->players_num = 1;
 	return (ft_players(vm, vm->players_num));
 }

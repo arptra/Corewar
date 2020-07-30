@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/parse.h"
+#include "../incl/corewar.h"
 
-int		read_byte_fd(int fd, unsigned char *byte)
+int			read_byte_fd(int fd, unsigned char *byte)
 {
 	if (read(fd, &(*byte), 1) > 0)
 		return (0);
@@ -20,7 +20,7 @@ int		read_byte_fd(int fd, unsigned char *byte)
 		return (-1);
 }
 
-uint8_t read_byte(t_vm *vm, int addr) // addr - step that need to jump, for read byte from it addr
+uint8_t		read_byte(t_vm *vm, int addr)
 {
 	uint8_t *arena;
 
@@ -31,8 +31,8 @@ uint8_t read_byte(t_vm *vm, int addr) // addr - step that need to jump, for read
 
 t_carriage	*copy_carriage(t_carriage *car, int addr)
 {
-	t_carriage *new_car;
-	int 		i;
+	t_carriage	*new_car;
+	int			i;
 
 	new_car = init_carriage();
 	new_car->a_s = init_args_size();
@@ -48,14 +48,14 @@ t_carriage	*copy_carriage(t_carriage *car, int addr)
 	return (new_car);
 }
 
-void	add_car(t_carriage **car, t_carriage *new_car)
+void		add_car(t_carriage **car, t_carriage *new_car)
 {
 	if (new_car)
 		new_car->next = *car;
 	*car = new_car;
 }
 
-int	get_addr(int addr)
+int			get_addr(int addr)
 {
 	addr = addr % MEM_SIZE;
 	if (addr < 0)

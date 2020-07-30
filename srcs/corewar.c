@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/parse.h"
+#include "../incl/corewar.h"
 
 void	ft_usage_corewar(void)
 {
@@ -20,15 +20,15 @@ void	ft_usage_corewar(void)
 	fd = open("txt/usage_corewar.txt", O_RDONLY);
 	if (fd == -1)
 		exit(-1);
-	while (read(fd,&buf,1))
-		write(1,&buf,1);
+	while (read(fd, &buf, 1))
+		write(1, &buf, 1);
 	close(fd);
 	exit(-1);
 }
 
-int main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	t_vm			*vm;
+	t_vm *vm;
 
 	if (argc == 1)
 		ft_usage_corewar();
@@ -45,5 +45,4 @@ int main(int argc, char **argv)
 	else
 		print_declare_winner(vm);
 	ft_free_vm(&vm);
-	return (0);
 }

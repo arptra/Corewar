@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/parse.h"
+#include "../incl/corewar.h"
 
 void				ft_error(int code, t_vm *vm)
 {
@@ -25,7 +25,7 @@ void				ft_error(int code, t_vm *vm)
 	while (read(fd, &buf, 1))
 	{
 		if (buf == '\n' && i1 > code)
-			break;
+			break ;
 		if (i1 == code)
 			write(2, &buf, 1);
 		if (buf == '\n')

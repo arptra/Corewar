@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/parse.h"
+#include "corewar.h"
 
 void	print_deb_lldi(t_vm *vm, int addr_1, int addr_2, int reg_num)
 {
