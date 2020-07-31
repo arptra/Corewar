@@ -37,5 +37,5 @@ void	st(t_vm *vm)
 			print_write_memory(vm, vm->car->p->cnum, addr, value);
 	}
 	if (vm->d_mod == 4)
-		printf("P\t%d | st r%d %d\n", vm->car->num, reg_num + 1, addr);
+		ft_printf("P\t%d | st r%d %d\n", vm->car->num, reg_num + 1, addr);
 }

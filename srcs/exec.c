@@ -79,7 +79,7 @@ void	exec(t_vm *vm)
 		vm->cycle++;
 		vm->cycle_left++;
 		if (vm->d_mod == 2 || vm->d_mod == 1)
-			printf("It is now cycle %d\n", vm->cycle);
+			ft_printf("It is now cycle %d\n", vm->cycle);
 		exec_cycle(vm);
 		if (vm->cycle_to_die == vm->cycle_left || vm->cycle_to_die <= 0)
 			check(vm);

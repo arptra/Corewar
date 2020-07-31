@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add.c                                              :+:      :+:    :+:   */
+/*   ft_add.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: student <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -30,6 +30,6 @@ void	add(t_vm *vm)
 	vm->car->registers[reg_3] = value;
 	vm->car->move += vm->car->a_s->arg_3;
 	if (vm->d_mod == 4)
-		printf("P\t%d | add r%d r%d r%d\n", vm->car->num,
+		ft_printf("P\t%d | ft_add r%d r%d r%d\n", vm->car->num,
 				reg_1 + 1, reg_2 + 1, reg_3 + 1);
 }

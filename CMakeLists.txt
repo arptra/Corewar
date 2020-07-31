@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 
 
 add_executable(vm
+        srcs/corewar.c
         srcs/init.c
         srcs/parse.c
         srcs/op_codes.c
@@ -37,10 +38,12 @@ add_executable(vm
         op_codes/xor.c
         op_codes/st.c
         op_codes/fork.c
-        op_codes/lfork.c srcs/corewar.c)
+        op_codes/lfork.c )
 
 add_subdirectory(libft)
 
+add_subdirectory(ft_printf)
+
 include_directories(incl)
 
-target_link_libraries(vm ft)
+target_link_libraries(vm ft ft_printf)

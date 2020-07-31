@@ -25,7 +25,7 @@ void		print_vis_debug(t_vm *vm, t_carriage *del)
 	if (vm->flag_vis == 1)
 		print_kill_carriage(vm, del);
 	if (vm->d_mod == 8)
-		printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+		ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 				del->num, vm->cycle, vm->cycle_to_die);
 }
 
@@ -74,7 +74,7 @@ void		check(t_vm *vm)
 		vm->cycle_to_die -= CYCLE_DELTA;
 		vm->checks = 0;
 		if (vm->d_mod == 2)
-			printf("Cycle to die is now %d\n", vm->cycle_to_die);
+			ft_printf("Cycle to die is now %d\n", vm->cycle_to_die);
 	}
 	vm->cycle_left = 0;
 	vm->lives = 0;

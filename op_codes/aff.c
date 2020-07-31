@@ -22,5 +22,5 @@ void	aff(t_vm *vm)
 	value = vm->car->registers[reg_num];
 	vm->car->move += 1;
 	if (vm->aff == 1)
-		printf("Aff: %c\n", (char)value);
+		ft_printf("Aff: %c\n", (char)value);
 }

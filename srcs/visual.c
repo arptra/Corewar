@@ -18,8 +18,7 @@ void	print_add_player(t_vm *vm, const int player_id,
 	uint8_t	*arena;
 	int		codesize;
 
-	setbuf(stdout, NULL);
-	printf("p%c%d%c%d%c%s%c%d%c", SEP, vm->cycle, SEP, player_id,
+	ft_printf("p%c%d%c%d%c%s%c%d%c", SEP, vm->cycle, SEP, player_id,
 		   SEP, name, SEP, address, SEP);
 	codesize = get_player(vm, player_id)->cs;
 	arena = &vm->arena[address];
@@ -29,17 +28,17 @@ void	print_add_player(t_vm *vm, const int player_id,
 		arena++;
 		codesize--;
 	}
-	printf("\n");
+	ft_printf("\n");
 }
 
 void	print_add_carriage(t_vm *vm, int player_id, t_carriage *car)
 {
-	printf("c%c%d%c%d%c%d%c%d\n", SEP, vm->cycle, SEP,
+	ft_printf("c%c%d%c%d%c%d%c%d\n", SEP, vm->cycle, SEP,
 		   player_id, SEP, car->num, SEP, car->pc);
 }
 
 void	print_kill_carriage(t_vm *vm, t_carriage *car)
 {
-	printf("k%c%d%c%d%c%d\n", SEP, vm->cycle, SEP,
+	ft_printf("k%c%d%c%d%c%d\n", SEP, vm->cycle, SEP,
 		   car->p->cnum, SEP, car->num);
 }

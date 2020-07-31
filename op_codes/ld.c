@@ -26,5 +26,5 @@ void	ld(t_vm *vm)
 	vm->car->registers[reg_num] = value;
 	vm->car->move += vm->car->a_s->arg_2;
 	if (vm->d_mod == 4)
-		printf("P\t%d | ld %d r%d\n", vm->car->num, value, reg_num + 1);
+		ft_printf("P\t%d | ld %d r%d\n", vm->car->num, value, reg_num + 1);
 }

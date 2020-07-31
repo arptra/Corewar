@@ -33,6 +33,6 @@ void	and(t_vm *vm)
 	vm->car->move += ind_move(vm->car->a_t->arg_3,
 			vm->car->a_s->arg_3);
 	if (vm->d_mod == 4)
-		printf("P\t%4d | and %d %d r%d\n", vm->car->num,
+		ft_printf("P\t%4d | and %d %d r%d\n", vm->car->num,
 				value_1, value_2, reg_num + 1);
 }

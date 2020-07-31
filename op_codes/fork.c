@@ -26,7 +26,7 @@ void	ffork(t_vm *vm)
 	add_car(&(vm->head), car);
 	vm->cars_num++;
 	if (vm->d_mod == 4)
-		printf("P\t%d | fork %d (%d)\n", vm->car->num, addr, car->pc);
+		ft_printf("P\t%d | fork %d (%d)\n", vm->car->num, addr, car->pc);
 	if (vm->flag_vis == 1)
 		print_add_carriage(vm, car->p->cnum, car);
 }

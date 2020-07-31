@@ -14,9 +14,9 @@
 
 void	print_deb_ldi(t_vm *vm, int addr_1, int addr_2, int reg_num)
 {
-	printf("P\t%4d | ldi %d %d r%d\n",
+	ft_printf("P\t%4d | ldi %d %d r%d\n",
 			vm->car->num, addr_1, addr_2, reg_num);
-	printf("\t| -> load from %d + %d = %d (with pc and mod %d)\n",
+	ft_printf("\t| -> load from %d + %d = %d (with pc and mod %d)\n",
 			addr_1, addr_2, addr_1 + addr_2,
 			vm->car->pc + (addr_1 + addr_2) % IDX_MOD);
 }

@@ -39,7 +39,7 @@ int		main(int argc, char **argv)
 	if (vm->flag_vis == 0)
 	{
 		if (vm->d_mod != 0)
-			printf("Contestant %d, \"%s\", has won !\n",
+			ft_printf("Contestant %d, \"%s\", has won !\n",
 					vm->last_live->cnum, vm->last_live->cn);
 	}
 	else

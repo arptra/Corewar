@@ -30,6 +30,6 @@ void	sub(t_vm *vm)
 	vm->car->registers[reg_3] = value;
 	vm->car->move += vm->car->a_s->arg_3;
 	if (vm->d_mod == 4)
-		printf("P %4d | sub r%d r%d r%d\n",
+		ft_printf("P %4d | sub r%d r%d r%d\n",
 				vm->car->num, reg_1 + 1, reg_2 + 1, reg_3 + 1);
 }

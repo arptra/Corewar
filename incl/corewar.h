@@ -14,9 +14,9 @@
 # define COREWAR_H
 
 # include "../libft/libft.h"
+# include "../ft_printf/ft_printf.h"
 # include "stdint.h"
 # include "op.h"
-# include "stdio.h"
 
 # define T_RD  3
 # define T_RI  5

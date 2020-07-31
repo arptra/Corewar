@@ -32,9 +32,9 @@ void	sti(t_vm *vm)
 	put_value(vm, addr, REG_SIZE, value);
 	if (vm->d_mod == 4)
 	{
-		printf("P\t%d | sti r%d %d %d\n",
+		ft_printf("P\t%d | sti r%d %d %d\n",
 				vm->car->num, reg_num + 1, arg_2, arg_3);
-		printf("\t| -> store to %d + %d = %d (with pc and mod %d)\n",
+		ft_printf("\t| -> store to %d + %d = %d (with pc and mod %d)\n",
 				arg_2, arg_3, arg_2 + arg_3, addr);
 	}
 	if (vm->flag_vis == 1)

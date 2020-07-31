@@ -14,9 +14,9 @@
 
 void	print_deb_lldi(t_vm *vm, int addr_1, int addr_2, int reg_num)
 {
-	printf("P\t%4d | lldi %d %d r%d\n",
+	ft_printf("P\t%4d | lldi %d %d r%d\n",
 			vm->car->num, addr_1, addr_2, reg_num + 1);
-	printf("       | -> load from %d + %d = %d (with pc %d)\n",
+	ft_printf("       | -> load from %d + %d = %d (with pc %d)\n",
 			addr_1,
 			addr_2,
 			addr_1 + addr_2,

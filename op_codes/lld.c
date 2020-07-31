@@ -25,6 +25,6 @@ void	lld(t_vm *vm)
 	reg_num = read_byte(vm, vm->car->move) - 1;
 	vm->car->registers[reg_num] = value;
 	if (vm->d_mod == 4)
-		printf("P\t%4d | lld %d r%d\n",
+		ft_printf("P\t%4d | lld %d r%d\n",
 				vm->car->num, value, reg_num + 1);
 }
