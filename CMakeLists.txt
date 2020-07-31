@@ -42,7 +42,7 @@ add_executable(vm
 
 add_subdirectory(libft)
 
-add_subdirectory(ft_printf)
+add_subdirectory(vm_ft_printf)
 
 include_directories(incl)
 

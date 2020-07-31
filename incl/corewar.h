@@ -14,7 +14,7 @@
 # define COREWAR_H
 
 # include "../libft/libft.h"
-# include "../ft_printf/ft_printf.h"
+# include "../vm_ft_printf/ft_printf.h"
 # include "stdint.h"
 # include "op.h"
 
