@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: student <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: u18188899 <u18188899@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 21:07:11 by student           #+#    #+#             */
-/*   Updated: 2020/07/30 21:07:13 by student          ###   ########.fr       */
+/*   Updated: 2020/08/01 18:08:40 by u18188899        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ t_vm			*ft_parse_flags(int argc, char **argv, t_vm *vm)
 	if (ft_strequ(argv[vm->itrtr + 1], "-i")
 		&& ++vm->itrtr && --vm->players_num)
 		vm->flag_vis = 1;
+	if (ft_strequ(argv[vm->itrtr + 1], "-a")
+		&& ++vm->itrtr && --vm->players_num)
+		vm->aff = 1;
 	if (ft_strequ(argv[vm->itrtr + 1], "-d") && (vm->players_num -= 2))
 		if ((vm->itrtr += 2) >= argc ||
 			((vm->d_mod = ft_atoi(argv[vm->itrtr])) != 0 &&

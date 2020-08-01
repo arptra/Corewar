@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: student <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: u18188899 <u18188899@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 21:05:28 by student           #+#    #+#             */
-/*   Updated: 2020/07/30 21:05:31 by student          ###   ########.fr       */
+/*   Updated: 2020/08/01 18:24:40 by u18188899        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
 
-# include "../libft/libft.h"
 # include "../vm_ft_printf/ft_printf.h"
-# include "stdint.h"
+# include "../libft/libft.h"
 # include "op.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <stdint.h>
 
 # define T_RD  3
 # define T_RI  5

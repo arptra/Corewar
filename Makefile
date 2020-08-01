@@ -38,7 +38,29 @@ VM:= 	\
 		op_codes/sti.c \
 		op_codes/sub.c \
 		op_codes/xor.c \
-		op_codes/zjmp.c
+		op_codes/zjmp.c \
+		vm_ft_printf/aux_pow_add.c \
+		vm_ft_printf/ft_printf.c \
+		vm_ft_printf/longdiv.c \
+		vm_ft_printf/longdouble.c \
+		vm_ft_printf/parser.c \
+		vm_ft_printf/parser_2.c \
+		vm_ft_printf/print_char.c \
+		vm_ft_printf/print_eg.c \
+		vm_ft_printf/print_float.c \
+		vm_ft_printf/print_float_2.c \
+		vm_ft_printf/print_float_3.c \
+		vm_ft_printf/print_frac.c \
+		vm_ft_printf/print_int.c \
+		vm_ft_printf/print_int_2.c \
+		vm_ft_printf/print_itoa.c \
+		vm_ft_printf/print_o.c \
+		vm_ft_printf/print_o_2.c \
+		vm_ft_printf/print_str.c \
+		vm_ft_printf/print_trash.c \
+		vm_ft_printf/print_uint.c \
+		vm_ft_printf/print_uint_2.c \
+		vm_ft_printf/print_utf.c
 
 OBJECTS_VM := $(VM:.c=.o)
 
