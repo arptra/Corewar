@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ldi.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: student <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: u18188899 <u18188899@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 21:01:27 by student           #+#    #+#             */
-/*   Updated: 2020/07/30 21:01:37 by student          ###   ########.fr       */
+/*   Updated: 2020/08/01 17:24:25 by u18188899        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../incl/corewar.h"
 
 void	print_deb_ldi(t_vm *vm, int addr_1, int addr_2, int reg_num)
 {
