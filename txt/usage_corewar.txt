@@ -1,5 +1,5 @@
 Usage:
-    ./corewar [one of: -dump nbr_cycles | -i | -d N] [-n number] <champion1.cor> <...>
+    ./corewar [one of: -dump nbr_cycles | -i | -d N | -a] [-n number] <champion1.cor> <...>
 
     -dump nbr_cycles:
         At the end of nbr_cycles of executions,
@@ -7,11 +7,12 @@ Usage:
         and quit the game. The memory will be 
         dumped in the hexadecimal format with 
         32 octets per line.
-        NOTE: this argument should be placed first.
     -i:
         The argument turn on a special visualization mode.
         At this special mode corewar print out symbols that
         will be used to visualize game.
+		Example:
+		./corewar -i spoiler.cor zork.cor | python3 ./visualiser/corewar_visual.py
     -d N:
         The argument turn on a special debug mode.
         At this special mode corewar print out debug info
@@ -22,6 +23,8 @@ Usage:
         - 4  Show operations (Params are NOT litteral ...)
         - 8  Show deaths
         - 16 Show PC movements (Except for jumps)
+    -a:
+        Prints output from "aff" (Default is to hide it)
     -n number:
         Sets the number of the next player.
         If non-existent, the player will have
