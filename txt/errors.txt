@@ -1,4 +1,3 @@
-
 ERROR: could not read from file with champion, may be it is direstory
 ERROR: file with champion code not properly named, need .cor extension
 ERROR: file with champion code could not be opened, check if file exists or permissions of the file
