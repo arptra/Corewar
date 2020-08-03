@@ -1,0 +1,5 @@
+Usage: ./asm <sourcefile.s>
+       <sourcefile.s >  — from assembler to bytecode
+
+You can also throw multiple сhampions at the same time:
+       ./asm <sourcefile1.s> <sourcefile2.s> <sourcefile3.s> 
