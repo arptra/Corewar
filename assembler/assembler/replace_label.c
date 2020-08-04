@@ -38,7 +38,7 @@ _Bool	find_label(t_label **head, t_label *label_arg)
 }
 
 /*
-** Функция подсчета длины до метки  
+** Функция подсчета длины до метки
 */
 
 int		count_length_to_label(t_label *label, t_label *label_arg)
@@ -69,7 +69,7 @@ int		count_length_to_label(t_label *label, t_label *label_arg)
 }
 
 /*
-** Функция замены метки  
+** Функция замены метки
 */
 
 void	replace_label(t_label *head)

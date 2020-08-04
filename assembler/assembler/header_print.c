@@ -14,7 +14,7 @@
 #include "options.h"
 
 /*
-**  Функция печати в обратном порядке 
+**  Функция печати в обратном порядке
 */
 
 void	print_reverse(int fd, u_int8_t byte, u_int32_t *num)
@@ -24,7 +24,7 @@ void	print_reverse(int fd, u_int8_t byte, u_int32_t *num)
 }
 
 /*
-**  Функция печати заголовка 
+**  Функция печати заголовка
 */
 
 void	header_print(int fd, t_header *header)

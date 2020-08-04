@@ -13,7 +13,7 @@
 #include "assembler.h"
 
 /*
-** Функция подсчета размера программы 
+** Функция подсчета размера программы
 */
 
 unsigned int	calc_progsize(t_tkn *tkn)
@@ -26,7 +26,7 @@ unsigned int	calc_progsize(t_tkn *tkn)
 	while (tkn->next != NULL)
 	{
 		if (tkn->type == COMMAND)
-			weight +=len_command(tkn);
+			weight += len_command(tkn);
 		tkn = tkn->next;
 	}
 	tkn = cp_tok;

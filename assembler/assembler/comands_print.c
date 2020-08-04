@@ -44,7 +44,7 @@ u_int8_t	calc_arg_type_code(t_tkn *tkn)
 }
 
 /*
-** Функция записи в обратном порядке 
+** Функция записи в обратном порядке
 */
 
 void		write_reverse(t_tkn *tkn, t_op *op, int fd)
@@ -67,7 +67,7 @@ void		write_reverse(t_tkn *tkn, t_op *op, int fd)
 }
 
 /*
-** Функция печати аргументов 
+** Функция печати аргументов
 */
 
 void		print_args(int fd, t_tkn *tkn)
@@ -94,7 +94,7 @@ void		print_args(int fd, t_tkn *tkn)
 }
 
 /*
-** Функция печати команд 
+** Функция печати команд
 */
 
 void		commands_print(int fd, t_tkn *tkn)

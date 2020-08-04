@@ -86,14 +86,14 @@ void	ft_usage_assembler(void)
 	fd = open("txt/usage_assembler.txt", O_RDONLY);
 	if (fd == -1)
 		exit(-1);
-	while (read(fd,&buf,1))
-		write(1,&buf,1);
+	while (read(fd, &buf, 1))
+		write(1, &buf, 1);
 	close(fd);
 	exit(-1);
 }
 
 /*
-** Главная функция 
+** Главная функция
 */
 
 int		main(int ac, char **av)
@@ -102,7 +102,7 @@ int		main(int ac, char **av)
 	t_header	header;
 	t_tkn_sec	check_list;
 	int			i;
-	
+
 	if (ac == 1)
 	{
 		ft_usage_assembler();
@@ -121,3 +121,4 @@ int		main(int ac, char **av)
 	}
 	return (0);
 }
+

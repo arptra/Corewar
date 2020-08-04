@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   assembler.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: umoff <umoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/26 13:37:24 by umoff             #+#    #+#             */
-/*   Updated: 2020/07/02 14:01:15 by umoff            ###   ########.fr       */
+/*   Created: 2020/08/04 12:03:03 by macbookair        #+#    #+#             */
+/*   Updated: 2020/08/04 12:03:18 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	ASSEMBLER_H
+#ifndef ASSEMBLER_H
 # define ASSEMBLER_H
 # include <stdlib.h>
 # include <stdint.h>
@@ -38,7 +38,7 @@
 # define ENDLINE		4
 # define NOTENDSTR		5
 
-typedef enum	e_tkn_type
+typedef enum		e_tkn_type
 {
 	NAME = 1,
 	COMMENT_PROG,
@@ -51,7 +51,7 @@ typedef enum	e_tkn_type
 	SEPARATOR,
 	NEW_LINE,
 	END
-}				t_tkn_type;
+}					t_tkn_type;
 
 typedef struct		s_tkn
 {

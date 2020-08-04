@@ -35,7 +35,6 @@ void	indent_print(char *str, u_int16_t end)
 ** Функция получения строки из списка памяти
 */
 
-
 char	*give_string_from_ml(u_int32_t row)
 {
 	t_ml *lst;

@@ -41,7 +41,7 @@ void	check_args(t_tkn *tkn, int *i, int com_code)
 }
 
 /*
-** Функция проверки команды 
+** Функция проверки команды
 */
 
 void	test_command(t_tkn *tkn)

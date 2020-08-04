@@ -35,7 +35,7 @@ void	this_string(t_tkn *tkn, t_tkn_sec *check_list)
 }
 
 /*
-** Функция установки команды 
+** Функция установки команды
 */
 
 void	set_command(t_tkn *tkn, t_tkn_sec *check_list, char *com_name)
@@ -56,7 +56,7 @@ void	set_command(t_tkn *tkn, t_tkn_sec *check_list, char *com_name)
 }
 
 /*
-** Если комманада, то запускаем функцию установки команды 
+** Если комманада, то запускаем функцию установки команды
 */
 
 void	this_command(t_tkn *tkn, t_tkn_sec *check_list)
@@ -75,7 +75,7 @@ void	this_command(t_tkn *tkn, t_tkn_sec *check_list)
 }
 
 /*
-** Получаем последовательность токенов 
+** Получаем последовательность токенов
 */
 
 void	tkn_sequence(t_tkn *tkn, t_tkn_sec *check_list)

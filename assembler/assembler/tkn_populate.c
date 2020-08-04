@@ -26,7 +26,7 @@ _Bool	is_numarg(char *str)
 }
 
 /*
-** Функция распознания метки аргумента 
+** Функция распознания метки аргумента
 */
 
 _Bool	arg_label_recognition(char *str, t_tkn *tkn, t_label **tail)

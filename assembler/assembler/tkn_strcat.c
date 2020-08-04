@@ -15,7 +15,7 @@
 #include "assembler.h"
 
 /*
-** Функция поиска токена 
+** Функция поиска токена
 */
 
 t_tkn		*find_tkn(t_tkn *head, t_tkn_type type)
@@ -91,7 +91,7 @@ t_tkn		*go_next_string(t_tkn *tkn)
 }
 
 /*
-** Функция объединения токенов 
+** Функция объединения токенов
 */
 
 char		*tkn_strcat(char *dst, t_tkn *tkn, u_int32_t max_len)

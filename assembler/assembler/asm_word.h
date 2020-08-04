@@ -19,5 +19,4 @@ _Bool	this_digit_word(char *str, char *delims);
 _Bool	this_special(char c, char *special);
 int		equals(char *ethalon, char *str, char *delims);
 
-
 #endif

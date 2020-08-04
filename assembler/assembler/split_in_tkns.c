@@ -73,7 +73,6 @@ void	split_in_tkns_line(t_pc *pc, t_tkn **tkn, t_label **label, char *str)
 ** Функция установки списков при запуске
 */
 
-
 void	set_lists_at_start(t_tkn **tkn, t_label **label)
 {
 	while ((*tkn)->prev)
