@@ -1,5 +1,5 @@
-#C_FLAGS =  -Wall -Wextra -Werror
-C_FLAGS =  -Wall -Wextra
+C_FLAGS =  -Wall -Wextra -Werror
+#C_FLAGS =  -Wall -Wextra
 LIBFT_DIR := libft/
 NAME1:= corewar
 NAME2:= asm

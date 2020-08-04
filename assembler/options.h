@@ -6,7 +6,7 @@
 /*   By: umoff <umoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 13:37:11 by umoff             #+#    #+#             */
-/*   Updated: 2020/07/02 14:04:17 by umoff            ###   ########.fr       */
+/*   Updated: 2020/08/04 13:20:15 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ typedef struct	s_op
 	char		*name;
 	int			num_args;
 	t_arg_type	args_type[3];
-	u_int8_t	code;
+	uint8_t		code;
 	int			cycle;
 	_Bool		argument_type_code;
-	u_int8_t	size_t_dir;
+	uint8_t		size_t_dir;
 }				t_op;
 
 static t_op		g_op[17] = {
