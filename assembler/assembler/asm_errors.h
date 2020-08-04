@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_errors.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: umoff <umoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 13:38:14 by umoff             #+#    #+#             */
-/*   Updated: 2020/07/02 14:01:28 by umoff            ###   ########.fr       */
+/*   Updated: 2020/08/04 12:43:40 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@
 
 # define NL_MISSING			"ERROR: No new line"
 
-# define CMD_MISS	        "ERROR: The argument must be preceded by the command token"
+# define CMD_MISS	        "ERROR: Need a command token before the argument"
 
-# define EXTR_SPRTR	        "ERROR: Arguments must not be separated from the command"
+# define EXTR_SPRTR	        "ERROR: Arguments not separated from a command"
 
 # define SPRTR_MISS	        "ERROR: Arguments must be separated"
 
-# define NAME_CMT	        "ERROR: Invalid name and(or) comment of the сhampion"
+# define NAME_CMT	        "ERROR: Invalid name or comment of the сhampion"
 
 # define DOUBLE_COMMENT		"ERROR: The champion can have a double comment"
 
@@ -41,7 +41,7 @@
 
 # define LONG_CMNT			"ERROR: The сhampion's comment is too long"
 
-# define ERR_ARGS			"ERROR: The command is accompanied by incorrect arguments"
+# define ERR_ARGS			"ERROR: The command has by incorrect arguments"
 
 # define INVALID_STR_PLACE	"ERROR: The token string in the wrong place"
 
@@ -59,6 +59,6 @@
 ** Предупреждения
 */
 
-# define WRNNG_TREG_INVALID_NUM	"WARNING: The argument T_REG has an unsupported number"
+# define WRNNG_TREG_INVALID_NUM	"WARNING: Argument T_REG has incorrect number"
 
 #endif

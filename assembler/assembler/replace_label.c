@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_label.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: umoff <umoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 13:40:37 by umoff             #+#    #+#             */
-/*   Updated: 2020/07/02 14:02:43 by umoff            ###   ########.fr       */
+/*   Updated: 2020/08/04 12:45:01 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "asm_errors.h"
 
 /*
-** Функция поиска метки  
+** Функция поиска метки
 */
 
 _Bool	find_label(t_label **head, t_label *label_arg)
