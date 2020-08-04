@@ -1,0 +1,144 @@
+QWidget#main {
+    background: #1d1d1d;
+}
+
+QLabel {
+    color: #4d4d4d;
+    font: 16px;
+    font-weight: bold;
+}
+
+QLabel[player="1"] {
+    color: #D34C75;
+}
+
+QLabel[player="1"][lighted="true"] {
+    color: #1d1d1d;
+    background:#D34C75;
+}
+
+QLabel[player="2"] {
+    color: #E9C13B;
+}
+
+QLabel[player="2"][lighted="true"] {
+    color: #1d1d1d;
+    background:#E9C13B;
+}
+
+QLabel[player="3"] {
+    color: #0A92AC;
+}
+
+QLabel[player="3"][lighted="true"] {
+    color: #1d1d1d;
+    background:#0A92AC;
+}
+
+QLabel[player="4"] {
+    color: #8662EA;
+}
+
+QLabel[player="4"][lighted="true"] {
+    color: #1d1d1d;
+    background:#8662EA;
+}
+
+
+QLabel[dead="true"] {
+    text-decoration: line-through;
+}
+
+QLabel[lighted="true"] {
+    color: #D8DECA;
+}
+
+QLabel[status="paused"] {
+    color: #1d1d1d;
+    background: #FEFEF5;
+}
+
+QLabel[status="play"] {
+    color: #FEFEF5;
+}
+
+QLabel#error {
+    color: #e91e63;
+    font: 18px;
+}
+
+QLabel#second {
+    color: #aaaaaa;
+    font: 15px;
+}
+
+QFrame {
+    border: none;
+    background: #1d1d1d;
+}
+
+QScrollBar:vertical {
+    border: none;
+    background: transparent;
+    width: 8px;
+    margin: 0px;
+    padding: 0px;
+}
+
+QScrollBar::add-page:vertical {
+    background: none;
+}
+
+QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+QScrollBar:left-arrow:horizontal, QScrollBar::right-arrow:horizontal {
+    background: #ff0000;
+}
+
+QScrollBar:top-arrow:vertical, QScrollBar::bottom-arrow:vertical {
+    background: #555555;
+}
+
+QScrollBar::handle:vertical {
+    background: #AA666666;
+    min-height: 0px;
+    width: 10px;
+}
+
+QScrollBar::add-line {
+    border: none;
+    background: none;
+    height: 0px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line {
+    border: none;
+    background: none;
+    height: 0px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar:horizontal {
+    border: none;
+    background-color: transparent;
+    height: 8px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #AA666666;
+    height: 10px;
+}
+
+QScrollBar::add-page:horizontal {
+    background: none;
+}
+
+QScrollBar::sub-page:horizontal {
+    background: none;
+}
