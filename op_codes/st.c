@@ -34,7 +34,7 @@ void	st(t_vm *vm)
 		put_value(vm, vm->car->pc + (addr % IDX_MOD), DIR_SIZE, value);
 		vm->car->move += IND_SIZE;
 		if (vm->flag_vis == 1)
-			print_write_memory(vm, vm->car->p->cnum, addr, value);
+			print_write_memory(vm, vm->car->p->cnum, vm->car->pc + (addr % IDX_MOD), value);
 	}
 	if (vm->d_mod == 4)
 		ft_printf("P\t%d | st r%d %d\n", vm->car->num, reg_num + 1, addr);
