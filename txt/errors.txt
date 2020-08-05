@@ -6,7 +6,8 @@ ERROR: here should be zero bytes
 ERROR: this champion have too big code size
 ERROR: 2 players with same numbers, check usage of -n flags
 ERROR: player_num greater than overall number of players
-ERROR: parameter nbr_cycles should be positive integer
+ERROR: parameter nbr_cycles should be >= 0
 ERROR: -n flag not properly used
 ERROR: too much players for game
 ERROR: -d flag not properly used
+ERROR: no players were given

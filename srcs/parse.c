@@ -6,7 +6,7 @@
 /*   By: u18188899 <u18188899@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 21:07:11 by student           #+#    #+#             */
-/*   Updated: 2020/08/01 18:08:40 by u18188899        ###   ########.fr       */
+/*   Updated: 2020/08/05 19:16:31 by u18188899        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ t_vm			*ft_parse_flags(int argc, char **argv, t_vm *vm)
 {
 	if (--(vm->nbr_cycles) && ft_strequ(argv[1], "-dump"))
 	{
-		if ((vm->nbr_cycles = ft_atoi(argv[2])) < 0)
+		if (argc == 2 || ((vm->nbr_cycles = ft_atoi(argv[2])) < 0) ||
+			((vm->players_num = vm->players_num - 2) == 0))
 			ft_error(9, vm);
-		vm->players_num = vm->players_num - 2;
 		vm->itrtr += 2;
 	}
 	if (ft_strequ(argv[vm->itrtr + 1], "-i")
@@ -107,8 +107,10 @@ t_vm			*ft_parse_flags(int argc, char **argv, t_vm *vm)
 		if ((vm->itrtr += 2) >= argc ||
 			((vm->d_mod = ft_atoi(argv[vm->itrtr])) != 0 &&
 			vm->d_mod != 1 && vm->d_mod != 2 && vm->d_mod != 4 &&
-			vm->d_mod != 8 && vm->d_mod != 16))
+			vm->d_mod != 8))
 			ft_error(13, vm);
+	if (vm->players_num == 0)
+		ft_error(13, vm);
 	return (vm);
 }
 
