@@ -6,7 +6,7 @@
 /*   By: u18188899 <u18188899@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 21:04:13 by student           #+#    #+#             */
-/*   Updated: 2020/08/01 17:24:25 by u18188899        ###   ########.fr       */
+/*   Updated: 2020/08/06 10:50:45 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	st(t_vm *vm)
 		put_value(vm, vm->car->pc + (addr % IDX_MOD), DIR_SIZE, value);
 		vm->car->move += IND_SIZE;
 		if (vm->flag_vis == 1)
-			print_write_memory(vm, vm->car->p->cnum, vm->car->pc + (addr % IDX_MOD), value);
+			print_write_memory(vm,
+					vm->car->p->cnum, vm->car->pc + (addr % IDX_MOD), value);
 	}
 	if (vm->d_mod == 4)
 		ft_printf("P\t%d | st r%d %d\n", vm->car->num, reg_num + 1, addr);

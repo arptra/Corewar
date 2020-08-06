@@ -6,7 +6,7 @@
 /*   By: u18188899 <u18188899@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/31 12:47:59 by u18188899         #+#    #+#             */
-/*   Updated: 2020/05/31 12:54:32 by u18188899        ###   ########.fr       */
+/*   Updated: 2020/08/06 10:52:01 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ char				*ft_itoa_base(int n, int base)
 	chars = "0123456789abcdef";
 	if (n < 0 && base != 10)
 		return (NULL);
-	fresh = (char*)malloc(sizeof(char) * (ft_get_depth(n,base) + 1));
+	fresh = (char*)malloc(sizeof(char) * (ft_get_depth(n, base) + 1));
 	if (!fresh)
 		return (NULL);
 	t1 = ft_abs(n);
-	i1 = ft_get_depth(n,base);
+	i1 = ft_get_depth(n, base);
 	fresh[i1] = '\0';
 	while (t1 >= (unsigned int)base)
 	{
