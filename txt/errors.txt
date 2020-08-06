@@ -1,0 +1,13 @@
+ERROR: could not read from file with champion, may be it is direstory
+ERROR: file with champion code not properly named, need .cor extension
+ERROR: file with champion code could not be opened, check if file exists or permissions of the file
+ERROR: this is not a champion, that is another file
+ERROR: here should be zero bytes
+ERROR: this champion have too big code size
+ERROR: 2 players with same numbers, check usage of -n flags
+ERROR: player_num greater than overall number of players
+ERROR: parameter nbr_cycles should be >= 0
+ERROR: -n flag not properly used
+ERROR: too much players for game
+ERROR: -d flag not properly used
+ERROR: no players were given
