@@ -6,7 +6,7 @@
 /*   By: student <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 21:08:35 by student           #+#    #+#             */
-/*   Updated: 2020/07/30 21:08:44 by student          ###   ########.fr       */
+/*   Updated: 2020/08/06 11:02:21 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,14 @@ void			print_arena(void *arena, size_t size)
 	size_t	i1;
 
 	i1 = 0;
+	write(1, " ", 1);
 	while (i1 < size)
 	{
 		print_byte_by_ptr(arena + i1);
 		i1++;
 		if (i1 % 32 == 0)
 			write(1, "\n", 1);
+		write(1, " ", 1);
 	}
 	write(1, "\n", 1);
 }
