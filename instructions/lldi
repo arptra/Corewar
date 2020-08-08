@@ -1,0 +1,5 @@
+.name "All Function"
+.comment "All Function"
+
+lldi r1, r5, r16 # (0e 54 01 05 10)
+
